@@ -474,6 +474,7 @@ footer {
   <div class="nav-item" onclick="scrollTo('cat16')">Blood / Medicine</div>
   <div class="nav-item" onclick="scrollTo('cat17')">Birthdays &amp; Holidays</div>
   <div class="nav-item" onclick="scrollTo('cat18')">Organization</div>
+  <div class="nav-item" onclick="scrollTo('overview')">Theology Map</div>
   <div class="nav-item" onclick="scrollTo('summary')">Summary</div>
 </nav>
 
@@ -1258,6 +1259,207 @@ footer {
     <div class="collision-text">The Watchtower's self-identification as "God's visible organization" requires accepting a claim that cannot be verified from Scripture — and that Scripture itself warns against. The Bereans checked Paul's teaching against Scripture and were praised (Acts 17:11); the Watchtower condemns the same behavior as apostasy. Furthermore, the organization has made multiple specific, dateable false prophecies (1914, 1925, 1975 predicted as Armageddon/paradise dates) — by the standard of Deut 18:20–22, this disqualifies the speaker as a prophet of God. <strong>The entire JW system stands or falls on the Governing Body's claimed authority. Remove that authority — by testing it against Scripture — and the entire doctrinal edifice has no foundation.</strong></div>
   </div>
 </div>
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PASTE STEP 1: Add this nav item INSIDE the <nav> block    -->
+<!-- Place it BEFORE the existing Summary nav item             -->
+<!-- Find:  <div class="nav-item" onclick="scrollTo('summary')">Summary</div>  -->
+<!-- Paste this line directly above it:                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+  <div class="nav-item" onclick="scrollTo('overview')">Theology Map</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PASTE STEP 2: Paste the full block below into the page    -->
+<!-- Find this line near the bottom of the file:               -->
+<!--   <div class="summary-section" id="summary">              -->
+<!-- Paste the entire block DIRECTLY ABOVE that line           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="summary-section" id="overview" style="margin-top:80px; padding-top:40px; border-top:1px solid var(--border);">
+  <h2 style="font-family:'Playfair Display',serif; font-size:28px; margin-bottom:8px; color:var(--text);">30,000-Foot View — Christian Theological Traditions</h2>
+  <p style="color:var(--text-muted); margin-bottom:32px; font-style:italic; font-size:15px;">How the major interpretive frameworks within Christianity differ from each other — and from the Jehovah's Witnesses</p>
+
+  <!-- INTRO EXPLAINER -->
+  <div style="background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--gold); padding:18px 22px; margin-bottom:32px; font-size:14px; color:var(--text-muted); line-height:1.7;">
+    <strong style="color:var(--text);">Why does this matter?</strong> Most theological disagreements between Christians — and especially between Christians and JWs — come down to one foundational question: <em>how do you read the Bible?</em> Specifically, how literally do you take prophecy, and do you distinguish between God's program for Israel and His program for the Church? The traditions below represent the major answers Christians have given to those questions. The Jehovah's Witnesses represent something different entirely — not a variant within Christian theological tradition, but a departure from the foundational doctrines all of these traditions share.
+  </div>
+
+  <!-- GRID OF POSITIONS -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:32px;">
+
+    <!-- AMILLENNIALISM -->
+    <div style="background:var(--surface); padding:0;">
+      <div style="padding:12px 20px; font-size:10px; letter-spacing:0.25em; text-transform:uppercase; font-weight:600; color:#a0bde8; background:rgba(91,141,217,0.08); border-bottom:1px solid var(--border); border-left:3px solid var(--dispensational);">
+        Amillennialism
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Who holds it</div>
+        <div style="font-size:14px; color:var(--text); margin-bottom:14px;">Roman Catholic, Eastern Orthodox, many Reformed (Presbyterian, some Lutherans), a large segment of evangelical Protestantism.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Core view</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">The "1,000 years" of Revelation 20 is <em>symbolic</em> — representing the entire Church age, the period between Christ's first and second comings. Christ is reigning now, spiritually, from heaven. There will be no literal future earthly kingdom. History ends with Christ's single visible return, a general resurrection, a general judgment, and the eternal state — all in one sequence.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Israel &amp; Church</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">The Church is the "new Israel" — Old Testament promises to Israel are fulfilled spiritually in the Church. Most amillennialists do not expect a future national restoration of ethnic Israel as a distinct entity in God's prophetic program.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Key scriptures used</div>
+        <div style="font-size:14px; color:var(--text-muted); line-height:1.65;">Rev 20:1–6 (symbolic 1,000 yrs); Gal 3:29 (believers = Abraham's seed); Rom 2:28–29 (true Jew = inward); John 18:36 (kingdom not of this world).</div>
+      </div>
+    </div>
+
+    <!-- POSTMILLENNIALISM -->
+    <div style="background:var(--surface); padding:0;">
+      <div style="padding:12px 20px; font-size:10px; letter-spacing:0.25em; text-transform:uppercase; font-weight:600; color:#6dbf8a; background:rgba(39,174,96,0.07); border-bottom:1px solid var(--border); border-left:3px solid var(--green);">
+        Postmillennialism
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Who holds it</div>
+        <div style="font-size:14px; color:var(--text); margin-bottom:14px;">Some Reformed and Puritan traditions, Reconstructionists (Theonomy), certain evangelical optimists. Less common today than before the 20th century's world wars.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Core view</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">The Gospel will gradually Christianize the world, ushering in a golden age of righteousness (the "Millennium") <em>before</em> Christ returns. Christ returns <em>after</em> this golden age — hence "post"-millennial. History is moving toward a Christianized civilization, and the Church is the primary agent of that transformation.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Israel &amp; Church</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">Similar to amillennialism — the Church inherits Israel's covenant promises. OT kingdom prophecies are being fulfilled through the Church's cultural and spiritual expansion.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Key scriptures used</div>
+        <div style="font-size:14px; color:var(--text-muted); line-height:1.65;">Matt 28:18–20 (Great Commission as world conquest); Ps 72 (kingdom expanding to fill the earth); Isa 2:2–4 (nations streaming to Zion); 1 Cor 15:25 (Christ must reign until all enemies subdued).</div>
+      </div>
+    </div>
+
+    <!-- HISTORIC PREMILLENNIALISM -->
+    <div style="background:var(--surface); padding:0;">
+      <div style="padding:12px 20px; font-size:10px; letter-spacing:0.25em; text-transform:uppercase; font-weight:600; color:#f9a8d4; background:rgba(236,72,153,0.07); border-bottom:1px solid var(--border); border-left:3px solid #ec4899;">
+        Historic (Non-Dispensational) Premillennialism
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Who holds it</div>
+        <div style="font-size:14px; color:var(--text); margin-bottom:14px;">Many early church fathers (Papias, Irenaeus, Justin Martyr), some modern evangelicals (George Ladd, others). Held the literal Millennium but without a pre-trib rapture or Israel/Church distinction.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Core view</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">Christ returns visibly and bodily <em>before</em> a literal 1,000-year earthly kingdom — hence "pre"-millennial. The Church goes through the Tribulation (<strong>post-tribulation</strong> rapture) and is present on earth during the end-times events. The Millennium is a literal future reign of Christ on earth.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Israel &amp; Church</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">Does not make a sharp Israel/Church distinction. The Church may participate in the fulfillment of OT promises, but a future for ethnic Israel is often acknowledged.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Key scriptures used</div>
+        <div style="font-size:14px; color:var(--text-muted); line-height:1.65;">Rev 19:11–20:6 (literal sequence: return → binding → reign); Matt 24:29–31 (gathering after the Tribulation); Rev 20:4–6 (first resurrection, 1,000-year reign).</div>
+      </div>
+    </div>
+
+    <!-- DISPENSATIONAL PREMILLENNIALISM -->
+    <div style="background:var(--surface); padding:0;">
+      <div style="padding:12px 20px; font-size:10px; letter-spacing:0.25em; text-transform:uppercase; font-weight:600; color:var(--amber); background:rgba(212,137,26,0.08); border-bottom:1px solid var(--border); border-left:3px solid var(--amber);">
+        Dispensational Premillennialism — Pre-Tribulation ★ This Site's Framework
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Who holds it</div>
+        <div style="font-size:14px; color:var(--text); margin-bottom:14px;">Majority of American evangelical and Baptist churches, most Bible churches, Dallas Theological Seminary tradition, many Pentecostal/Charismatic denominations, the Scofield Reference Bible tradition.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Core view</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;">God administers history through distinct "dispensations" — periods with different governing arrangements. The Church age is a distinct parenthesis that ends at the <strong>Rapture</strong> (Church removed before Tribulation). Then follows the 7-year <strong>Tribulation</strong> (Daniel's 70th Week, for Israel), <strong>Christ's Second Coming</strong> to earth, a <strong>literal 1,000-year Millennial Kingdom</strong> with Christ ruling from Jerusalem, the <strong>Great White Throne Judgment</strong>, and the eternal state.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Israel &amp; Church</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.65;"><strong style="color:var(--text)">The defining distinctive:</strong> Israel and the Church are permanently distinct in God's program. God's covenants with Abraham and David will be <em>literally</em> fulfilled with ethnic, national Israel. The Church does not replace Israel; Israel's prophetic program resumes after the Rapture.</div>
+        <div style="font-size:13px; color:var(--gold); margin-bottom:6px; font-family:'Playfair Display',serif;">Key scriptures used</div>
+        <div style="font-size:14px; color:var(--text-muted); line-height:1.65;">1 Thess 4:13–18 (Rapture); Dan 9:24–27 (70th Week for Israel); Rev 20:1–6 (literal 1,000 years × 6); Rom 11:25–27 (all Israel saved); Zech 14:4 (feet on Mt. of Olives); Gen 12/15/17 (Abrahamic covenant — literal, unconditional, national).</div>
+      </div>
+    </div>
+
+  </div><!-- end grid -->
+
+  <!-- PRE VS POST TRIB EXPLAINER -->
+  <div style="background:var(--surface2); border:1px solid var(--border); border-top:3px solid var(--gold); padding:20px 24px; margin-bottom:32px;">
+    <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; font-weight:600;">Pre-Trib vs. Post-Trib — What's the Difference Within Premillennialism?</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div>
+        <div style="font-size:14px; font-weight:600; color:var(--text); margin-bottom:8px;">Pre-Tribulation Rapture</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.65;">The Church is removed from the earth <em>before</em> the 7-year Tribulation begins. Basis: 1 Thess 5:9 ("God has not destined us for wrath"), Rev 3:10 ("keep you from the hour of trial"), John 14:1–3 (Jesus comes to take believers to the Father's house). The Tribulation is primarily God's wrath on an unbelieving world and the time of "Jacob's trouble" (Jer 30:7) — a period specifically for Israel, not the Church. This is the majority view in American evangelicalism and the framework used throughout this site.</div>
+      </div>
+      <div>
+        <div style="font-size:14px; font-weight:600; color:var(--text); margin-bottom:8px;">Post-Tribulation Rapture</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.65;">The Church remains on earth through the Tribulation and is raptured at the very end, simultaneously with Christ's Second Coming. Basis: Matt 24:29–31 (gathering "after the tribulation"), John 17:15 (Jesus prays not that believers be taken out of the world but kept from evil), Rev 7:14 (the great multitude "came out of the great tribulation"). Post-tribulationists often argue that the Church has always faced persecution and there is no scriptural promise of removal before tribulation. Both positions hold a literal Millennium; they differ only on the Church's presence during the preceding 7 years.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MID-TRIB NOTE -->
+  <div style="background:var(--surface); border:1px solid var(--border); padding:16px 20px; margin-bottom:32px; font-size:13px; color:var(--text-muted);">
+    <strong style="color:var(--text);">Mid-Tribulation / Pre-Wrath Rapture</strong> — A smaller third position holds that the Church is raptured at the midpoint of the 7-year period (after 3½ years), or just before God's specific bowl/trumpet wrath is poured out (the "pre-wrath" view). These positions accept a literal Tribulation and Millennium but place the Rapture at different points within the 7-year period. They represent a minority within premillennialism.
+  </div>
+
+  <!-- JW CONTRAST BOX -->
+  <div style="background:rgba(192,57,43,0.07); border:1px solid var(--red-dim); border-left:3px solid var(--red); padding:20px 24px; margin-bottom:8px;">
+    <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--red); margin-bottom:12px; font-weight:600;">⚠ Where the Jehovah's Witnesses Stand — Outside All of These Traditions</div>
+    <div style="font-size:14px; color:#e89080; line-height:1.7;">
+      Every tradition above — amillennial, postmillennial, historic premillennial, and dispensational — shares the following non-negotiables: <strong style="color:var(--text-muted)">the full deity of Christ, the Trinity, salvation by grace through faith, the bodily resurrection, and the eternal conscious existence of the soul.</strong> These are not inter-denominational disputes; they are the foundational consensus of historic Christianity across 2,000 years and every major theological tradition.
+      <br><br>
+      The Jehovah's Witnesses reject <em>all</em> of these. They are not a variant within Christian eschatology — they are a 19th-century organization that reconstructed an entirely different theological system, denying Christ's deity, rejecting the Trinity, teaching annihilation of the soul, denying the bodily resurrection of Christ, and replacing saving faith with organizational performance. The debates between pre-trib and post-trib Christians are family disputes over prophetic timelines. The debate between Christianity and the Watchtower is a dispute over the identity of God Himself.
+      <br><br>
+      <strong style="color:#e89080;">In other words:</strong> a pre-trib dispensationalist and a committed amillennialist will disagree vigorously about the Rapture and the Millennium — and both would immediately recognize JW theology as outside the bounds of Christian orthodoxy on the questions that matter most.
+    </div>
+  </div>
+
+  <!-- QUICK COMPARISON TABLE -->
+  <div style="margin-top:28px;">
+    <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; font-weight:600;">At a Glance — How the Traditions Compare on Key Points</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:12px;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Position</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Trinity &amp; Christ's Deity</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Millennium</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Rapture</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Israel / Church</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Bodily Resurrection</th>
+            <th style="text-align:left; padding:10px 14px; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap;">Eternal Hell</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 14px; color:var(--text); font-family:'Playfair Display',serif; white-space:nowrap;">Amillennial</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Symbolic / Now</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">At 2nd Coming</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Church = New Israel</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 14px; color:var(--text); font-family:'Playfair Display',serif; white-space:nowrap;">Postmillennial</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Gospel Age / Church triumph</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">After Millennium</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Church = New Israel</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 14px; color:var(--text); font-family:'Playfair Display',serif; white-space:nowrap;">Historic Premillennial</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">Literal 1,000 yrs</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Post-Trib / at 2nd Coming</td>
+            <td style="padding:11px 14px; color:var(--text-muted);">Soft distinction</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(212,137,26,0.04);">
+            <td style="padding:11px 14px; color:var(--amber); font-family:'Playfair Display',serif; white-space:nowrap;">Dispensational Pre-Trib ★</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">Literal 1,000 yrs</td>
+            <td style="padding:11px 14px; color:#90c8a0;">Pre-Trib / before wrath</td>
+            <td style="padding:11px 14px; color:#90c8a0;">Permanently distinct</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+            <td style="padding:11px 14px; color:#90c8a0;">✓ Yes</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(192,57,43,0.05);">
+            <td style="padding:11px 14px; color:#e89080; font-family:'Playfair Display',serif; white-space:nowrap;">Jehovah's Witnesses</td>
+            <td style="padding:11px 14px; color:#e89080;">✗ Denied</td>
+            <td style="padding:11px 14px; color:#e89080;">Organizational paradise earth</td>
+            <td style="padding:11px 14px; color:#e89080;">No rapture concept</td>
+            <td style="padding:11px 14px; color:#e89080;">JW org = spiritual Israel</td>
+            <td style="padding:11px 14px; color:#e89080;">✗ Denied (spirit re-creation)</td>
+            <td style="padding:11px 14px; color:#e89080;">✗ Denied (annihilation)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- END OF PASTE BLOCK                                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
 
 <!-- ══════════════════════════════════════ -->
 <!-- SUMMARY TABLE -->
