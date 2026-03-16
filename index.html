@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Theologies, One Canon — JW vs Biblical Christian Teaching</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap');
+
+:root {
+  --bg: #0d0d0f;
+  --surface: #141418;
+  --surface2: #1c1c22;
+  --border: #2a2a35;
+  --border-light: #3a3a48;
+  --text: #e8e4d9;
+  --text-muted: #8a8578;
+  --text-dim: #5a5650;
+  --gold: #c8a84b;
+  --gold-dim: #7a6428;
+  --red: #c0392b;
+  --red-dim: #6b1f18;
+  --red-soft: #e8c4bf;
+  --blue: #2980b9;
+  --blue-soft: #bdd6e8;
+  --green: #27ae60;
+  --green-soft: #b8dfc8;
+  --amber: #d4891a;
+  --dispensational: #5b8dd9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative;
+  padding: 80px 40px 72px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,168,75,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 58px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.header-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 36px;
+  font-style: italic;
+}
+
+.header-note {
+  display: inline-block;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 12px 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 680px;
+  text-align: left;
+}
+
+/* ── HERMENEUTICS BADGE ── */
+.hermeneutics-banner {
+  background: rgba(91,141,217,0.08);
+  border: 1px solid rgba(91,141,217,0.25);
+  border-left: 3px solid var(--dispensational);
+  padding: 12px 20px;
+  font-size: 13px;
+  color: #a0bde8;
+  max-width: 680px;
+  margin: 12px auto 0;
+  text-align: left;
+}
+
+.hermeneutics-banner strong {
+  color: #c8dbf5;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,13,15,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar { display: none; }
+
+.nav-item {
+  flex-shrink: 0;
+  padding: 14px 16px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── CATEGORY HEADER ── */
+.category {
+  margin-top: 72px;
+  scroll-margin-top: 54px;
+}
+
+.category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--gold-dim);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.cat-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* ── COMPARISON TABLE ── */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.col-jw, .col-oc {
+  padding: 0;
+  background: var(--surface);
+}
+
+.col-header {
+  padding: 12px 20px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+
+.col-jw .col-header {
+  background: rgba(192,57,43,0.12);
+  color: #e89080;
+  border-left: 3px solid var(--red);
+}
+
+.col-oc .col-header {
+  background: rgba(39,174,96,0.08);
+  color: #80c898;
+  border-left: 3px solid var(--green);
+}
+
+.col-body {
+  padding: 20px 20px 24px;
+}
+
+.position-text {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.scriptures {
+  margin-top: 12px;
+}
+
+.scripture-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  align-items: flex-start;
+}
+
+.ref {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  color: var(--gold);
+  flex-shrink: 0;
+  padding-top: 1px;
+  min-width: 110px;
+}
+
+.verse-text {
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── DISPENSATIONAL CALLOUT ── */
+.disp-note {
+  background: rgba(91,141,217,0.07);
+  border: 1px solid rgba(91,141,217,0.2);
+  border-left: 3px solid var(--dispensational);
+  padding: 14px 18px;
+  font-size: 13px;
+  color: #a0bde8;
+  margin-bottom: 8px;
+}
+
+.disp-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dispensational);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* ── COLLISION BOX ── */
+.collision {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--amber);
+  padding: 18px 22px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.collision-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.collision-text {
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.collision-text strong {
+  color: var(--text);
+}
+
+/* ── NWT NOTE ── */
+.nwt-note {
+  background: rgba(192,57,43,0.07);
+  border: 1px solid var(--red-dim);
+  border-left: 3px solid var(--red);
+  padding: 12px 18px;
+  font-size: 13px;
+  color: #e89080;
+  margin-bottom: 8px;
+}
+
+.nwt-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* ── TAGS ── */
+.tag-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+}
+
+.tag-fundamental { border-color: var(--red); color: var(--red); }
+.tag-soteriological { border-color: var(--blue); color: #6ab0d8; }
+.tag-eschatological { border-color: var(--amber); color: var(--amber); }
+.tag-pneumatological { border-color: #8b5cf6; color: #a78bfa; }
+.tag-christological { border-color: var(--gold); color: var(--gold); }
+.tag-ecclesiological { border-color: var(--green); color: #6dbf8a; }
+.tag-anthropological { border-color: #ec4899; color: #f9a8d4; }
+.tag-bibliological { border-color: #14b8a6; color: #5eead4; }
+.tag-dispensational { border-color: var(--dispensational); color: #a0bde8; }
+
+/* ── SUMMARY TABLE ── */
+.summary-section {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.summary-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.summary-section p {
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  font-style: italic;
+  font-size: 15px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.summary-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.summary-table tr:hover td { background: var(--surface); }
+
+.summary-table td:first-child {
+  font-family: 'Playfair Display', serif;
+  color: var(--text);
+  font-size: 14px;
+  width: 22%;
+}
+
+.summary-table td:nth-child(2) { color: #e09090; width: 37%; }
+.summary-table td:nth-child(3) { color: #90c8a0; width: 37%; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 40px 24px 60px;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .comparison { grid-template-columns: 1fr; gap: 0; }
+  .col-oc { border-top: 1px solid var(--border); }
+  nav { padding: 0 12px; }
+  .nav-item { padding: 12px 10px; font-size: 10px; }
+  header { padding: 60px 20px 56px; }
+}
+
+/* ── ANIMATIONS ── */
+.category {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.category.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Comparative Theology · Canon-Based Analysis · Dispensational Framework</div>
+  <h1>Two Theologies,<br><em>One Canon</em></h1>
+  <p class="header-sub">A systematic comparison of Jehovah's Witness doctrine against Biblical Christian teaching, examined through Scripture using a literal, grammatical-historical hermeneutic</p>
+  <div class="header-note">
+    <strong style="color:var(--text)">Method:</strong> Each entry presents (1) the JW position, (2) the Biblical Christian position, (3) the scriptural evidence for each, and (4) the canonical collision — the place where a false reading runs into passages it cannot harmonize. Scripture references follow ESV unless noted.
+  </div>
+  <div class="hermeneutics-banner" style="margin-top:12px;">
+    <strong>Hermeneutical Commitment:</strong> The Biblical Christian positions throughout this site are presented from a <em>literal, grammatical-historical</em> interpretive framework — the same method used in classical dispensationalism. Prophecy is interpreted literally unless the grammar or context demands otherwise. Israel and the Church are treated as distinct programs in God's redemptive plan. The normal, plain meaning of the text is the governing principle.
+  </div>
+</header>
+
+<nav id="mainnav">
+  <div class="nav-item active" onclick="scrollTo('cat1')">Nature of God</div>
+  <div class="nav-item" onclick="scrollTo('cat2')">Trinity</div>
+  <div class="nav-item" onclick="scrollTo('cat3')">Person of Christ</div>
+  <div class="nav-item" onclick="scrollTo('cat4')">Holy Spirit</div>
+  <div class="nav-item" onclick="scrollTo('cat5')">Salvation</div>
+  <div class="nav-item" onclick="scrollTo('cat6')">Atonement</div>
+  <div class="nav-item" onclick="scrollTo('cat7')">Soul &amp; Death</div>
+  <div class="nav-item" onclick="scrollTo('cat8')">Resurrection</div>
+  <div class="nav-item" onclick="scrollTo('cat9')">Hell &amp; Judgment</div>
+  <div class="nav-item" onclick="scrollTo('cat10')">144,000</div>
+  <div class="nav-item" onclick="scrollTo('cat11')">Rapture &amp; Millennium</div>
+  <div class="nav-item" onclick="scrollTo('cat12')">The Name "Jehovah"</div>
+  <div class="nav-item" onclick="scrollTo('cat13')">The NWT Bible</div>
+  <div class="nav-item" onclick="scrollTo('cat14')">Cross / Stake</div>
+  <div class="nav-item" onclick="scrollTo('cat15')">Prayer &amp; Mediation</div>
+  <div class="nav-item" onclick="scrollTo('cat16')">Blood / Medicine</div>
+  <div class="nav-item" onclick="scrollTo('cat17')">Birthdays &amp; Holidays</div>
+  <div class="nav-item" onclick="scrollTo('cat18')">Organization</div>
+  <div class="nav-item" onclick="scrollTo('summary')">Summary</div>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 1: NATURE OF GOD -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat1">
+  <div class="category-header">
+    <span class="cat-num">01</span>
+    <h2 class="cat-title">The Nature of God — Is God One Person or Three?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-fundamental">Fundamental</span>
+    <span class="tag tag-christological">Theological Basis</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">God is a single person — Jehovah. He has a body of spirit, a distinct individual, alone deserving of worship. The Trinity is a pagan invention imported into Christianity from Babylon and Greece. God cannot be three persons simultaneously; this is logically incoherent and unscriptural.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Deut 6:4</span><span class="verse-text">"Jehovah our God is one Jehovah" — cited as proof of strict numerical oneness.</span></div>
+          <div class="scripture-item"><span class="ref">John 17:3</span><span class="verse-text">Jesus calls the Father "the only true God" — used to exclude the Son from true deity.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">God is one divine Being (ousia) subsisting eternally in three distinct Persons — Father, Son, and Holy Spirit — each fully God, coequal and coeternal. The unity of God is affirmed; the complexity of His personal nature is revealed progressively throughout Scripture. Taking the text at face value across both Testaments, no other conclusion can be reached.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Deut 6:4</span><span class="verse-text">Hebrew <em>echad</em> ("one") denotes unity, not numerical singularity — the same word as Gen 2:24 where husband and wife become "one flesh."</span></div>
+          <div class="scripture-item"><span class="ref">Gen 1:26</span><span class="verse-text">"Let us make man in our image" — plural identity in the very act of creation, taken at face value.</span></div>
+          <div class="scripture-item"><span class="ref">Matt 28:19</span><span class="verse-text">One name (singular) of Father, Son, and Spirit — three Persons share one name.</span></div>
+          <div class="scripture-item"><span class="ref">Isa 48:16</span><span class="verse-text">"The Lord GOD has sent me, and his Spirit" — all three Persons in a single OT passage.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">If John 17:3 proves the Father alone is "truly God," then John 1:1 ("the Word was God"), John 20:28 (Thomas: "My Lord and my God"), and Col 2:9 ("the whole fullness of deity dwells bodily") must be wrong — or Jesus is simultaneously not-truly-God and called God by Scripture itself. The JW reading creates a canon-internal contradiction they must resolve through translation alteration (NWT: "a god" at John 1:1), not exegesis.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 2: TRINITY -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat2">
+  <div class="category-header">
+    <span class="cat-num">02</span>
+    <h2 class="cat-title">The Trinity — Pagan Invention or Scriptural Revelation?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-fundamental">Fundamental</span>
+    <span class="tag tag-christological">Christological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The Trinity doctrine originated in pagan religion and was formally imposed on Christianity at the Council of Nicaea (325 AD) by the politically motivated Emperor Constantine. It is not found in the Bible and the word "Trinity" never appears in Scripture. Early Christians were not Trinitarian.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Hist. Argument</span><span class="verse-text">The Watchtower's "Should You Believe in the Trinity?" cites Constantine and post-4th-century councils as the source.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">The Trinity is not a word but a doctrine derived from Scripture's own witness — arrived at by reading the Bible plainly. Nicaea did not invent Trinitarian theology; it codified it against Arianism (essentially the JW position). Pre-Nicene fathers — Ignatius, Justin Martyr, Irenaeus, Tertullian — all taught the three-Person God before any council.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Matt 3:16–17</span><span class="verse-text">At Jesus' baptism all three Persons appear simultaneously — Son baptized, Spirit descending, Father speaking.</span></div>
+          <div class="scripture-item"><span class="ref">2 Cor 13:14</span><span class="verse-text">Paul's benediction invokes the grace of Christ, the love of God, and the fellowship of the Spirit — three distinct persons, one blessing.</span></div>
+          <div class="scripture-item"><span class="ref">Ignatius (~107 AD)</span><span class="verse-text">Wrote of Christ as God-in-flesh decades before Nicaea — predating the Watchtower's claimed council origin by 220 years.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">Nicaea did not produce a doctrine from nothing — it ruled against Arius, whose teaching matches JW theology almost exactly. The JW position is precisely what the early church rejected as heretical. The historical argument cuts the other direction: <strong>the minority Arian view lost to a Trinitarian consensus that predated the council.</strong> Furthermore, if the Trinity is a pagan invention, one must explain why Jewish converts in the first century immediately began worshipping Jesus (Matt 2:11, John 20:28, Phil 2:10–11) alongside God — behavior strict Jewish monotheists would never permit for a creature.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 3: PERSON OF CHRIST -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat3">
+  <div class="category-header">
+    <span class="cat-num">03</span>
+    <h2 class="cat-title">The Person of Christ — First Creation or Eternal God?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-christological">Christological</span>
+    <span class="tag tag-fundamental">Central Dispute</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus Christ is Michael the Archangel in his pre-human existence — the first and greatest creation of Jehovah God, not God Himself. He is a mighty god (lowercase), but not Almighty God. He is a distinct, inferior being who was created before all other things and through whom God created everything else. He is a god, but not the God.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Col 1:15 (NWT)</span><span class="verse-text">"Firstborn of all creation" — JWs read as "first thing created," inserting "other" throughout the passage.</span></div>
+          <div class="scripture-item"><span class="ref">Prov 8:22</span><span class="verse-text">Wisdom "created" at the beginning — identified with the pre-incarnate Christ.</span></div>
+          <div class="scripture-item"><span class="ref">John 14:28</span><span class="verse-text">"The Father is greater than I" — taken as ontological inferiority.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus Christ is the eternal Son of God — fully divine, not created, begotten from the Father before all ages. "Firstborn" (<em>prototokos</em>) is a title of preeminence and legal inheritance, not temporal sequence — exactly as Israel is called God's "firstborn" (Exod 4:22) though not the first nation to exist. He is the Creator of all things, not a created being. He voluntarily took on human nature in the Incarnation without ceasing to be God (the hypostatic union).</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">John 1:1–3</span><span class="verse-text">"In the beginning was the Word… all things were made through him, and without him was not any thing made that was made." — If Christ made all created things, he cannot himself be a created thing.</span></div>
+          <div class="scripture-item"><span class="ref">John 8:58</span><span class="verse-text">"Before Abraham was, I am" — <em>ego eimi</em> echoes Exod 3:14; the Jews understood this as a divine claim (v.59, attempted stoning).</span></div>
+          <div class="scripture-item"><span class="ref">Col 1:17</span><span class="verse-text">"He is before all things, and in him all things hold together" — he sustains creation; a creature cannot do this.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 1:6, 8</span><span class="verse-text">Angels commanded to worship the Son. God calls the Son "God": "Your throne, O God, is forever."</span></div>
+          <div class="scripture-item"><span class="ref">Isa 9:6</span><span class="verse-text">The coming child is called "Mighty God, Everlasting Father" — the same "Mighty God" title applied to Jehovah in Isa 10:21.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nwt-note">
+    <div class="nwt-label">NWT Translation Issue</div>
+    John 1:1 — Greek: "kai theos ēn ho logos" (and the Word was God). NWT renders: "the Word was a god." No Greek manuscript has the indefinite article here. The NWT inserts it to support a theological presupposition. The predicate-nominative construction (Colwell's Rule) argues against this rendering. No credentialed Greek scholar outside the Watchtower defends it.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">If Christ is a created being ("a god"), then John 1:3 says all created things were made through him — which means he both created and was created, a logical impossibility. Furthermore, Isa 44:6 records Jehovah declaring "besides me there is no god." If Jesus is "a god," either Jehovah is wrong, or polytheism is true. <strong>There is no third option within JW theology that avoids this contradiction.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 4: HOLY SPIRIT -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat4">
+  <div class="category-header">
+    <span class="cat-num">04</span>
+    <h2 class="cat-title">The Holy Spirit — Divine Person or Impersonal Force?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-pneumatological">Pneumatological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The Holy Spirit is not a person but Jehovah's active force — the energy or power by which God accomplishes his will in the universe, like electricity or wind. It has no personality, no mind, no will of its own. It is never addressed in prayer and is not worshipped.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Gen 1:2</span><span class="verse-text">"God's active force was moving" (NWT) — the JW translation renders "Spirit" as "active force."</span></div>
+          <div class="scripture-item"><span class="ref">Acts 2:17</span><span class="verse-text">"I will pour out my spirit" — pouring language implies a substance, not a person.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">The Holy Spirit is the third Person of the Trinity — fully God, possessing intellect, will, and emotion. He speaks, teaches, prays, grieves, searches, witnesses, and can be lied to. He is not a force any more than the Father is a force. Scripture consistently uses masculine personal pronouns and attributes personal actions to Him — taking the text at face value leaves no alternative reading.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">John 16:13–14</span><span class="verse-text">"He will guide… he will not speak on his own authority… he will glorify me" — personal pronoun, personal agency, personal volition.</span></div>
+          <div class="scripture-item"><span class="ref">Rom 8:26–27</span><span class="verse-text">The Spirit "intercedes for us with groanings" and has a "mind" — intercession requires personhood.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 5:3–4</span><span class="verse-text">"You have lied to the Holy Spirit… you have not lied to men but to God." — The Spirit = God. You cannot lie to a force.</span></div>
+          <div class="scripture-item"><span class="ref">Eph 4:30</span><span class="verse-text">"Do not grieve the Holy Spirit." — Forces cannot be grieved; only persons experience grief.</span></div>
+          <div class="scripture-item"><span class="ref">Isa 63:10</span><span class="verse-text">Israel "rebelled and grieved his Holy Spirit" — personal grief attested in the Old Testament.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">An impersonal force cannot be lied to (Acts 5), cannot grieve (Eph 4:30, Isa 63:10), cannot intercede with groanings (Rom 8:26), cannot teach and remind (John 14:26), and cannot be blasphemed (Mark 3:29 — the unforgivable sin). Every one of these attributes requires personhood. The "active force" interpretation requires reinterpreting six independent texts from four different books while explaining why God would use uniformly personal language for an impersonal power.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 5: SALVATION -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat5">
+  <div class="category-header">
+    <span class="cat-num">05</span>
+    <h2 class="cat-title">Salvation — Grace Alone or Organizational Obedience?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-soteriological">Soteriological</span>
+    <span class="tag tag-fundamental">Core Gospel</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Salvation is not a present possession but an ongoing process. It requires: (1) faith in Jehovah and the ransom sacrifice of Jesus, (2) active association with and loyalty to the Watchtower organization ("Jehovah's visible organization"), (3) regular meeting attendance and field service (door-to-door evangelism), and (4) obedience to the Governing Body's directives. One can lose salvation through sin, disfellowshipping, or spiritual neglect. There is no assurance of salvation in this life.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Matt 24:45–47</span><span class="verse-text">"Faithful and discreet slave" — applied to the Governing Body as the conduit of spiritual food.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 10:25</span><span class="verse-text">"Not forsaking the assembling" — interpreted as requiring formal meeting attendance at Kingdom Halls.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Salvation is by grace alone, through faith alone, in Christ alone — received as a completed gift at the moment of belief, not earned through works or organizational loyalty. It is a present, eternally secure reality for the believer. Good works flow from salvation as fruit, never as contributing causes. Assurance of salvation is both possible and explicitly promised by Scripture — a hallmark of genuine conversion.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Eph 2:8–9</span><span class="verse-text">"By grace you have been saved through faith… not a result of works, so that no one may boast." — Past tense, completed transaction.</span></div>
+          <div class="scripture-item"><span class="ref">John 5:24</span><span class="verse-text">"Whoever hears my word and believes him who sent me has eternal life… has passed from death to life." — Present possession, past transition — settled.</span></div>
+          <div class="scripture-item"><span class="ref">1 John 5:13</span><span class="verse-text">"I write these things to you who believe… so that you may know that you have eternal life." — Assurance is the explicit purpose of the letter.</span></div>
+          <div class="scripture-item"><span class="ref">Rom 8:38–39</span><span class="verse-text">Nothing in all creation can separate the believer from the love of God in Christ Jesus.</span></div>
+          <div class="scripture-item"><span class="ref">John 10:28–29</span><span class="verse-text">"I give them eternal life, and they will never perish, and no one will snatch them out of my hand." — The security is double-sealed: Christ's hand and the Father's hand.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">John 5:24 says the believer "has passed from death to life" — past tense, completed action. 1 John 5:13 says believers can <em>know</em> they have eternal life — John writes specifically to produce that assurance. These texts directly contradict the JW position that salvation cannot be known in this life. Furthermore, no verse in Scripture conditions salvation on membership in any particular human organization. <strong>Eph 2:8–9 explicitly excludes works from the ground of salvation</strong> — the JW system makes organizational performance a requirement, adding to what Paul declares complete.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 6: ATONEMENT -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat6">
+  <div class="category-header">
+    <span class="cat-num">06</span>
+    <h2 class="cat-title">The Atonement — Full Propitiation or Mere Ransom Offsetting Adam?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-soteriological">Soteriological</span>
+    <span class="tag tag-christological">Christological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus' death was a "ransom sacrifice" — a perfect human life given to offset (correspond to) Adam's perfect human life that was forfeited through sin. The exchange is life-for-life, human-for-human. Because Christ was only a perfect man (not God incarnate), his death is sufficient to undo Adam's sin-debt. The atonement is transactional and legal; it does not include propitiation (satisfying divine wrath) since Jehovah does not have "wrath" in the theological sense.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">1 Tim 2:5–6</span><span class="verse-text">"The man Christ Jesus gave himself as a ransom for all" — emphasis on "man" as the key qualifier.</span></div>
+          <div class="scripture-item"><span class="ref">Rom 5:12, 19</span><span class="verse-text">Sin entered through one man; one man's obedience restores — symmetry used to argue Christ must be merely human.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Christ's atonement is substitutionary, propitiatory, and infinite in value because the one who died is God incarnate. A finite human death cannot atone for the infinite weight of sin against an infinite God. The Incarnation — God becoming man — is precisely what gives the atonement its cosmic sufficiency. Christ didn't merely offset Adam; he bore the wrath of God on behalf of his people (penal substitution), fully satisfying divine justice so that God can be "just and the justifier" of the one who believes (Rom 3:26).</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Isa 53:4–6</span><span class="verse-text">"The LORD has laid on him the iniquity of us all" — the transfer of guilt is active, divine, and forensic.</span></div>
+          <div class="scripture-item"><span class="ref">Rom 3:25</span><span class="verse-text">God "put forward" Christ "as a propitiation by his blood" — <em>hilastērion</em>: the mercy seat, the specific locus of wrath-satisfaction.</span></div>
+          <div class="scripture-item"><span class="ref">1 John 4:10</span><span class="verse-text">"He loved us and sent his Son to be the propitiation for our sins." — Explicit wrath-bearing language.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 9:14</span><span class="verse-text">"The blood of Christ, who through the eternal Spirit offered himself… to God" — the eternal nature of the Offerer is the measure of the offering's infinite worth.</span></div>
+          <div class="scripture-item"><span class="ref">2 Cor 5:21</span><span class="verse-text">"God made him who knew no sin to be sin for us, that we might become the righteousness of God in him." — The double imputation at the heart of substitutionary atonement.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">If Christ is only a perfect human, his death equals one human life — canceling Adam's. But Scripture's atonement language far exceeds life-for-life accounting. Rom 3:25 uses <em>hilastērion</em> (propitiation — wrath-satisfaction), Heb 9:14 grounds the atonement's efficacy in Christ's "eternal Spirit," and 1 John 2:2 says he is "the propitiation… for the sins of the whole world" — an infinite scope requiring infinite value. <strong>A merely human death is finite and cannot bear infinite sin.</strong> The JW ransom theory actually undermines the sufficiency it claims to defend.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 7: SOUL & DEATH -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat7">
+  <div class="category-header">
+    <span class="cat-num">07</span>
+    <h2 class="cat-title">The Soul and Death — Immortal Soul or Soul Sleep?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-anthropological">Anthropological</span>
+    <span class="tag tag-eschatological">Eschatological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Humans do not have a soul — they are a soul (a living creature). At death, the soul ceases to exist entirely; there is no consciousness, no awareness, no existence in any form. Death is a state of complete non-existence ("soul sleep"). The dead know nothing, feel nothing, and await resurrection as if in dreamless sleep. There is no intermediate state between death and resurrection.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Gen 2:7</span><span class="verse-text">"Man became a living soul" (KJV / NWT) — man is a soul, not has one.</span></div>
+          <div class="scripture-item"><span class="ref">Eccl 9:5</span><span class="verse-text">"The dead know nothing" — taken as a definitive statement of total unconsciousness.</span></div>
+          <div class="scripture-item"><span class="ref">Ps 146:4</span><span class="verse-text">"His spirit goes out, he returns to his earth; on that very day his plans perish."</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Humans are body-soul unities. At physical death, the immaterial soul/spirit separates from the body and consciously enters the presence of the Lord (believers) or Hades (unbelievers) to await final judgment. The body awaits bodily resurrection. This conscious intermediate state is explicitly taught in the New Testament — taking these passages literally at face value yields no other conclusion. Resurrection is the future reunification of the soul with a glorified body, not a re-creation from nothing.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Luke 23:43</span><span class="verse-text">"Today you will be with me in Paradise" — same day, conscious presence. (JWs move the comma in the NWT to neutralize this, unsupported by any manuscript.)</span></div>
+          <div class="scripture-item"><span class="ref">2 Cor 5:8</span><span class="verse-text">"We would rather be away from the body and at home with the Lord." — Consciousness is implied in "at home with the Lord."</span></div>
+          <div class="scripture-item"><span class="ref">Phil 1:23</span><span class="verse-text">"My desire is to depart and be with Christ, for that is far better." — Paul anticipates conscious fellowship, not nonexistence.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 6:9–10</span><span class="verse-text">Souls under the altar cry out to God — conscious, aware, communicating after death.</span></div>
+          <div class="scripture-item"><span class="ref">Luke 16:22–23</span><span class="verse-text">Lazarus and the rich man — both conscious, aware of their condition, in the intermediate state after death.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nwt-note">
+    <div class="nwt-label">NWT Translation Issue</div>
+    Luke 23:43 in Greek: "Amen I say to you, today with me you will be in paradise." NWT moves the comma: "Truly I say to you today, I tell you that you will be with me in Paradise." This comma relocation is not supported by any Greek manuscript tradition and fundamentally reverses the verse's meaning. No other translation in any language makes this choice.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">"The dead know nothing" in Eccl 9:5 is a wisdom observation about life "under the sun" — Ecclesiastes' framing device for earthly perspective, not a theological definition of the afterlife. Read as absolute, it contradicts Rev 6:9–10 (souls under the altar are conscious and speaking), Luke 16 (conscious intermediate state described in narrative detail), Phil 1:23 (Paul desires death as "far better" — inexplicable if death is nonexistence), and Matt 17:3 (Moses and Elijah appear and converse with Jesus centuries after their deaths). <strong>Soul sleep requires ignoring or redefining at least five independent New Testament texts.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 8: RESURRECTION -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat8">
+  <div class="category-header">
+    <span class="cat-num">08</span>
+    <h2 class="cat-title">The Resurrection — Bodily Restoration or Spirit Re-creation?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-eschatological">Eschatological</span>
+    <span class="tag tag-christological">Christological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus was raised as a spirit creature — his physical body was disposed of by God (dissolved or dematerialized). His post-resurrection appearances in a body were temporary materializations to prove he was alive, not evidence of a bodily resurrection. The 144,000 are also raised as spirit creatures. The "great crowd" will be resurrected in physical bodies to live on a paradise earth, but Jesus himself did not rise bodily.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">1 Pet 3:18</span><span class="verse-text">"Put to death in the flesh but made alive in the spirit" — interpreted as transformation from physical to spirit existence.</span></div>
+          <div class="scripture-item"><span class="ref">1 Cor 15:44–45</span><span class="verse-text">"It is sown a natural body, it is raised a spiritual body… life-giving spirit" — "spiritual body" read as non-physical.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus rose bodily — the same body that died was raised, transformed and glorified. The empty tomb is the physical evidence. His resurrection is the prototype and guarantee of the believer's future bodily resurrection. "Spiritual body" (<em>soma pneumatikon</em>) is still <em>soma</em> (body); "spiritual" describes its animating power and nature, not its physicality. The literal, plain reading of the resurrection accounts allows no other conclusion.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Luke 24:39</span><span class="verse-text">"See my hands and feet, that it is I myself. Touch me, and see. For a spirit does not have flesh and bones as you see that I have."</span></div>
+          <div class="scripture-item"><span class="ref">John 2:19–21</span><span class="verse-text">"Destroy this temple, and in three days I will raise it up… he was speaking about the temple of his body." — His own body is what rises.</span></div>
+          <div class="scripture-item"><span class="ref">John 20:27</span><span class="verse-text">"Put your finger here, and see my hands… do not disbelieve, but believe." — Physical wounds present post-resurrection.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 2:31</span><span class="verse-text">Peter: his flesh "did not see corruption" — the body itself was preserved and raised.</span></div>
+          <div class="scripture-item"><span class="ref">1 Cor 15:20</span><span class="verse-text">"Christ the firstfruits of those who have fallen asleep" — our bodily resurrection mirrors and depends on his.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">Jesus explicitly denies being a spirit in Luke 24:39: <em>"a spirit does not have flesh and bones as you see that I have."</em> This verse directly and by name refutes the JW position. John 2:19–21 says Jesus himself predicted his body would be raised. Acts 2:31 says his flesh did not see corruption. The JW view requires Jesus to be lying or mistaken in Luke 24. Furthermore, if Jesus rose as a spirit, Paul's argument in 1 Cor 15:20 that he is the "firstfruits" of our resurrection means believers will also rise as spirits — but JWs say the great crowd rises physically. <strong>The JW system is internally contradictory on resurrection.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 9: HELL & JUDGMENT — DISPENSATIONAL -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat9">
+  <div class="category-header">
+    <span class="cat-num">09</span>
+    <h2 class="cat-title">Hell and Eternal Judgment — Annihilation or Conscious Punishment?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-eschatological">Eschatological</span>
+    <span class="tag tag-dispensational">Dispensational</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Hell (Gehenna) means eternal annihilation — permanent non-existence, not conscious punishment. The wicked are simply destroyed, ceasing to exist forever. There is no place of ongoing conscious torment. The "lake of fire" in Revelation represents the second death — complete destruction. A loving God would never torment people eternally; such a concept is pagan and unscriptural.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Ps 37:9–10</span><span class="verse-text">"Evildoers shall be cut off… in a little while the wicked will be no more." — Taken as cessation of existence.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 20:14</span><span class="verse-text">"The lake of fire is the second death" — death = non-existence; "second death" = permanent non-existence.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Hell is a place of conscious, eternal separation from God and ongoing punishment — taught explicitly and repeatedly by Jesus Himself, who spoke more about hell than any other biblical figure. Taking these statements literally and at face value, as the grammatical-historical method demands, yields a clear picture. Scripture lays out a specific future sequence: the current intermediate state (Hades/Paradise), followed by the Rapture, the 7-year Tribulation, Christ's literal 1,000-year reign on earth (the Millennium), a brief final rebellion, and then the Great White Throne Judgment — at which all unsaved dead are resurrected, judged, and consigned to the lake of fire for eternity (Rev 20:11–15).</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Matt 25:46</span><span class="verse-text">"These will go away into eternal punishment, but the righteous into eternal life." — <em>Aiōnios</em> modifies both equally; if life is conscious and eternal, so is punishment.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 14:11</span><span class="verse-text">"The smoke of their torment goes up forever and ever, and they have no rest, day or night." — Continuous, conscious, unending torment.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 20:10–15</span><span class="verse-text">The devil, the beast, and the false prophet are "tormented day and night forever" in the lake of fire. At the Great White Throne, all unsaved dead are resurrected for final judgment and cast into the lake of fire — the second death.</span></div>
+          <div class="scripture-item"><span class="ref">Mark 9:48</span><span class="verse-text">"Where their worm does not die and the fire is not quenched" — language from Isa 66:24 describing an ongoing, unending process.</span></div>
+          <div class="scripture-item"><span class="ref">Luke 16:23–24</span><span class="verse-text">The rich man in Hades is in "torment," sees Abraham, speaks, and pleads for relief — fully conscious in the intermediate state after death.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="disp-note">
+    <div class="disp-label">📖 Dispensational Framework — The Sequence of Future Judgments</div>
+    Classical dispensationalism distinguishes multiple future judgments, each literal and in sequence: (1) <strong>The Judgment Seat of Christ</strong> (Bema, 2 Cor 5:10) — for believers only, evaluating rewards after the Rapture, not salvation; (2) <strong>Judgment of the Nations</strong> (Matt 25:31–46) — at Christ's Second Coming, determining who enters the Millennial Kingdom in natural bodies; (3) <strong>The Great White Throne</strong> (Rev 20:11–15) — after the Millennium, for all unsaved dead of all ages, resulting in the lake of fire (the second death). These judgments are not conflated — they are distinct events separated by literal intervals of time. The JW annihilation view collapses all of this into a single event and strips it of its literal, textual detail.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">Matt 25:46 uses the identical word (<em>aiōnios</em>) for both eternal life and eternal punishment in the same sentence. If annihilationists read punishment as temporary or terminal, they must apply the same logic to life — eternal life also becomes temporary. The grammar will not allow splitting the word's meaning mid-sentence. Rev 14:11 says torment "goes up forever and ever" — the strongest possible Greek expression for endless duration (<em>eis aiōnas aiōnōn</em>). Rev 20:10 explicitly says the devil is "tormented," not destroyed. <strong>The annihilation view requires redefining "eternal" differently every time it applies to punishment vs. life — a hermeneutic of convenience rather than consistency.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 10: 144,000 — DISPENSATIONAL -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat10">
+  <div class="category-header">
+    <span class="cat-num">10</span>
+    <h2 class="cat-title">The 144,000 — Literal Future Israel or Symbolic Church?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-eschatological">Eschatological</span>
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-dispensational">Dispensational</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The 144,000 is a literal number representing a special class of Jehovah's Witnesses — the "anointed class" — who will rule with Christ in heaven as spirit creatures. The quota was filled by 1935; since then, nearly all JWs belong to the "other sheep" or "great crowd" who will inherit a paradise earth, not heaven. Only the 144,000 partake of the communion emblems (bread and wine) at the annual Memorial. Most JWs do not take communion.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Rev 7:4</span><span class="verse-text">"I heard the number of the sealed, 144,000" — literal number, specific class.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 14:1–3</span><span class="verse-text">144,000 "purchased from the earth" — interpreted as the heavenly class, distinct from the great crowd.</span></div>
+          <div class="scripture-item"><span class="ref">John 10:16</span><span class="verse-text">"Other sheep I have that are not of this fold" — interpreted as the earthly great crowd, distinct from the heavenly 144,000.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Taking the text of Revelation 7 literally — as the grammatical-historical method demands — the 144,000 are exactly what the text says they are: 12,000 sealed individuals from each of the 12 literal tribes of Israel. They are Jewish evangelists commissioned by God during the future 7-year Tribulation period (Daniel's 70th Week) to proclaim the Gospel of the Kingdom to the nations after the Church has been raptured. This is not the Church; this is not a JW anointed class — it is a future, literal, national Israel fulfilling a specific prophetic role. Israel and the Church are distinct entities in God's redemptive program.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Rev 7:4–8</span><span class="verse-text">Twelve thousand from each of twelve named tribes — literal tribal identity. Taken at face value, this is ethnic Israel. The text says "from the tribe of Judah," "from the tribe of Reuben," etc. — not "from among Jehovah's Witnesses."</span></div>
+          <div class="scripture-item"><span class="ref">Rev 14:4</span><span class="verse-text">"These have been redeemed from the earth… firstfruits to God and the Lamb." — The 144,000 are a first-installment of Israel's end-time redemption (Zech 12:10; Rom 11:25–27).</span></div>
+          <div class="scripture-item"><span class="ref">Dan 9:24–27</span><span class="verse-text">Daniel's 70th Week is a 7-year period specifically appointed for Israel ("your people and your holy city"). The 144,000 are sealed at its outset for divine protection during the Great Tribulation.</span></div>
+          <div class="scripture-item"><span class="ref">Rom 11:25–27</span><span class="verse-text">"All Israel will be saved" — a future, national, literal fulfillment of God's irrevocable covenant with Israel (v.29), distinct from the Church age.</span></div>
+          <div class="scripture-item"><span class="ref">1 Cor 11:23–26</span><span class="verse-text">"Do this in remembrance of me… as often as you drink it" — the Lord's Supper is addressed to all Church-age believers without class restriction.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="disp-note">
+    <div class="disp-label">📖 Dispensational Key Distinction — Israel ≠ The Church</div>
+    Classical dispensationalism insists that God has two distinct programs running through history: <strong>His purposes for Israel</strong> (an earthly, national covenant people) and <strong>His purposes for the Church</strong> (the body of Christ, a heavenly calling). These programs are not merged, replaced, or conflated. The Church age is a parenthesis — a mystery program not revealed in the Old Testament (Eph 3:1–9) — bracketed between Pentecost and the Rapture. When the Church is removed at the Rapture (1 Thess 4:13–18), God resumes His prophetic calendar with Israel during Daniel's 70th Week. The 144,000 belong to Israel's program, not the Church's. The JW two-class system creates a false partition within the Church; dispensationalism distinguishes Israel from the Church altogether — a fundamentally different and textually supported division.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The JW reading of 144,000 as a "Watchtower anointed class" with a quota that closed in 1935 is invented — it appears nowhere in Scripture. The text names twelve specific tribes of Israel, not an organizational rank in a 20th-century corporation. More critically: the JW claim that the quota was "filled" requires that God stopped sealing people in 1935, yet Rev 7 presents the sealing as a future event tied to Tribulation judgments that have not yet occurred. <strong>If only 144,000 may take communion, Jesus' words in John 6:53 ("unless you eat the flesh of the Son of Man… you have no life in you") condemn the other sheep to having no life in them</strong> — an unintended consequence the Watchtower cannot answer.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 11: RAPTURE, TRIBULATION, MILLENNIUM — DISPENSATIONAL -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat11">
+  <div class="category-header">
+    <span class="cat-num">11</span>
+    <h2 class="cat-title">End Times — Armageddon Paradise or Rapture, Tribulation &amp; Millennium?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-eschatological">Eschatological</span>
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-dispensational">Dispensational</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The end-times scenario: Armageddon (an imminent global war led by Jehovah) destroys all wicked people and worldly governments. The 144,000 anointed are taken to heaven to reign with Christ. The "great crowd" of surviving JWs and resurrected righteous inhabit a cleansed paradise earth under Theocratic rule for a literal 1,000-year period (the "Millennium"), after which Satan is released briefly, destroyed, and the paradise continues forever. "Going to heaven" is not the destiny of most JWs — earthly paradise is. The two-class system (heavenly vs. earthly) is permanent and essential.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Rev 16:14–16</span><span class="verse-text">Armageddon — the gathering of kings for the battle of the great day of God.</span></div>
+          <div class="scripture-item"><span class="ref">Ps 37:29</span><span class="verse-text">"The righteous shall inherit the land and dwell upon it forever" — earthly inheritance for the great crowd.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 21:3–4</span><span class="verse-text">God dwelling with his people on a renewed earth — applied to the earthly great crowd.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Scripture, read literally, reveals a specific, ordered prophetic sequence: (1) <strong>The Rapture</strong> — Christ returns in the air to remove the Church before the coming wrath (1 Thess 4:13–18; 1 Cor 15:51–52; John 14:1–3). The Church does not go through the Tribulation — it is taken out first. (2) <strong>Daniel's 70th Week (7-year Tribulation)</strong> — a period of unprecedented global judgment and the Great Tribulation, culminating in Christ's visible return (Matt 24:21; Rev 6–18; Dan 9:27). (3) <strong>The Second Coming</strong> — Christ returns bodily and visibly to earth with the saints (Rev 19:11–16; Zech 14:4; Acts 1:11). (4) <strong>The Millennial Kingdom</strong> — Christ reigns literally, bodily, on David's throne in Jerusalem for 1,000 literal years (Rev 20:1–6; Isa 11:1–10; Zech 14:9). Promises to Israel are fulfilled literally. (5) <strong>Eternal State</strong> — the new heaven and new earth, unified under God's presence forever (Rev 21–22).</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">1 Thess 4:13–18</span><span class="verse-text">"The Lord himself will descend from heaven with a shout… and the dead in Christ will rise first. Then we who are alive… will be caught up together with them in the clouds to meet the Lord in the air." — The Rapture: Church removed before wrath.</span></div>
+          <div class="scripture-item"><span class="ref">1 Thess 5:9</span><span class="verse-text">"God has not destined us for wrath, but to obtain salvation through our Lord Jesus Christ." — The Church is exempt from Tribulation wrath; Israel's prophetic calendar resumes.</span></div>
+          <div class="scripture-item"><span class="ref">Dan 9:24–27</span><span class="verse-text">Seventy weeks decreed for "your people" (Israel) and "your holy city" — a 7-year final period specifically for Israel and Jerusalem, not the Church.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 19:11–16</span><span class="verse-text">Christ's literal, visible, bodily return to earth — "King of Kings and Lord of Lords" — at the conclusion of the Tribulation, to establish His kingdom.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 20:1–6</span><span class="verse-text">"They came to life and reigned with Christ for a thousand years" — six times in this passage the duration is stated as 1,000 years, taken literally as a distinct future earthly reign.</span></div>
+          <div class="scripture-item"><span class="ref">Isa 11:6–9</span><span class="verse-text">The wolf dwelling with the lamb, creation at peace — a literal, physical description of Millennial conditions on earth under Christ's rule, not an allegory.</span></div>
+          <div class="scripture-item"><span class="ref">Zech 14:4, 9</span><span class="verse-text">"His feet shall stand on the Mount of Olives" — a literal, geographic, bodily return to the exact location of the Ascension. "The LORD will be king over all the earth."</span></div>
+          <div class="scripture-item"><span class="ref">Acts 1:11</span><span class="verse-text">"This Jesus, who was taken up from you into heaven, will come in the same way as you saw him go" — bodily, visibly, to the earth.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="disp-note">
+    <div class="disp-label">📖 Dispensational Framework — Why the Sequence Matters</div>
+    The dispensational reading of end-times prophecy is not speculation — it is the result of applying the same literal, grammatical-historical hermeneutic consistently used to interpret all other Scripture. When Isa 7:14 predicts a virgin birth, we take it literally. When Mic 5:2 predicts Bethlehem, we take it literally. The same consistency demands that when Zech 14:4 says Christ's feet will stand on the Mount of Olives, or Rev 20 says "a thousand years" six times, we take those literally too. The JW system applies a selective literalism — taking 144,000 as a literal number (to support its organizational doctrine) while allegorizing the Millennium, the Rapture, and Israel's national restoration. <strong>This inconsistency is hermeneutically arbitrary.</strong> The pre-tribulational rapture, the 7-year Tribulation, and the literal 1,000-year Millennial reign are the natural result of reading the prophetic texts the way the rest of Scripture is read.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The JW system has no pre-Tribulation Rapture, no distinction between the Rapture and the Second Coming, no literal fulfillment of Israel's covenant promises, and no Millennial Kingdom in the biblical sense — it substitutes an organizational paradise-earth doctrine for the specific, detailed prophetic program the Old and New Testaments describe. The Watchtower's "Armageddon" is not the same event as the biblical Battle of Armageddon (Rev 16:14–16; 19:19–21), which ends with Christ's visible return and the establishment of His earthly kingdom — not the beginning of an organizational paradise administered from Brooklyn. Furthermore, God's unconditional covenants with Abraham (Gen 12; 15; 17) and David (2 Sam 7:12–16) promise specific, literal, national, territorial, and dynastic fulfillments to <em>Israel</em> — not a spiritualized organization. <strong>If these covenants are not literally fulfilled, God is unfaithful to his stated word</strong> — a conclusion that undermines the entire basis of theological certainty.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 12: THE NAME JEHOVAH -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat12">
+  <div class="category-header">
+    <span class="cat-num">12</span>
+    <h2 class="cat-title">The Divine Name — Was "Jehovah" Removed from the NT?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-bibliological">Bibliological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The name "Jehovah" (YHWH) originally appeared 237 times in the New Testament but was removed by apostate copyists who replaced it with "Lord" (Kyrios) and "God" (Theos). The NWT restores these 237 occurrences. Using the name "Jehovah" is essential to salvation and true worship. Jesus himself used the name, and early Christians would have preserved it. The suppression of the divine name is part of the great apostasy.</div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">No Greek NT manuscript — not one, out of over 5,800 extant — contains the Tetragrammaton (YHWH). The NWT's 237 insertions are editorial additions with zero manuscript support. When NT authors quote OT passages that contain YHWH and render them as <em>Kyrios</em> (Lord), they consistently apply those passages to Jesus — demonstrating that the early church identified Jesus as the LORD (YHWH) of the Old Testament. Taking these quotations at face value reveals one of the most powerful arguments for Christ's full deity in Scripture.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Rom 10:9, 13</span><span class="verse-text">Paul quotes Joel 2:32 ("Call on the name of the LORD/YHWH") and applies it to Jesus — "confess… Jesus is Lord… call on the name of the Lord." YHWH's name is applied to Christ.</span></div>
+          <div class="scripture-item"><span class="ref">Phil 2:10–11</span><span class="verse-text">At Jesus' name every knee bows — language from Isa 45:23 where every knee bows to YHWH alone.</span></div>
+          <div class="scripture-item"><span class="ref">1 Pet 3:15</span><span class="verse-text">"Honor Christ the Lord as holy" — quoting Isa 8:13 "honor YHWH as holy." Peter transfers the title to Jesus.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nwt-note">
+    <div class="nwt-label">Textual-Critical Issue</div>
+    The JW claim that "Jehovah" was removed from the NT has no textual support. There are no variant manuscripts, no early church quotations, no papyri fragments — nothing — supporting YHWH in the NT text. The NWT inserted it based on theological preference alone. The actual manuscript evidence runs the opposite direction: NT authors consistently apply Old Testament YHWH texts to Jesus using Kyrios — suggesting the early church understood Jesus as the one identified with YHWH, not as a separate being subordinate to him.
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The "removal" hypothesis requires a coordinated, universal, successful conspiracy across every known manuscript — before the age of printing, across multiple continents, involving Jewish, Greek, Latin, and Coptic scribes, leaving zero trace. This is historically implausible. More damaging: when the NT quotes YHWH texts and applies them to Jesus (Rom 10:13/Joel 2:32; Phil 2:10/Isa 45:23; 1 Pet 3:15/Isa 8:13), <strong>this itself argues that the early church identified Jesus as YHWH</strong> — the opposite of what JWs claim.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 13: THE NWT BIBLE -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat13">
+  <div class="category-header">
+    <span class="cat-num">13</span>
+    <h2 class="cat-title">The New World Translation — Faithful Translation or Doctrinal Revision?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-bibliological">Bibliological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The New World Translation is the most accurate Bible translation available, freed from the trinitarian bias that corrupts other translations. Its translation committee were divinely guided scholars who restored correct renderings. The NWT's unique readings (such as "a god" at John 1:1 or inserting "Jehovah" in the NT) represent the most honest engagement with the original text.</div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">The NWT is a doctrinally motivated revision, not a translation. Its translation committee (Frederick Franz and others) had no formal training in biblical Greek or Hebrew. Distinctive NWT readings — "a god" at John 1:1, inserting "Jehovah" 237 times in the NT with no manuscript basis, adding "other" four times in Col 1:16–17 with no Greek support — all serve to eliminate texts that contradict Watchtower theology. No credentialed biblical scholar outside the Watchtower defends these renderings on textual grounds.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">John 1:1</span><span class="verse-text">NWT: "the Word was <em>a</em> god" — no Greek manuscript supports the indefinite article here. Every credentialed Greek scholar who has examined this rendering has rejected it, including non-Christian scholars with no theological stake in the outcome.</span></div>
+          <div class="scripture-item"><span class="ref">Col 1:16–17</span><span class="verse-text">NWT inserts "other" four times: "all [other] things were created… he is before all [other] things." The word does not appear in the Greek text. Its insertion fundamentally reverses the verse's meaning — making Christ a creature rather than the Creator.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 1:6</span><span class="verse-text">NWT: "let all God's angels do obeisance to him" — changing "worship" (<em>proskuneō</em>) to the weaker "obeisance" to avoid the implication that Christ receives worship.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">A translation committee that adds words to the Greek text not present in any manuscript (Col 1:16–17: "other"), inserts a divine name 237 times with no manuscript basis (NT: "Jehovah"), and renders a clear predicate nominative contrary to Greek grammar (John 1:1: "a god") is not translating — it is rewriting. The NWT can only be defended if one already accepts Watchtower theology; it cannot be used to independently establish Watchtower theology, because it was constructed to fit it. <strong>The circularity is the problem: the NWT proves JW doctrine, but JW doctrine produced the NWT.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 14: CROSS / STAKE -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat14">
+  <div class="category-header">
+    <span class="cat-num">14</span>
+    <h2 class="cat-title">The Cross — Pagan Symbol or Historical Instrument?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-bibliological">Bibliological</span>
+    <span class="tag tag-christological">Christological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Jesus was executed on an upright stake (<em>stauros</em>), not a cross. The cross is a pagan symbol originating in Babylonian religion — the "T" of Tammuz. Displaying or venerating the cross is idolatry. The Watchtower teaches that Constantine introduced the cross symbol into Christianity in the 4th century as part of the great apostasy. JWs do not use crosses in any form.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Linguistic Arg.</span><span class="verse-text"><em>Stauros</em> (Greek) originally meant an upright stake — JWs claim this is evidence for a stake, not a cross-shaped instrument.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">The historical and textual evidence points to a cross-shaped instrument of execution. The presence of a <em>titlon</em> (title/sign) nailed above Jesus' head (John 19:19–20), the posting of charges above the condemned person's head (Roman practice), and Thomas touching both hands (John 20:25, 27) and feet (Luke 24:39–40) implies arms spread laterally — consistent with crucifixion on a cross, not hands above the head on a stake. Furthermore, <em>stauros</em> was used by first-century writers to describe the cross-shaped Roman instrument, not merely a stake.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">John 19:18–20</span><span class="verse-text">A title was placed above Jesus' head — Roman crucifixion practice for a cross, not a stake where the placard would be at body level.</span></div>
+          <div class="scripture-item"><span class="ref">John 20:25</span><span class="verse-text">"Unless I see in his hands the mark of the nails" — plural nails in plural hands implies two separate hand-nail points, consistent with outstretched arms on a cross.</span></div>
+          <div class="scripture-item"><span class="ref">Matt 27:37</span><span class="verse-text">"Over his head they put the charge against him" — above the head, not above the hands, as Roman cross practice dictated.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The "pagan origin" argument is historically dubious — the cross was used as a Roman execution device entirely independent of religious symbolism. The sign above Jesus' head (John 19:19–20; Matt 27:37) is inconsistent with stake crucifixion, where the sign would be at chest level. Thomas's reference to "nails" (plural) in the hands, and the posting of a title <em>above</em> the head, align directly with the standard Roman cross. The JW position requires rewriting Roman execution history to fit a theological conclusion that was reached first.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 15: PRAYER & MEDIATION -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat15">
+  <div class="category-header">
+    <span class="cat-num">15</span>
+    <h2 class="cat-title">Prayer and Mediation — Direct Access or Organizational Filter?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-soteriological">Soteriological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Prayer is directed to Jehovah God alone, through Jesus as mediator — but Jesus' role as mediator applies only to the 144,000 anointed class. The "great crowd" of ordinary JWs are not in the "new covenant" and therefore do not have Jesus as their direct mediator. Their spiritual access comes through the Governing Body and the organization. Prayer is formulaic — always addressed to "Jehovah God," never to Jesus.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">1 Tim 2:5</span><span class="verse-text">"One mediator between God and men, the man Christ Jesus" — JWs restrict mediation to the 144,000.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Every believer has direct, unmediated access to God through Christ — there are no spiritual classes with differential access. The New Covenant, ratified by Christ's blood, applies to all believers equally. Jesus is the mediator for every person who comes to God through Him, without exception or tier. Prayer to Jesus is also explicitly modeled in Scripture — Stephen prays to Jesus (Acts 7:59–60), and all believers are called to "call upon the name of the Lord Jesus Christ" (1 Cor 1:2).</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Heb 4:16</span><span class="verse-text">"Let us draw near to the throne of grace" — "us" is universal; no class restriction given.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 10:19–22</span><span class="verse-text">"We have confidence to enter the holy places by the blood of Jesus… let us draw near" — all believers addressed.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 7:59–60</span><span class="verse-text">Stephen, at his death, prays directly to Jesus: "Lord Jesus, receive my spirit." — Prayer to Jesus is demonstrated, not forbidden.</span></div>
+          <div class="scripture-item"><span class="ref">1 Cor 1:2</span><span class="verse-text">"All who in every place call upon the name of our Lord Jesus Christ" — calling on Jesus is the defining mark of a believer.</span></div>
+          <div class="scripture-item"><span class="ref">Rev 22:20</span><span class="verse-text">"Come, Lord Jesus!" — John's prayer to Jesus closes the entire canon.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">1 Tim 2:5 says Christ is the one mediator "between God and men" — the Greek <em>anthrōpōn</em> means "mankind," not "the 144,000 anointed class." The JW restriction of Christ's mediation to a small elite has no textual basis — it is inserted to justify the organizational structure that substitutes the Governing Body for direct Christ-access. Furthermore, if Jesus is "only" the mediator for the 144,000, then the great crowd has no mediator — leaving them in precisely the situation Heb 9:15 says the New Covenant resolves. <strong>The JW system creates a class of believers without a mediator, which is textually and soteriologically incoherent.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 16: BLOOD / MEDICINE -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat16">
+  <div class="category-header">
+    <span class="cat-num">16</span>
+    <h2 class="cat-title">Blood Transfusions — Forbidden by God or Misapplied Prohibition?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-bibliological">Bibliological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Accepting blood transfusions is absolutely forbidden — a sin that can result in disfellowshipping. The prohibition is based on biblical commands to "abstain from blood" (Acts 15:29) and "pour out its blood" when an animal is slaughtered (Lev 17:13–14). Blood represents life, which belongs to God; ingesting or receiving blood in any form violates this principle. JWs may refuse transfusions even in life-threatening situations, and parents may refuse them for minor children.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Acts 15:28–29</span><span class="verse-text">"Abstain from blood" — the Jerusalem Council's directive applied to all Gentile believers.</span></div>
+          <div class="scripture-item"><span class="ref">Gen 9:4</span><span class="verse-text">"You shall not eat flesh with its life, that is, its blood." — Noahic covenant prohibition on blood.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">The biblical prohibitions on blood universally address the <em>eating</em> of blood as food — a dietary and ritual practice. They have no exegetical connection to intravenous medical procedures that didn't exist in any form in the ancient world. The Jerusalem Council's "abstain from blood" directive (Acts 15) addresses food offered to idols and eating blood — not medical intervention. Applying a dietary command to a life-saving transfusion is an extraordinary interpretive leap made by no biblical author and no mainstream church tradition.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Lev 17:14</span><span class="verse-text">"You shall not eat the blood of any creature, for the life of every creature is its blood" — the context is dietary, not medical. Eating and IV transfusion are categorically different acts.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 15:29</span><span class="verse-text">"Abstain from… blood" — listed alongside "things strangled" and "sexual immorality." These are all food/conduct items at communal meals with Gentiles, not medical procedures.</span></div>
+          <div class="scripture-item"><span class="ref">Matt 12:11–12</span><span class="verse-text">"Which one of you who has a sheep, if it falls into a pit on the Sabbath, will not take hold of it and lift it out? Of how much more value is a man than a sheep?" — The principle of preserving life overrides ritual restrictions.</span></div>
+          <div class="scripture-item"><span class="ref">Mark 3:4</span><span class="verse-text">"Is it lawful on the Sabbath to do good or to do harm, to save life or to kill?" — Christ frames life-saving as consistent with, not contrary to, God's law.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The Watchtower's blood doctrine requires applying a dietary prohibition to a medical procedure through a metaphorical extension that the text itself never makes. "Abstain from blood" in Acts 15 is surrounded by dietary context (things strangled, food offered to idols) — nothing in the passage addresses medicine. Furthermore, the Watchtower itself has shifted positions on what blood "fractions" are acceptable (plasma, platelets, hemoglobin derivatives are now permitted in some forms) — demonstrating that the rule is not derived from a consistent textual principle but from organizational policy. <strong>People have died and children have been allowed to die based on an interpretive choice that no first-century Christian would have recognized.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 17: BIRTHDAYS & HOLIDAYS -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat17">
+  <div class="category-header">
+    <span class="cat-num">17</span>
+    <h2 class="cat-title">Birthdays and Holidays — Pagan Corruption or Christian Liberty?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">Birthdays, Christmas, Easter, Thanksgiving, and most national holidays are forbidden because they have pagan origins and are not commanded in Scripture. The only two birthday celebrations in the Bible (Pharaoh's and Herod's) ended in death — which JWs take as God's judgment on the practice. Celebrating such events dishonors Jehovah and defiles the believer with false religious associations.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Gen 40:20–22</span><span class="verse-text">Pharaoh's birthday — a man was executed. Taken as ominous precedent.</span></div>
+          <div class="scripture-item"><span class="ref">Mark 6:21–28</span><span class="verse-text">Herod's birthday — John the Baptist beheaded. Taken as further condemnation.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">Scripture nowhere forbids birthday celebrations or holidays. The "pagan origins" argument, applied consistently, would also condemn most days of the week (named for Norse and Roman gods), the months of the year, and vast swaths of human culture. Romans 14 and 1 Corinthians 8–10 establish the principle of Christian liberty: one believer may observe a day, another may not — neither is condemned. The test is not historical origin but present meaning and purpose. Commemorating Christ's birth, death, and resurrection is honoring, not pagan, regardless of when it is observed.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Rom 14:5–6</span><span class="verse-text">"One person esteems one day as better than another, while another esteems all days alike. Each one should be fully convinced in his own mind. The one who observes the day, observes it in honor of the Lord."</span></div>
+          <div class="scripture-item"><span class="ref">Col 2:16–17</span><span class="verse-text">"Let no one pass judgment on you in questions of food and drink, or with regard to a festival or a new moon or a Sabbath." — External religious rules about days and foods are not binding on believers.</span></div>
+          <div class="scripture-item"><span class="ref">1 Cor 10:31</span><span class="verse-text">"Whether you eat or drink, or whatever you do, do all to the glory of God." — The standard is intent and dedication, not calendar conformity.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">If two biblical birthday celebrations ended badly, this proves only that two birthday celebrations ended badly — not that birthday celebrations are universally condemned. By the same logic, weddings are dangerous (Samson's ended in violence), meals are dangerous (Judas betrayed Christ at a supper), and prayers are dangerous (the Pharisee's prayer condemned him). The "bad outcome = divine judgment on the practice" fallacy proves nothing. Romans 14:5–6 explicitly gives believers freedom to observe or not observe days — Paul does not name specific days because the principle is universal. <strong>The Watchtower's holiday prohibitions are extra-biblical rules imposed as salvation requirements — precisely the kind of tradition Jesus condemned the Pharisees for in Mark 7:8.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CAT 18: ORGANIZATION -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat18">
+  <div class="category-header">
+    <span class="cat-num">18</span>
+    <h2 class="cat-title">The Organization — Is the Watchtower God's Visible Channel?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-fundamental">Fundamental</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The Watchtower Bible and Tract Society and its Governing Body constitute "Jehovah's visible organization on earth" — the sole channel through which God communicates spiritual truth to mankind today. Submission to the Governing Body is equated with submission to God. Questioning, criticizing, or leaving the organization is treated as apostasy — a spiritual death sentence. Disfellowshipped members are shunned completely by family and friends who remain JWs. The organization claims to be the "faithful and discreet slave" of Matt 24:45.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Matt 24:45–47</span><span class="verse-text">"Who then is the faithful and discreet slave whom his master appointed over his domestics?" — Applied by the Watchtower to itself as the sole source of spiritual food.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 13:17</span><span class="verse-text">"Obey your leaders and submit to them" — applied to the Governing Body as supreme human authority.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">No human organization is the "sole channel" of God's truth. The completed canon of Scripture is the final, sufficient, and authoritative revelation of God (2 Tim 3:16–17; Rev 22:18–19). The Church of Jesus Christ is His body — it is not identified with any single organization, and no organization has the authority to add to Scripture, require absolute submission, or shun those who leave. The Bereans were commended for testing teaching against Scripture (Acts 17:11) — the very thing the Watchtower forbids.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">2 Tim 3:16–17</span><span class="verse-text">"All Scripture is breathed out by God and profitable… that the man of God may be complete, equipped for every good work." — Scripture is sufficient; no additional organizational channel is needed.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 17:11</span><span class="verse-text">The Bereans "received the word with all eagerness, examining the Scriptures daily to see if these things were so" — commended for checking teaching against Scripture, not condemned for questioning leaders.</span></div>
+          <div class="scripture-item"><span class="ref">Gal 1:8–9</span><span class="verse-text">"Even if we or an angel from heaven should preach to you a gospel contrary to the one we preached to you, let him be accursed." — The standard is the apostolic gospel, not organizational loyalty.</span></div>
+          <div class="scripture-item"><span class="ref">1 Tim 2:5</span><span class="verse-text">"There is one mediator between God and men, the man Christ Jesus." — The mediator is Christ, not the Governing Body.</span></div>
+          <div class="scripture-item"><span class="ref">Matt 18:20</span><span class="verse-text">"Where two or three are gathered in my name, there am I among them." — Christ's presence is not restricted to an organizational structure.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Canonical Collision</div>
+    <div class="collision-text">The Watchtower's self-identification as "God's visible organization" requires accepting a claim that cannot be verified from Scripture — and that Scripture itself warns against. The Bereans checked Paul's teaching against Scripture and were praised (Acts 17:11); the Watchtower condemns the same behavior as apostasy. Furthermore, the organization has made multiple specific, dateable false prophecies (1914, 1925, 1975 predicted as Armageddon/paradise dates) — by the standard of Deut 18:20–22, this disqualifies the speaker as a prophet of God. <strong>The entire JW system stands or falls on the Governing Body's claimed authority. Remove that authority — by testing it against Scripture — and the entire doctrinal edifice has no foundation.</strong></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SUMMARY TABLE -->
+<!-- ══════════════════════════════════════ -->
+<div class="summary-section" id="summary">
+  <h2>At a Glance — Summary Comparison</h2>
+  <p>18 doctrinal points examined through Scripture with a literal, grammatical-historical hermeneutic</p>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Jehovah's Witnesses</th>
+        <th>Biblical Christian (Dispensational)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Nature of God</td><td>One person — Jehovah only</td><td>One Being, three co-equal Persons (Trinity)</td></tr>
+      <tr><td>Trinity</td><td>Pagan invention; rejected</td><td>Scriptural doctrine; pre-Nicene consensus</td></tr>
+      <tr><td>Person of Christ</td><td>Created angel (Michael); lesser god</td><td>Eternal, uncreated God incarnate; Creator</td></tr>
+      <tr><td>Holy Spirit</td><td>Impersonal active force</td><td>Third Person of the Trinity; fully divine</td></tr>
+      <tr><td>Salvation</td><td>Ongoing process; organizational loyalty required; no assurance</td><td>By grace through faith alone; present, secure, assured</td></tr>
+      <tr><td>Atonement</td><td>Life-for-life ransom (human for human)</td><td>Infinite substitutionary propitiation; God incarnate dying for sinners</td></tr>
+      <tr><td>Soul &amp; Death</td><td>Soul sleep; no consciousness after death</td><td>Conscious intermediate state; soul with God immediately</td></tr>
+      <tr><td>Resurrection</td><td>Spirit re-creation; no bodily resurrection of Christ</td><td>Literal bodily resurrection of Christ and believers</td></tr>
+      <tr><td>Hell &amp; Judgment</td><td>Annihilation; no conscious punishment</td><td>Conscious eternal punishment; Great White Throne Judgment after Millennium</td></tr>
+      <tr><td>144,000</td><td>JW anointed class (quota filled 1935)</td><td>Literal 12,000 from each tribe of Israel; Tribulation-period Jewish evangelists</td></tr>
+      <tr><td>End Times</td><td>Armageddon → paradise earth; two-class destiny</td><td>Rapture → 7-yr Tribulation → Second Coming → 1,000-yr Millennium → Eternal State</td></tr>
+      <tr><td>Israel &amp; Church</td><td>No distinction; "spiritual Israel" = the organization</td><td>Distinct programs; Israel not replaced; covenants literally fulfilled</td></tr>
+      <tr><td>Divine Name</td><td>"Jehovah" removed from NT; must be restored</td><td>No manuscript support; NT applies YHWH texts to Jesus</td></tr>
+      <tr><td>The NWT</td><td>Most accurate translation; divinely guided</td><td>Doctrinally motivated revision; no credentialed Greek scholar defends its key renderings</td></tr>
+      <tr><td>Cross</td><td>Pagan symbol; Jesus died on a stake</td><td>Historical cross; textual and historical evidence supports cross-shaped instrument</td></tr>
+      <tr><td>Prayer</td><td>Only to Jehovah; Jesus mediates only for 144,000</td><td>All believers pray directly to God through Christ; prayer to Jesus is modeled in Scripture</td></tr>
+      <tr><td>Blood Transfusions</td><td>Forbidden; a dietary blood prohibition applied to medicine</td><td>Dietary command; no textual basis for medical application; life is to be preserved</td></tr>
+      <tr><td>Organization</td><td>Watchtower is God's sole channel; obedience required for salvation</td><td>Scripture alone is sufficient; no human organization is God's exclusive channel; Bereans commended for testing</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- /.container -->
+
+<footer>
+  <p style="margin-bottom:8px; color:var(--text-muted);">Two Theologies, One Canon — JW vs Biblical Christian Teaching</p>
+  Scripture references follow ESV unless noted. · Presented from a literal, grammatical-historical (dispensational) hermeneutic.<br>
+  For further study: compare positions against the original Greek and Hebrew texts. All claims are verifiable from primary sources.
+</footer>
+
+<script>
+// Intersection Observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.category').forEach(el => observer.observe(el));
+
+// Nav scroll function
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Active nav item on scroll
+const navItems = document.querySelectorAll('.nav-item');
+const categories = document.querySelectorAll('.category, .summary-section');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  categories.forEach(cat => {
+    const top = cat.getBoundingClientRect().top;
+    if (top <= 80) current = cat.id;
+  });
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    const onclick = item.getAttribute('onclick') || '';
+    const id = onclick.match(/'([^']+)'/)?.[1];
+    if (id === current) item.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
