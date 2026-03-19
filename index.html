@@ -2726,26 +2726,31 @@ const allSections = [
 ];
 
 window.addEventListener('scroll', () => {
-  const nav       = document.getElementById('mainnav');
-  const navH      = nav ? nav.getBoundingClientRect().height : 54;
-  const threshold = navH + 32;
+  const nav = document.getElementById('mainnav');
+  const navH = nav ? nav.getBoundingClientRect().height : 54;
+  const threshold = navH + 20;
 
-  let currentId = null;
+  let activeId = null;
   for (const id of allSections) {
     const el = document.getElementById(id);
     if (!el) continue;
 
     const rect = el.getBoundingClientRect();
-    if (rect.top <= threshold) {
-      currentId = id;
-    } else {
-      // as soon as a section starts below threshold, the previous visible one is the active one
+
+    // If this section covers the threshold line, it's the active section.
+    if (rect.top <= threshold && rect.bottom > threshold) {
+      activeId = id;
       break;
+    }
+
+    // Otherwise keep the last section that started above the threshold.
+    if (rect.top <= threshold) {
+      activeId = id;
     }
   }
 
-  if (!currentId) currentId = allSections[0];
-  setActiveNav(currentId, { animate: false });
+  if (!activeId) activeId = allSections[0];
+  setActiveNav(activeId, { animate: false });
 }, { passive: true });
 </script>
 
