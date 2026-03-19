@@ -774,12 +774,16 @@ footer {
 }
 
 @media (max-width: 640px) {
-  .genealogy-timeline::before { left: 80px; }
-  .genealogy-entry { grid-template-columns: 80px 1fr; gap: 0 16px; }
+  .genealogy-timeline { padding-left: 0; margin-bottom: 14px; }
+  .genealogy-timeline::before { left: 60px; }
+  .genealogy-entry { grid-template-columns: 64px 1fr; gap: 0.4rem 12px; }
+  .genealogy-era { text-align: left; padding-left: 0; }
+  .genealogy-era::after { right: auto; left: 54px; }
   .genealogy-era-label strong { font-size: 11px; }
-  .doctrine-flow { font-size: 12px; }
-  .doctrine-flow td:first-child { width: 30%; }
+  .doctrine-flow { font-size: 12px; min-width: 620px; }
+  .doctrine-flow td:first-child { width: 34%; }
   .doctrine-flow td:nth-child(2) { display: none; }
+  .doctrine-flow td { word-break: break-word; }
 }
 
 /* ── ANIMATIONS ── */
