@@ -450,6 +450,337 @@ footer {
   .nav-item { padding: 12px 10px; font-size: 10px; }
   header { padding: 60px 20px 56px; }
 }
+ 
+/* ── GENEALOGY TIMELINE (cat0 only) ── */
+.genealogy-timeline {
+  position: relative;
+  margin: 0 0 8px;
+}
+
+.genealogy-timeline::before {
+  content: '';
+  position: absolute;
+  left: 108px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 60px, var(--border) calc(100% - 60px), transparent);
+}
+
+.genealogy-entry {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 0 28px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.genealogy-entry + .genealogy-entry {
+  margin-top: 0;
+}
+
+.genealogy-era {
+  padding: 28px 0 8px;
+  text-align: right;
+  position: relative;
+}
+
+.genealogy-era-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.genealogy-era-label strong {
+  display: block;
+  font-size: 12px;
+  color: var(--gold-dim);
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+
+/* The dot on the timeline */
+.genealogy-era::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 38px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--border-light);
+  border: 1px solid var(--border);
+}
+
+.genealogy-entry.primary .genealogy-era::after {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  width: 11px;
+  height: 11px;
+  right: -6px;
+  top: 37px;
+}
+
+.genealogy-entry.terminal .genealogy-era::after {
+  background: #4a2d8a;
+  border-color: #7c5cbf;
+  width: 13px;
+  height: 13px;
+  right: -7px;
+  top: 36px;
+}
+
+.genealogy-body {
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.genealogy-entry:last-child .genealogy-body {
+  border-bottom: none;
+}
+
+.genealogy-person {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.genealogy-entry.primary .genealogy-person {
+  color: var(--gold);
+}
+
+.genealogy-dates {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.genealogy-role {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  font-style: normal;
+}
+
+.genealogy-entry.primary .genealogy-role {
+  color: var(--gold-dim);
+}
+
+.genealogy-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.genealogy-desc strong {
+  color: var(--text);
+}
+
+.doctrine-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.doctrine-pill {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border: 1px solid var(--border-light);
+  color: var(--text-dim);
+  background: var(--surface2);
+}
+
+.doctrine-pill.inherited {
+  border-color: var(--gold-dim);
+  color: var(--gold-dim);
+}
+
+.doctrine-pill.direct {
+  border-color: #c0392b44;
+  color: #e89080;
+  background: rgba(192,57,43,0.07);
+}
+
+/* Connector arrow between entries */
+.genealogy-connector {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.genealogy-connector::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* Doctrine flow table */
+.doctrine-flow {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.doctrine-flow th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+
+.doctrine-flow td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.doctrine-flow tr:last-child td {
+  border-bottom: none;
+}
+
+.doctrine-flow tr:hover td {
+  background: var(--surface);
+}
+
+.doctrine-flow td:first-child {
+  font-family: 'Playfair Display', serif;
+  color: var(--text);
+  width: 24%;
+  font-size: 14px;
+}
+
+.doctrine-flow td:nth-child(2) {
+  color: var(--text-muted);
+  width: 22%;
+  font-size: 12px;
+}
+
+.doctrine-flow td:nth-child(3) {
+  color: #e09090;
+  width: 30%;
+  font-size: 13px;
+}
+
+.doctrine-flow td:last-child {
+  color: #90c8a0;
+  width: 24%;
+  font-size: 13px;
+}
+
+.source-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-dim);
+  margin-bottom: 3px;
+}
+
+/* Bottom line box */
+.bottom-line {
+  background: rgba(200,168,75,0.06);
+  border: 1px solid var(--gold-dim);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin-bottom: 8px;
+}
+
+.bottom-line-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.bottom-line p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.bottom-line p:last-child {
+  margin-bottom: 0;
+}
+
+.bottom-line strong {
+  color: var(--text);
+}
+
+/* Failed prophecy list */
+.failed-prophecy-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.failed-prophecy-list li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.6;
+  align-items: baseline;
+}
+
+.failed-prophecy-list li:last-child {
+  border-bottom: none;
+}
+
+.fp-year {
+  font-family: 'Playfair Display', serif;
+  color: #e89080;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fp-desc {
+  color: var(--text-muted);
+}
+
+.fp-desc strong {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .genealogy-timeline::before { left: 80px; }
+  .genealogy-entry { grid-template-columns: 80px 1fr; gap: 0 16px; }
+  .genealogy-era-label strong { font-size: 11px; }
+  .doctrine-flow { font-size: 12px; }
+  .doctrine-flow td:first-child { width: 30%; }
+  .doctrine-flow td:nth-child(2) { display: none; }
+}
 
 /* ── ANIMATIONS ── */
 .category {
@@ -1735,6 +2066,49 @@ footer {
     </div>
   </div>
 </div>
+  <!-- ══════════════════════════════════════ -->
+<!-- CAT 18: ORGANIZATION                  -->
+<!-- Paste this before cat0 in .container  -->
+<!-- ══════════════════════════════════════ -->
+<div class="category" id="cat18">
+  <div class="category-header">
+    <span class="cat-num">18</span>
+    <h2 class="cat-title">The Organization — Is the Watchtower God's Visible Channel?</h2>
+  </div>
+  <div class="tag-row" style="margin-bottom:16px">
+    <span class="tag tag-ecclesiological">Ecclesiological</span>
+    <span class="tag tag-fundamental">Fundamental</span>
+  </div>
+  <div class="comparison">
+    <div class="col-jw">
+      <div class="col-header">Jehovah's Witness Position</div>
+      <div class="col-body">
+        <div class="position-text">The Watchtower Bible and Tract Society and its Governing Body constitute "Jehovah's visible organization on earth" — the sole channel through which God communicates spiritual truth to mankind today. Submission to the Governing Body is equated with submission to God. Questioning, criticizing, or leaving the organization is treated as apostasy — a spiritual death sentence. Disfellowshipped members are shunned completely by family and friends who remain JWs. The organization claims to be the "faithful and discreet slave" of Matt 24:45.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">Matt 24:45–47</span><span class="verse-text">"Who then is the faithful and discreet slave whom his master appointed over his domestics?" — Applied by the Watchtower to itself as the sole source of spiritual food.</span></div>
+          <div class="scripture-item"><span class="ref">Heb 13:17</span><span class="verse-text">"Obey your leaders and submit to them" — applied to the Governing Body as supreme human authority.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-oc">
+      <div class="col-header">Biblical Christian Position</div>
+      <div class="col-body">
+        <div class="position-text">No human organization is the "sole channel" of God's truth. The completed canon of Scripture is the final, sufficient, and authoritative revelation of God (2 Tim 3:16–17; Rev 22:18–19). The Church of Jesus Christ is His body — it is not identified with any single organization, and no organization has the authority to add to Scripture or require absolute submission above Scripture itself. Notably, the Bereans were commended specifically for testing the teaching they received against Scripture (Acts 17:11) — that posture of careful examination is presented in the Bible as a virtue, not a threat.</div>
+        <div class="scriptures">
+          <div class="scripture-item"><span class="ref">2 Tim 3:16–17</span><span class="verse-text">"All Scripture is breathed out by God and profitable… that the man of God may be complete, equipped for every good work." — Scripture is sufficient; no additional organizational channel is declared necessary.</span></div>
+          <div class="scripture-item"><span class="ref">Acts 17:11</span><span class="verse-text">The Bereans "received the word with all eagerness, examining the Scriptures daily to see if these things were so" — commended for checking teaching against Scripture, not condemned for doing so.</span></div>
+          <div class="scripture-item"><span class="ref">Gal 1:8–9</span><span class="verse-text">"Even if we or an angel from heaven should preach to you a gospel contrary to the one we preached to you, let him be accursed." — The standard is the apostolic gospel, not loyalty to any human authority.</span></div>
+          <div class="scripture-item"><span class="ref">1 Tim 2:5</span><span class="verse-text">"There is one mediator between God and men, the man Christ Jesus." — The mediator is Christ, not a governing body.</span></div>
+          <div class="scripture-item"><span class="ref">Matt 18:20</span><span class="verse-text">"Where two or three are gathered in my name, there am I among them." — Christ's presence is not restricted to an organizational structure.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collision">
+    <div class="collision-label">⚡ Where the Texts Create Tension</div>
+    <div class="collision-text">The claim that any human organization is God's sole channel of truth is a significant one — and Scripture provides a clear way to test it. The Bereans in Acts 17:11 tested Paul's teaching against Scripture and were praised for it. That same approach — examining any teaching, including the Watchtower's, against the text of Scripture — is what this entire site invites. It is worth knowing that the organization has made specific, dateable prophetic predictions that did not come to pass (including 1914, 1925, and 1975 as predicted turning points for Armageddon or the beginning of paradise). Deuteronomy 18:20–22 provides a standard for evaluating prophetic claims, and those passages are worth reading alongside that history. None of this is said to condemn the many sincere people who have devoted their lives within the Watchtower community — but the question of whether an organization's claims to exclusive divine authority can withstand scriptural scrutiny is precisely the question this site was built to explore, openly and honestly, for anyone who wants to look.</div>
+  </div>
+</div>
 <!-- ══════════════════════════════════════════════════════════════════════════ -->
 <!--                                                                          -->
 <!--   TWO THEOLOGIES, ONE CANON — PLUG-IN SECTION                           -->
@@ -1751,349 +2125,6 @@ footer {
 <!-- ══════════════════════════════════════════════════════════════════════════ -->
 
 
-<!-- ─────────────────────────────────────────── -->
-<!-- STEP 1: Add this <style> block once,        -->
-<!-- inside your existing <style> tag            -->
-<!-- (or anywhere before the section)            -->
-<!-- ─────────────────────────────────────────── -->
-<style>
-/* ── GENEALOGY TIMELINE (cat0 only) ── */
-.genealogy-timeline {
-  position: relative;
-  margin: 0 0 8px;
-}
-
-.genealogy-timeline::before {
-  content: '';
-  position: absolute;
-  left: 108px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--border) 60px, var(--border) calc(100% - 60px), transparent);
-}
-
-.genealogy-entry {
-  display: grid;
-  grid-template-columns: 108px 1fr;
-  gap: 0 28px;
-  margin-bottom: 0;
-  position: relative;
-}
-
-.genealogy-entry + .genealogy-entry {
-  margin-top: 0;
-}
-
-.genealogy-era {
-  padding: 28px 0 8px;
-  text-align: right;
-  position: relative;
-}
-
-.genealogy-era-label {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  line-height: 1.4;
-}
-
-.genealogy-era-label strong {
-  display: block;
-  font-size: 12px;
-  color: var(--gold-dim);
-  letter-spacing: 0.05em;
-  text-transform: none;
-  margin-bottom: 2px;
-}
-
-/* The dot on the timeline */
-.genealogy-era::after {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: 38px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--border-light);
-  border: 1px solid var(--border);
-}
-
-.genealogy-entry.primary .genealogy-era::after {
-  background: var(--gold-dim);
-  border-color: var(--gold);
-  width: 11px;
-  height: 11px;
-  right: -6px;
-  top: 37px;
-}
-
-.genealogy-entry.terminal .genealogy-era::after {
-  background: #4a2d8a;
-  border-color: #7c5cbf;
-  width: 13px;
-  height: 13px;
-  right: -7px;
-  top: 36px;
-}
-
-.genealogy-body {
-  padding: 20px 0 20px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.genealogy-entry:last-child .genealogy-body {
-  border-bottom: none;
-}
-
-.genealogy-person {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 2px;
-  line-height: 1.2;
-}
-
-.genealogy-entry.primary .genealogy-person {
-  color: var(--gold);
-}
-
-.genealogy-dates {
-  font-size: 11px;
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
-}
-
-.genealogy-role {
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 12px;
-  font-style: normal;
-}
-
-.genealogy-entry.primary .genealogy-role {
-  color: var(--gold-dim);
-}
-
-.genealogy-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-
-.genealogy-desc strong {
-  color: var(--text);
-}
-
-.doctrine-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.doctrine-pill {
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  padding: 3px 9px;
-  border: 1px solid var(--border-light);
-  color: var(--text-dim);
-  background: var(--surface2);
-}
-
-.doctrine-pill.inherited {
-  border-color: var(--gold-dim);
-  color: var(--gold-dim);
-}
-
-.doctrine-pill.direct {
-  border-color: #c0392b44;
-  color: #e89080;
-  background: rgba(192,57,43,0.07);
-}
-
-/* Connector arrow between entries */
-.genealogy-connector {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 0;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.genealogy-connector::before {
-  content: '';
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--border-light);
-}
-
-/* Doctrine flow table */
-.doctrine-flow {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-
-.doctrine-flow th {
-  text-align: left;
-  padding: 10px 14px;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  border-bottom: 1px solid var(--border);
-  font-weight: 400;
-}
-
-.doctrine-flow td {
-  padding: 11px 14px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-  line-height: 1.6;
-}
-
-.doctrine-flow tr:last-child td {
-  border-bottom: none;
-}
-
-.doctrine-flow tr:hover td {
-  background: var(--surface);
-}
-
-.doctrine-flow td:first-child {
-  font-family: 'Playfair Display', serif;
-  color: var(--text);
-  width: 24%;
-  font-size: 14px;
-}
-
-.doctrine-flow td:nth-child(2) {
-  color: var(--text-muted);
-  width: 22%;
-  font-size: 12px;
-}
-
-.doctrine-flow td:nth-child(3) {
-  color: #e09090;
-  width: 30%;
-  font-size: 13px;
-}
-
-.doctrine-flow td:last-child {
-  color: #90c8a0;
-  width: 24%;
-  font-size: 13px;
-}
-
-.source-tag {
-  display: inline-block;
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  padding: 1px 6px;
-  border: 1px solid var(--gold-dim);
-  color: var(--gold-dim);
-  margin-bottom: 3px;
-}
-
-/* Bottom line box */
-.bottom-line {
-  background: rgba(200,168,75,0.06);
-  border: 1px solid var(--gold-dim);
-  border-left: 3px solid var(--gold);
-  padding: 20px 24px;
-  margin-bottom: 8px;
-}
-
-.bottom-line-label {
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.bottom-line p {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.75;
-  margin-bottom: 10px;
-}
-
-.bottom-line p:last-child {
-  margin-bottom: 0;
-}
-
-.bottom-line strong {
-  color: var(--text);
-}
-
-/* Failed prophecy list */
-.failed-prophecy-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0;
-}
-
-.failed-prophecy-list li {
-  display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 0 14px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  line-height: 1.6;
-  align-items: baseline;
-}
-
-.failed-prophecy-list li:last-child {
-  border-bottom: none;
-}
-
-.fp-year {
-  font-family: 'Playfair Display', serif;
-  color: #e89080;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.fp-desc {
-  color: var(--text-muted);
-}
-
-.fp-desc strong {
-  color: var(--text);
-}
-
-@media (max-width: 640px) {
-  .genealogy-timeline::before { left: 80px; }
-  .genealogy-entry { grid-template-columns: 80px 1fr; gap: 0 16px; }
-  .genealogy-era-label strong { font-size: 11px; }
-  .doctrine-flow { font-size: 12px; }
-  .doctrine-flow td:first-child { width: 30%; }
-  .doctrine-flow td:nth-child(2) { display: none; }
-}
-</style>
-
-
-<!-- ─────────────────────────────────────────────────── -->
-<!-- STEP 2: Paste this entire block into .container    -->
-<!-- Recommended position: immediately before #cat1    -->
-<!-- ─────────────────────────────────────────────────── -->
 
 <div class="category" id="cat0">
   <div class="category-header">
