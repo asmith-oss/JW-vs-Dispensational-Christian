@@ -2724,18 +2724,21 @@ window.addEventListener('scroll', () => {
   const navH      = nav ? nav.getBoundingClientRect().height : 54;
   const threshold = navH + 32;
 
-  let currentId = allSections[0];
+  let currentId = null;
   for (const id of allSections) {
     const el = document.getElementById(id);
     if (!el) continue;
 
     const rect = el.getBoundingClientRect();
-    if (rect.top <= threshold && rect.bottom > threshold) {
+    if (rect.top <= threshold) {
       currentId = id;
+    } else {
+      // as soon as a section starts below threshold, the previous visible one is the active one
       break;
     }
   }
 
+  if (!currentId) currentId = allSections[0];
   setActiveNav(currentId, { animate: false });
 }, { passive: true });
 </script>
