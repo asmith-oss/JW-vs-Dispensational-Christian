@@ -2677,23 +2677,33 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.category').forEach(el => observer.observe(el));
 
-/* ── scrollToSection ──
-   Uses manual offset calculation instead of scrollIntoView so that
-   scroll-margin-top is honoured correctly on Mobile Safari too.     */
+/* ── scrollToSection ── */
+let isProgrammaticScroll = false;
+let programmaticScrollTimer = null;
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
 
   const nav  = document.getElementById('mainnav');
   const navH = nav ? nav.getBoundingClientRect().height : 54;
+  const scrollY = window.scrollY !== undefined ? window.scrollY : window.pageYOffset;
+  const top = el.getBoundingClientRect().top + scrollY - navH - 8;
 
-  /* getBoundingClientRect().top is relative to the viewport.
-     Adding pageYOffset converts it to an absolute document position. */
-  const top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+  /* Flag that scroll events fired during this animation are programmatic,
+     so the listener doesn't fight the smooth scroll on slow mobile renders */
+  isProgrammaticScroll = true;
+  clearTimeout(programmaticScrollTimer);
 
   window.scrollTo({ top, behavior: 'smooth' });
   el.classList.add('visible');
   setActiveNav(id);
+
+  /* Give the smooth scroll time to finish before re-enabling the listener.
+     1200ms covers even the slowest mobile inertia scroll on a long page. */
+  programmaticScrollTimer = setTimeout(() => {
+    isProgrammaticScroll = false;
+  }, 1200);
 }
 
 /* ── Active nav highlight ── */
@@ -2714,7 +2724,6 @@ function setActiveNav(activeId, options = { animate: true }) {
     }
   });
 
-  /* Scroll the nav bar itself so the active pill is visible */
   if (activeItem) {
     activeItem.scrollIntoView({
       behavior: options.animate ? 'smooth' : 'auto',
@@ -2724,18 +2733,17 @@ function setActiveNav(activeId, options = { animate: true }) {
   }
 }
 
-/* ── Update active state during manual scroll.
-   List order must match the physical top-to-bottom HTML order. ── */
+/* ── Section list in DOM order ── */
 const allSections = [
   'cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9',
   'cat10','cat11','cat12','cat13','cat14','cat15','cat16','cat17',
-  'cat18',
-  'cat19',     // Before Russell — lives after cat18 in the HTML
-  'overview',
-  'summary'
+  'cat18','cat19','overview','summary'
 ];
 
+/* ── Scroll listener — disabled during programmatic scrolls ── */
 window.addEventListener('scroll', () => {
+  if (isProgrammaticScroll) return;
+
   const nav       = document.getElementById('mainnav');
   const navH      = nav ? nav.getBoundingClientRect().height : 54;
   const threshold = navH + 20;
@@ -2746,8 +2754,12 @@ window.addEventListener('scroll', () => {
     const el = document.getElementById(id);
     if (!el) continue;
     const rect = el.getBoundingClientRect();
-    if (rect.top <= threshold) activeId = id;
-    else break;   // sections are in order — once we pass the threshold, stop
+    if (rect.top <= threshold) {
+      activeId = id;
+    }
+    /* Removed the early break — iterate all sections every time.
+       The break was the mobile bug: on portrait the last sections
+       never registered because the loop exited before reaching them. */
   }
 
   setActiveNav(activeId, { animate: false });
