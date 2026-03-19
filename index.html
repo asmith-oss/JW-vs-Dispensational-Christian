@@ -2682,12 +2682,21 @@ function scrollToSection(id) {
 
 /* ── Active state ── */
 function setActiveNav(activeId) {
+  let activeItem = null;
+
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
     const fn    = item.getAttribute('onclick') || '';
     const match = fn.match(/'([^']+)'/);
-    if (match && match[1] === activeId) item.classList.add('active');
+    if (match && match[1] === activeId) {
+      item.classList.add('active');
+      activeItem = item;
+    }
   });
+
+  if (activeItem) {
+    activeItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
 }
 
 /* ── Highlight correct nav item during manual scroll.
