@@ -179,7 +179,7 @@ nav::-webkit-scrollbar { display: none; }
 /* ── CATEGORY HEADER ── */
 .category {
   margin-top: 72px;
-  scroll-margin-top: 54px;
+  scroll-margin-top: 64px;
 }
 
 .category-header {
@@ -380,6 +380,7 @@ nav::-webkit-scrollbar { display: none; }
   margin-top: 80px;
   padding-top: 40px;
   border-top: 1px solid var(--border);
+  scroll-margin-top: 64px;
 }
 
 .summary-section h2 {
@@ -479,26 +480,27 @@ footer {
 </header>
 
 <nav id="mainnav">
-  <div class="nav-item active" onclick="scrollTo('cat1')">Nature of God</div>
-  <div class="nav-item" onclick="scrollTo('cat2')">Trinity</div>
-  <div class="nav-item" onclick="scrollTo('cat3')">Person of Christ</div>
-  <div class="nav-item" onclick="scrollTo('cat4')">Holy Spirit</div>
-  <div class="nav-item" onclick="scrollTo('cat5')">Salvation</div>
-  <div class="nav-item" onclick="scrollTo('cat6')">Atonement</div>
-  <div class="nav-item" onclick="scrollTo('cat7')">Soul &amp; Death</div>
-  <div class="nav-item" onclick="scrollTo('cat8')">Resurrection</div>
-  <div class="nav-item" onclick="scrollTo('cat9')">Hell &amp; Judgment</div>
-  <div class="nav-item" onclick="scrollTo('cat10')">144,000</div>
-  <div class="nav-item" onclick="scrollTo('cat11')">Rapture &amp; Millennium</div>
-  <div class="nav-item" onclick="scrollTo('cat12')">The Name "Jehovah"</div>
-  <div class="nav-item" onclick="scrollTo('cat13')">The NWT Bible</div>
-  <div class="nav-item" onclick="scrollTo('cat14')">Cross / Stake</div>
-  <div class="nav-item" onclick="scrollTo('cat15')">Prayer &amp; Mediation</div>
-  <div class="nav-item" onclick="scrollTo('cat16')">Blood / Medicine</div>
-  <div class="nav-item" onclick="scrollTo('cat17')">Birthdays &amp; Holidays</div>
-  <div class="nav-item" onclick="scrollTo('cat18')">Organization</div>
-  <div class="nav-item" onclick="scrollTo('overview')">Theology Map</div>
-  <div class="nav-item" onclick="scrollTo('summary')">Summary</div>
+  <div class="nav-item active" onclick="scrollToSection('cat1')">Nature of God</div>
+  <div class="nav-item" onclick="scrollToSection('cat2')">Trinity</div>
+  <div class="nav-item" onclick="scrollToSection('cat3')">Person of Christ</div>
+  <div class="nav-item" onclick="scrollToSection('cat4')">Holy Spirit</div>
+  <div class="nav-item" onclick="scrollToSection('cat5')">Salvation</div>
+  <div class="nav-item" onclick="scrollToSection('cat6')">Atonement</div>
+  <div class="nav-item" onclick="scrollToSection('cat7')">Soul &amp; Death</div>
+  <div class="nav-item" onclick="scrollToSection('cat8')">Resurrection</div>
+  <div class="nav-item" onclick="scrollToSection('cat9')">Hell &amp; Judgment</div>
+  <div class="nav-item" onclick="scrollToSection('cat10')">144,000</div>
+  <div class="nav-item" onclick="scrollToSection('cat11')">Rapture &amp; Millennium</div>
+  <div class="nav-item" onclick="scrollToSection('cat12')">The Name "Jehovah"</div>
+  <div class="nav-item" onclick="scrollToSection('cat13')">The NWT Bible</div>
+  <div class="nav-item" onclick="scrollToSection('cat14')">Cross / Stake</div>
+  <div class="nav-item" onclick="scrollToSection('cat15')">Prayer &amp; Mediation</div>
+  <div class="nav-item" onclick="scrollToSection('cat16')">Blood / Medicine</div>
+  <div class="nav-item" onclick="scrollToSection('cat17')">Birthdays &amp; Holidays</div>
+  <div class="nav-item" onclick="scrollToSection('cat18')">Organization</div>
+  <div class="nav-item" onclick="scrollToSection('cat0')">Before Russell</div>
+  <div class="nav-item" onclick="scrollToSection('overview')">Theology Map</div>
+  <div class="nav-item" onclick="scrollToSection('summary')">Summary</div>
 </nav>
 
 <div class="container">
@@ -2636,6 +2638,7 @@ footer {
 </footer>
 
 <script>
+/* ── Fade-in on scroll ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('visible');
@@ -2644,27 +2647,53 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.category').forEach(el => observer.observe(el));
 
-function scrollTo(id) {
+/* ── scrollToSection — renamed from scrollTo to avoid
+   shadowing the browser's built-in window.scrollTo ── */
+function scrollToSection(id) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  if (!el) return;
+  const nav  = document.getElementById('mainnav');
+  const navH = nav ? nav.getBoundingClientRect().height : 54;
+  const top  = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+  window.scrollTo({ top, behavior: 'smooth' });
+  setActiveNav(id);
 }
 
-const navItems = document.querySelectorAll('.nav-item');
-const categories = document.querySelectorAll('.category, .summary-section');
+/* ── Active state ── */
+function setActiveNav(activeId) {
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+    const fn    = item.getAttribute('onclick') || '';
+    const match = fn.match(/'([^']+)'/);
+    if (match && match[1] === activeId) item.classList.add('active');
+  });
+}
+
+/* ── Highlight correct nav item during manual scroll.
+   Array order must match the physical top-to-bottom order
+   sections appear in the HTML. ── */
+const allSections = [
+  'cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9',
+  'cat10','cat11','cat12','cat13','cat14','cat15','cat16','cat17',
+  'cat18',
+  'cat0',        // ← "Before Russell" is pasted after cat18 in the HTML
+  'overview','summary'
+];
 
 window.addEventListener('scroll', () => {
-  let current = '';
-  categories.forEach(cat => {
-    const top = cat.getBoundingClientRect().top;
-    if (top <= 80) current = cat.id;
-  });
-  navItems.forEach(item => {
-    item.classList.remove('active');
-    const onclick = item.getAttribute('onclick') || '';
-    const id = onclick.match(/'([^']+)'/)?.[1];
-    if (id === current) item.classList.add('active');
-  });
-});
+  const nav       = document.getElementById('mainnav');
+  const navH      = nav ? nav.getBoundingClientRect().height : 54;
+  const threshold = navH + 32;
+
+  let currentId = allSections[0];
+  for (const id of allSections) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (el.getBoundingClientRect().top <= threshold) currentId = id;
+  }
+  setActiveNav(currentId);
+}, { passive: true });
 </script>
+
 </body>
 </html>
