@@ -2681,7 +2681,12 @@ function scrollToSection(id) {
 }
 
 /* ── Active state ── */
-function setActiveNav(activeId) {
+let currentActiveSection = null;
+
+function setActiveNav(activeId, options = { animate: true }) {
+  if (currentActiveSection === activeId) return;
+  currentActiveSection = activeId;
+
   let activeItem = null;
 
   document.querySelectorAll('.nav-item').forEach(item => {
@@ -2695,7 +2700,11 @@ function setActiveNav(activeId) {
   });
 
   if (activeItem) {
-    activeItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    activeItem.scrollIntoView({
+      behavior: options.animate ? 'smooth' : 'auto',
+      inline: 'center',
+      block: 'nearest'
+    });
   }
 }
 
@@ -2721,7 +2730,7 @@ window.addEventListener('scroll', () => {
     if (!el) continue;
     if (el.getBoundingClientRect().top <= threshold) currentId = id;
   }
-  setActiveNav(currentId);
+  setActiveNav(currentId, { animate: false });
 }, { passive: true });
 </script>
 
