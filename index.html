@@ -2662,6 +2662,9 @@ footer {
   For further study: compare positions against the original Greek and Hebrew texts. All claims are verifiable from primary sources.
 </footer>
 
+<!-- ═══════════════════════════════════════════════════════
+     REPLACE your entire <script>…</script> block with this
+     ═══════════════════════════════════════════════════════ -->
 <script>
 /* ── Fade-in on scroll ── */
 const observer = new IntersectionObserver((entries) => {
@@ -2672,25 +2675,26 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.category').forEach(el => observer.observe(el));
 
-/* ── scrollToSection — renamed from scrollTo to avoid
-   shadowing the browser's built-in window.scrollTo ── */
+/* ── scrollToSection ──
+   Uses manual offset calculation instead of scrollIntoView so that
+   scroll-margin-top is honoured correctly on Mobile Safari too.     */
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  setActiveNav(id);
+  const nav  = document.getElementById('mainnav');
+  const navH = nav ? nav.getBoundingClientRect().height : 54;
 
-  el.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
+  /* getBoundingClientRect().top is relative to the viewport.
+     Adding pageYOffset converts it to an absolute document position. */
+  const top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
 
-  // Ensure visibility class applies immediately on mobile too.
+  window.scrollTo({ top, behavior: 'smooth' });
   el.classList.add('visible');
-  requestAnimationFrame(() => el.classList.add('visible'));
+  setActiveNav(id);
 }
 
-/* ── Active state ── */
+/* ── Active nav highlight ── */
 let currentActiveSection = null;
 
 function setActiveNav(activeId, options = { animate: true }) {
@@ -2698,7 +2702,6 @@ function setActiveNav(activeId, options = { animate: true }) {
   currentActiveSection = activeId;
 
   let activeItem = null;
-
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
     const fn    = item.getAttribute('onclick') || '';
@@ -2709,51 +2712,42 @@ function setActiveNav(activeId, options = { animate: true }) {
     }
   });
 
+  /* Scroll the nav bar itself so the active pill is visible */
   if (activeItem) {
     activeItem.scrollIntoView({
       behavior: options.animate ? 'smooth' : 'auto',
-      inline: 'center',
-      block: 'nearest'
+      inline:   'center',
+      block:    'nearest'
     });
   }
 }
 
-/* ── Highlight correct nav item during manual scroll.
-   Array order must match the physical top-to-bottom order
-   sections appear in the HTML. ── */
+/* ── Update active state during manual scroll.
+   List order must match the physical top-to-bottom HTML order. ── */
 const allSections = [
   'cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9',
   'cat10','cat11','cat12','cat13','cat14','cat15','cat16','cat17',
   'cat18',
-  'cat19',        // ← "Before Russell" is pasted after cat18 in the HTML
-  'overview','summary'
+  'cat19',     // Before Russell — lives after cat18 in the HTML
+  'overview',
+  'summary'
 ];
 
 window.addEventListener('scroll', () => {
-  const nav = document.getElementById('mainnav');
-  const navH = nav ? nav.getBoundingClientRect().height : 54;
+  const nav       = document.getElementById('mainnav');
+  const navH      = nav ? nav.getBoundingClientRect().height : 54;
   const threshold = navH + 20;
 
-  let activeId = null;
+  let activeId = allSections[0];
+
   for (const id of allSections) {
     const el = document.getElementById(id);
     if (!el) continue;
-
     const rect = el.getBoundingClientRect();
-
-    // If this section covers the threshold line, it's the active section.
-    if (rect.top <= threshold && rect.bottom > threshold) {
-      activeId = id;
-      break;
-    }
-
-    // Otherwise keep the last section that started above the threshold.
-    if (rect.top <= threshold) {
-      activeId = id;
-    }
+    if (rect.top <= threshold) activeId = id;
+    else break;   // sections are in order — once we pass the threshold, stop
   }
 
-  if (!activeId) activeId = allSections[0];
   setActiveNav(activeId, { animate: false });
 }, { passive: true });
 </script>
