@@ -40,6 +40,10 @@ body {
   line-height: 1.75;
 }
 
+.category, .summary-section {
+  scroll-margin-top: 84px;
+}
+
 /* ── HEADER ── */
 header {
   position: relative;
@@ -2673,15 +2677,15 @@ document.querySelectorAll('.category').forEach(el => observer.observe(el));
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const nav  = document.getElementById('mainnav');
-  const navH = nav ? nav.getBoundingClientRect().height : 54;
-  const top  = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
 
-  window.scrollTo({ top, behavior: 'smooth' });
   setActiveNav(id);
 
-  // Ensure the target section is visible on iOS/mobile when navigating via nav.
-  // IntersectionObserver may fire late after programmatic smooth scroll.
+  el.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+
+  // Ensure visibility class applies immediately on mobile too.
   el.classList.add('visible');
   requestAnimationFrame(() => el.classList.add('visible'));
 }
