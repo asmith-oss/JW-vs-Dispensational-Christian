@@ -2728,8 +2728,14 @@ window.addEventListener('scroll', () => {
   for (const id of allSections) {
     const el = document.getElementById(id);
     if (!el) continue;
-    if (el.getBoundingClientRect().top <= threshold) currentId = id;
+
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= threshold && rect.bottom > threshold) {
+      currentId = id;
+      break;
+    }
   }
+
   setActiveNav(currentId, { animate: false });
 }, { passive: true });
 </script>
