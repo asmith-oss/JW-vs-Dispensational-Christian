@@ -2484,6 +2484,865 @@ footer {
   </tr>
 -->
 
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!--                                                                          -->
+<!--   TWO THEOLOGIES, ONE CANON — PLUG-IN SECTION                           -->
+<!--   "Theological Genealogy Map" — Interactive SVG Mind Map                -->
+<!--                                                                          -->
+<!--   HOW TO USE:                                                            -->
+<!--   1. Paste the <style> block into your existing <style> tag             -->
+<!--   2. Drop the #genealogy-map div into your .container wherever you      -->
+<!--      want it (recommended: inside or after #cat0, before #cat1)         -->
+<!--   3. Add a nav item (snippet at bottom)                                 -->
+<!--   No external dependencies. Pure HTML/CSS/JS/SVG.                       -->
+<!--                                                                          -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- STEP 1: Add to your existing <style> tag   -->
+<!-- ─────────────────────────────────────────── -->
+<style>
+/* ── MINDMAP SECTION ── */
+#genealogy-map {
+  margin-top: 72px;
+  scroll-margin-top: 54px;
+}
+
+.mindmap-wrap {
+  position: relative;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Subtle gold radial glow at center */
+.mindmap-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 44%, rgba(200,168,75,0.055) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#gm-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  cursor: grab;
+}
+
+#gm-svg:active { cursor: grabbing; }
+
+/* ── INFO PANEL ── */
+#gm-panel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+  background: var(--surface2);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--gold);
+  padding: 16px 18px 18px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+#gm-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#gm-panel-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+#gm-panel-dates {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+#gm-panel-role {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+#gm-panel-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+#gm-panel-doctrines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.gm-pill {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border: 1px solid;
+}
+
+.gm-pill-gold  { border-color: var(--gold-dim);  color: var(--gold-dim); }
+.gm-pill-red   { border-color: #6b1f18; color: #e89080; background: rgba(192,57,43,0.08); }
+.gm-pill-gray  { border-color: var(--border-light); color: var(--text-dim); }
+
+#gm-panel-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 16px;
+  color: var(--text-dim);
+  cursor: pointer;
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#gm-panel-close:hover { color: var(--text); }
+
+/* ── LEGEND ── */
+.gm-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.gm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.gm-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.gm-legend-line {
+  width: 24px;
+  height: 2px;
+  flex-shrink: 0;
+}
+
+/* ── CONTROLS ── */
+.gm-controls {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  align-items: center;
+}
+
+.gm-btn {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.gm-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+}
+
+.gm-hint {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+/* ── SVG node interaction styles ── */
+.gm-node { cursor: pointer; }
+.gm-node rect, .gm-node ellipse {
+  transition: filter 0.18s;
+}
+.gm-node:hover rect,
+.gm-node:hover ellipse {
+  filter: brightness(1.25);
+}
+.gm-node.selected rect,
+.gm-node.selected ellipse {
+  filter: brightness(1.4);
+}
+
+@media (max-width: 640px) {
+  #gm-panel { width: calc(100% - 40px); bottom: 12px; left: 12px; }
+  .gm-hint  { display: none; }
+}
+</style>
+
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- STEP 2: Drop this block into your .container       -->
+<!-- ─────────────────────────────────────────────────── -->
+
+<div id="genealogy-map" class="category">
+
+  <div class="category-header">
+    <span class="cat-num">00b</span>
+    <h2 class="cat-title">Theological Genealogy Map — Where JW Doctrine Actually Came From</h2>
+  </div>
+
+  <div class="tag-row" style="margin-bottom:20px">
+    <span class="tag tag-bibliological">Historical</span>
+    <span class="tag tag-eschatological">Doctrinal Origins</span>
+    <span class="tag tag-dispensational">Interactive</span>
+  </div>
+
+  <div style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:20px;">
+    Click any node to see where that figure or idea came from, what they contributed, and which JW doctrines trace back through them. The thicker the connection line, the more direct the influence.
+  </div>
+
+  <!-- Map container -->
+  <div class="mindmap-wrap">
+
+    <!-- Controls -->
+    <div class="gm-controls">
+      <button class="gm-btn" onclick="gmZoom(1.2)">+ Zoom</button>
+      <button class="gm-btn" onclick="gmZoom(0.83)">− Zoom</button>
+      <button class="gm-btn" onclick="gmReset()">Reset</button>
+      <span class="gm-hint">Click nodes · Drag to pan</span>
+    </div>
+
+    <!-- The SVG map -->
+    <svg id="gm-svg" viewBox="0 0 960 680" xmlns="http://www.w3.org/2000/svg"
+         font-family="'Source Serif 4', Georgia, serif">
+      <defs>
+        <!-- Arrow markers -->
+        <marker id="arr-gold" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#7a6428" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#c0392b" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="arr-dim" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#3a3a48" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#5b3a8a" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+
+        <!-- Glow filters -->
+        <filter id="glow-gold" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-red" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- PANNING / ZOOM GROUP                           -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <g id="gm-root">
+
+        <!-- ─── ERA BANDS (background) ─── -->
+        <rect x="0" y="0"   width="960" height="120" fill="#0d0d0f" opacity="0.6"/>
+        <rect x="0" y="120" width="960" height="130" fill="#141418" opacity="0.5"/>
+        <rect x="0" y="250" width="960" height="130" fill="#0d0d0f" opacity="0.5"/>
+        <rect x="0" y="380" width="960" height="130" fill="#141418" opacity="0.5"/>
+        <rect x="0" y="510" width="960" height="170" fill="#0d0d0f" opacity="0.6"/>
+
+        <!-- Era labels (left rail) -->
+        <text x="14" y="36" font-size="9" fill="#3a3a48" letter-spacing="0.2em"
+              text-transform="uppercase" font-family="'Source Serif 4',serif">4TH – 17TH CENTURY</text>
+        <text x="14" y="182" font-size="9" fill="#3a3a48" letter-spacing="0.2em">1820s – 1844</text>
+        <text x="14" y="312" font-size="9" fill="#3a3a48" letter-spacing="0.2em">1844 – 1869</text>
+        <text x="14" y="442" font-size="9" fill="#3a3a48" letter-spacing="0.2em">1870 – 1879</text>
+        <text x="14" y="572" font-size="9" fill="#3a3a48" letter-spacing="0.2em">1879 – PRESENT</text>
+
+        <!-- Era dividers -->
+        <line x1="0" y1="120" x2="960" y2="120" stroke="#2a2a35" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="0" y1="250" x2="960" y2="250" stroke="#2a2a35" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="0" y1="380" x2="960" y2="380" stroke="#2a2a35" stroke-width="1" stroke-dasharray="4 6"/>
+        <line x1="0" y1="510" x2="960" y2="510" stroke="#2a2a35" stroke-width="1" stroke-dasharray="4 6"/>
+
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- CONNECTION LINES (drawn before nodes)          -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Arius → Russell (long dim line; indirect) -->
+        <path d="M 196 88 C 196 300, 480 300, 480 430"
+              fill="none" stroke="#2a2a35" stroke-width="1.5"
+              stroke-dasharray="6 5" marker-end="url(#arr-dim)"/>
+
+        <!-- Socinians → Storrs -->
+        <path d="M 380 88 C 380 140, 340 140, 340 168"
+              fill="none" stroke="#3a3a48" stroke-width="1.5"
+              marker-end="url(#arr-dim)"/>
+
+        <!-- Socinians → Barbour (dim, indirect) -->
+        <path d="M 390 88 C 420 200, 600 200, 680 298"
+              fill="none" stroke="#2a2a35" stroke-width="1"
+              stroke-dasharray="5 5" marker-end="url(#arr-dim)"/>
+
+        <!-- Miller → post-disappointment -->
+        <path d="M 600 88 C 600 148, 580 148, 560 168"
+              fill="none" stroke="#7a6428" stroke-width="2"
+              marker-end="url(#arr-gold)"/>
+
+        <!-- Miller → Barbour (strong) -->
+        <path d="M 618 88 C 680 180, 700 240, 700 298"
+              fill="none" stroke="#7a6428" stroke-width="2.5"
+              marker-end="url(#arr-gold)"/>
+
+        <!-- Storrs → post-disappointment -->
+        <path d="M 340 218 C 340 260, 420 275, 480 298"
+              fill="none" stroke="#5a5650" stroke-width="2"
+              marker-end="url(#arr-dim)"/>
+
+        <!-- Storrs → Barbour (strong — conditionalism channel) -->
+        <path d="M 360 218 C 420 255, 580 265, 660 298"
+              fill="none" stroke="#5a5650" stroke-width="2.5"
+              marker-end="url(#arr-dim)"/>
+
+        <!-- post-disappointment → Wendell -->
+        <path d="M 490 348 C 490 370, 430 375, 390 428"
+              fill="none" stroke="#3a3a48" stroke-width="1.5"
+              marker-end="url(#arr-dim)"/>
+
+        <!-- post-disappointment → Barbour -->
+        <path d="M 540 348 C 580 375, 630 395, 670 428"
+              fill="none" stroke="#5a5650" stroke-width="2"
+              marker-end="url(#arr-dim)"/>
+
+        <!-- Wendell → Russell (spark line — gold dashed) -->
+        <path d="M 390 478 C 390 500, 450 510, 490 558"
+              fill="none" stroke="#7a6428" stroke-width="2"
+              stroke-dasharray="5 4" marker-end="url(#arr-gold)"/>
+
+        <!-- Barbour → Russell (PRIMARY — thick gold solid) -->
+        <path d="M 680 478 C 680 510, 580 525, 530 558"
+              fill="none" stroke="#c8a84b" stroke-width="4"
+              marker-end="url(#arr-gold)"/>
+
+        <!-- Russell → JW Org -->
+        <path d="M 500 628 L 500 648"
+              fill="none" stroke="#7c5cbf" stroke-width="3"
+              marker-end="url(#arr-purple)"/>
+
+        <!-- Brown → Barbour (chronology handoff) -->
+        <path d="M 820 228 C 820 260, 760 270, 730 298"
+              fill="none" stroke="#5a5650" stroke-width="1.5"
+              stroke-dasharray="5 4" marker-end="url(#arr-dim)"/>
+
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- NODES                                          -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- ── ROW 1: Ancient roots ── -->
+
+        <!-- ARIUS -->
+        <g class="gm-node" id="n-arius" onclick="gmSelect('arius')">
+          <rect x="116" y="42" width="160" height="56" rx="3"
+                fill="#141418" stroke="#3a3a48" stroke-width="1"/>
+          <rect x="116" y="42" width="3" height="56" fill="#3a3a48"/>
+          <text x="136" y="62" font-size="13" font-weight="700"
+                fill="#8a8578" font-family="'Playfair Display',serif">Arian Tradition</text>
+          <text x="136" y="78" font-size="10" fill="#5a5650">Arius · 256–336 AD</text>
+          <text x="136" y="91" font-size="10" fill="#5a5650">Christ = created being</text>
+        </g>
+
+        <!-- SOCINIANS -->
+        <g class="gm-node" id="n-soc" onclick="gmSelect('soc')">
+          <rect x="300" y="42" width="160" height="56" rx="3"
+                fill="#141418" stroke="#3a3a48" stroke-width="1"/>
+          <rect x="300" y="42" width="3" height="56" fill="#3a3a48"/>
+          <text x="320" y="62" font-size="13" font-weight="700"
+                fill="#8a8578" font-family="'Playfair Display',serif">Socinians</text>
+          <text x="320" y="78" font-size="10" fill="#5a5650">Polish Brethren · 16th–17th c.</text>
+          <text x="320" y="91" font-size="10" fill="#5a5650">Anti-Trinity · Soul not immortal</text>
+        </g>
+
+        <!-- WILLIAM MILLER -->
+        <g class="gm-node" id="n-miller" onclick="gmSelect('miller')">
+          <rect x="510" y="42" width="178" height="56" rx="3"
+                fill="#1c1810" stroke="#7a6428" stroke-width="1.5"/>
+          <rect x="510" y="42" width="3" height="56" fill="#7a6428"/>
+          <text x="530" y="62" font-size="13" font-weight="700"
+                fill="#c8a84b" font-family="'Playfair Display',serif">William Miller</text>
+          <text x="530" y="78" font-size="10" fill="#8a7848">1782–1849 · Baptist preacher</text>
+          <text x="530" y="91" font-size="10" fill="#8a7848">Prophetic date-setting pioneer</text>
+        </g>
+
+
+        <!-- ── ROW 2: 1820s–1844 ── -->
+
+        <!-- GEORGE STORRS -->
+        <g class="gm-node" id="n-storrs" onclick="gmSelect('storrs')">
+          <rect x="258" y="168" width="166" height="60" rx="3"
+                fill="#141814" stroke="#2e5a3e" stroke-width="1.5"/>
+          <rect x="258" y="168" width="3" height="60" fill="#27ae60" opacity="0.5"/>
+          <text x="278" y="190" font-size="13" font-weight="700"
+                fill="#80c898" font-family="'Playfair Display',serif">George Storrs</text>
+          <text x="278" y="206" font-size="10" fill="#5a8568">1796–1879 · Millerite minister</text>
+          <text x="278" y="219" font-size="10" fill="#5a8568">Soul sleep · Annihilationism</text>
+        </g>
+
+        <!-- POST-DISAPPOINTMENT -->
+        <g class="gm-node" id="n-post" onclick="gmSelect('post')">
+          <rect x="448" y="168" width="178" height="60" rx="3"
+                fill="#161614" stroke="#3a3828" stroke-width="1"/>
+          <rect x="448" y="168" width="3" height="60" fill="#7a6428" opacity="0.5"/>
+          <text x="468" y="188" font-size="12" font-weight="700"
+                fill="#9a9070" font-family="'Playfair Display',serif">Post-Disappointment</text>
+          <text x="468" y="202" font-size="10" fill="#6a6050">Adventist splinters · 1844+</text>
+          <text x="468" y="215" font-size="10" fill="#6a6050">Prophecy revised, not abandoned</text>
+          <text x="468" y="223" font-size="9"  fill="#5a5040" font-style="italic">The failed date becomes the method</text>
+        </g>
+
+        <!-- JOHN AQUILA BROWN -->
+        <g class="gm-node" id="n-brown" onclick="gmSelect('brown')">
+          <rect x="742" y="168" width="170" height="60" rx="3"
+                fill="#141418" stroke="#2a2a38" stroke-width="1"/>
+          <rect x="742" y="168" width="3" height="60" fill="#3a3a48"/>
+          <text x="762" y="188" font-size="12" font-weight="700"
+                fill="#7a7890" font-family="'Playfair Display',serif">John Aquila Brown</text>
+          <text x="762" y="204" font-size="10" fill="#5a5868">1823 publication</text>
+          <text x="762" y="217" font-size="10" fill="#5a5868">Calculated 607BC + 2,520 yrs</text>
+          <text x="762" y="226" font-size="9"  fill="#4a4858" font-style="italic">= 1914</text>
+        </g>
+
+
+        <!-- ── ROW 3: 1844–1869 ── -->
+
+        <!-- JONAS WENDELL -->
+        <g class="gm-node" id="n-wendell" onclick="gmSelect('wendell')">
+          <rect x="308" y="428" width="162" height="60" rx="3"
+                fill="#161614" stroke="#3a3828" stroke-width="1"/>
+          <rect x="308" y="428" width="3" height="60" fill="#7a6428" opacity="0.4"/>
+          <text x="328" y="449" font-size="13" font-weight="700"
+                fill="#9a9070" font-family="'Playfair Display',serif">Jonas Wendell</text>
+          <text x="328" y="465" font-size="10" fill="#6a6050">1815–1873 · Adventist preacher</text>
+          <text x="328" y="478" font-size="10" fill="#6a6050">Russell's personal awakening</text>
+        </g>
+
+
+        <!-- ── ROW 4: 1870–1879 ── -->
+
+        <!-- NELSON BARBOUR — PRIMARY SOURCE — gold glow -->
+        <g class="gm-node" id="n-barbour" onclick="gmSelect('barbour')" filter="url(#glow-gold)">
+          <rect x="596" y="298" width="198" height="80" rx="3"
+                fill="#1c1810" stroke="#c8a84b" stroke-width="2"/>
+          <rect x="596" y="298" width="4" height="80" fill="#c8a84b"/>
+          <text x="618" y="322" font-size="14" font-weight="700"
+                fill="#c8a84b" font-family="'Playfair Display',serif">Nelson H. Barbour</text>
+          <text x="618" y="339" font-size="10" fill="#9a8040">1824–1905 · Millerite → chronologist</text>
+          <text x="618" y="353" font-size="10" fill="#9a8040">Parousia = invisible presence</text>
+          <text x="618" y="367" font-size="10" fill="#9a8040">Co-wrote "Three Worlds" w/ Russell</text>
+          <!-- PRIMARY badge -->
+          <rect x="714" y="302" width="76" height="16" rx="2"
+                fill="#c8a84b" opacity="0.15"/>
+          <text x="752" y="313" font-size="9" fill="#c8a84b"
+                text-anchor="middle" letter-spacing="0.1em">PRIMARY SOURCE</text>
+        </g>
+
+
+        <!-- ── ROW 5: Russell & JW ── -->
+
+        <!-- CHARLES TAZE RUSSELL -->
+        <g class="gm-node" id="n-russell" onclick="gmSelect('russell')" filter="url(#glow-gold)">
+          <rect x="388" y="558" width="224" height="70" rx="3"
+                fill="#1c1810" stroke="#c8a84b" stroke-width="2.5"/>
+          <rect x="388" y="558" width="4" height="70" fill="#c8a84b"/>
+          <text x="410" y="582" font-size="15" font-weight="700"
+                fill="#c8a84b" font-family="'Playfair Display',serif">Charles Taze Russell</text>
+          <text x="410" y="599" font-size="10" fill="#9a8040">1852–1916 · Synthesizer &amp; publisher</text>
+          <text x="410" y="613" font-size="10" fill="#9a8040">Watch Tower founded 1879</text>
+          <text x="410" y="622" font-size="9"  fill="#7a6428" font-style="italic">Did not originate — organized</text>
+        </g>
+
+        <!-- JEHOVAH'S WITNESSES ORG -->
+        <g class="gm-node" id="n-jw" onclick="gmSelect('jw')">
+          <rect x="380" y="648" width="240" height="22" rx="0"
+                fill="#1a1228" stroke="#7c5cbf" stroke-width="1.5"/>
+          <rect x="380" y="648" width="4" height="22" fill="#7c5cbf"/>
+          <text x="500" y="663" font-size="11" fill="#a08ad8"
+                text-anchor="middle" font-family="'Playfair Display',serif"
+                letter-spacing="0.08em">JEHOVAH'S WITNESSES · est. 1931</text>
+        </g>
+
+        <!-- ── DOCTRINE CALLOUT NODES (floating labels on connections) ── -->
+
+        <!-- "Invisible parousia" callout on Barbour→Russell line -->
+        <g id="co-parousia" opacity="0.9">
+          <rect x="556" y="510" width="134" height="28" rx="2"
+                fill="#1c1c22" stroke="#7a6428" stroke-width="0.5"/>
+          <text x="563" y="521" font-size="9" fill="#9a8040">Invisible parousia doctrine</text>
+          <text x="563" y="532" font-size="9" fill="#7a6428">+ 1914 chronology</text>
+        </g>
+
+        <!-- "Soul sleep" callout on Storrs→Barbour line -->
+        <g id="co-sleep" opacity="0.85">
+          <rect x="430" y="232" width="112" height="28" rx="2"
+                fill="#1c1c22" stroke="#2e5a3e" stroke-width="0.5"/>
+          <text x="437" y="243" font-size="9" fill="#5a8568">Soul sleep doctrine</text>
+          <text x="437" y="254" font-size="9" fill="#5a8568">Annihilationism</text>
+        </g>
+
+        <!-- "1874 spark" callout on Wendell→Russell -->
+        <g id="co-spark" opacity="0.85">
+          <rect x="298" y="514" width="110" height="28" rx="2"
+                fill="#1c1c22" stroke="#7a6428" stroke-width="0.5"/>
+          <text x="305" y="525" font-size="9" fill="#9a8040">Personal catalyst</text>
+          <text x="305" y="536" font-size="9" fill="#7a6428">1874 first preached here</text>
+        </g>
+
+        <!-- "Arian Christology" callout on Arius→Russell -->
+        <g id="co-arian" opacity="0.8">
+          <rect x="196" y="360" width="118" height="28" rx="2"
+                fill="#1c1c22" stroke="#3a3a48" stroke-width="0.5"/>
+          <text x="203" y="371" font-size="9" fill="#7a7890">Arian Christology</text>
+          <text x="203" y="382" font-size="9" fill="#5a5870">Christ = created being</text>
+        </g>
+
+      </g><!-- /#gm-root -->
+    </svg>
+
+    <!-- Info panel (shown on node click) -->
+    <div id="gm-panel">
+      <button id="gm-panel-close" onclick="gmClose()">✕</button>
+      <div id="gm-panel-name"></div>
+      <div id="gm-panel-dates"></div>
+      <div id="gm-panel-role"></div>
+      <div id="gm-panel-desc"></div>
+      <div id="gm-panel-doctrines"></div>
+    </div>
+
+  </div><!-- /.mindmap-wrap -->
+
+  <!-- Legend -->
+  <div class="gm-legend">
+    <div class="gm-legend-item">
+      <div class="gm-legend-dot" style="background:#c8a84b;"></div>
+      Primary / direct source
+    </div>
+    <div class="gm-legend-item">
+      <div class="gm-legend-dot" style="background:#5a5650;"></div>
+      Secondary influence
+    </div>
+    <div class="gm-legend-item">
+      <div class="gm-legend-dot" style="background:#3a3a48;"></div>
+      Indirect / environmental
+    </div>
+    <div class="gm-legend-item">
+      <div class="gm-legend-line" style="background:#c8a84b; height:3px;"></div>
+      Strong doctrinal transmission
+    </div>
+    <div class="gm-legend-item">
+      <div class="gm-legend-line" style="background:#3a3a48; border-top:1px dashed #3a3a48; height:0;"></div>
+      Indirect / environmental influence
+    </div>
+    <div class="gm-legend-item">
+      <div class="gm-legend-dot" style="background:#7c5cbf;"></div>
+      Rutherford formalization (1931)
+    </div>
+  </div>
+
+  <!-- Collision note below map -->
+  <div class="collision" style="margin-top:8px;">
+    <div class="collision-label">⚡ What This Map Reveals</div>
+    <div class="collision-text">
+      The Watchtower presents itself as the only organization in 1,800 years to recover the true Christianity that apostate Christendom buried. But this map tells a different story: nearly every distinctive JW doctrine traces to an identifiable 19th-century source — most of them the wreckage of failed prophetic movements that had already been examined and rejected. <strong>Nelson Barbour alone</strong> handed Russell the invisible parousia doctrine, the 1914 chronological framework, the 6,000-year human history timeline, and the conditionalism he had inherited from George Storrs. Russell's contribution was organizational and communicative — he published prolifically and built a distribution machine. What he published was largely borrowed. The question this map raises is not about sincerity — many figures in this genealogy were deeply sincere. The question is whether a system built on the successive reinterpretation of failed date-predictions, assembled from pre-existing heterodox streams, constitutes the recovery of primitive Christianity or a novel 19th-century construction. Scripture provides the test: <em>"search the scriptures daily, whether those things were so"</em> (Acts 17:11).
+    </div>
+  </div>
+
+</div><!-- /#genealogy-map -->
+
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- STEP 3: Add to your <nav> element                  -->
+<!-- ─────────────────────────────────────────────────── -->
+<!--
+  <div class="nav-item" onclick="scrollTo('genealogy-map')">Genealogy Map</div>
+-->
+
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- STEP 4: The JS — paste before </body>              -->
+<!-- (or add into your existing <script> block)         -->
+<!-- ─────────────────────────────────────────────────── -->
+<script>
+// ── NODE DATA ──
+const GM_DATA = {
+  arius: {
+    name: 'The Arian Tradition',
+    dates: 'Arius c. 256–336 AD · Condemned at Nicaea 325 AD',
+    role: 'Ancient anti-Trinitarian stream',
+    desc: 'Arius of Alexandria taught that the Son of God was a created being — "there was a time when he was not." This was not a fringe position; it spread widely before the Council of Nicaea condemned it in 325 AD as contrary to apostolic teaching. What Nicaea condemned closely parallels the JW view of Christ. Significantly, Nicaea did not invent Trinitarianism to oppose Arianism — it ruled against a view the church had been opposing for decades. The Arian framework resurfaced through the Socinians (16th–17th c.) and again through 19th-century American religious rationalism — the water Russell swam in.',
+    pills: [
+      { text: 'Christ is a created being', cls: 'gm-pill-red' },
+      { text: 'Subordinationist Christology', cls: 'gm-pill-gold' },
+      { text: 'Pre-dates Russell by 1,500 years', cls: 'gm-pill-gray' },
+    ]
+  },
+  soc: {
+    name: 'The Socinians (Polish Brethren)',
+    dates: '16th – 17th century',
+    role: 'Rationalist anti-Trinitarian stream · Protestant era',
+    desc: 'The Socinians revived Arian Christology in a more systematic form. They denied the Trinity, taught that Jesus was a supremely exalted but ultimately created being, rejected the natural immortality of the soul, and approached Scripture through a rationalist filter. Their influence flowed into Protestant liberalism and resurfaced — diluted — in the 19th-century American theological environment where Russell emerged. George Storrs inherited elements of this framework independently.',
+    pills: [
+      { text: 'Denial of the Trinity', cls: 'gm-pill-red' },
+      { text: 'Soul not naturally immortal', cls: 'gm-pill-red' },
+      { text: 'Christ exalted but created', cls: 'gm-pill-gold' },
+    ]
+  },
+  miller: {
+    name: 'William Miller',
+    dates: '1782 – 1849',
+    role: 'Baptist preacher · Founder of the Millerite movement',
+    desc: 'Miller predicted Christ\'s return in 1843–1844 based on Daniel 8:14, applying the day-year principle (one prophetic day = one calendar year) and tracing from 457 BC. When October 22, 1844 came and went without incident — the Great Disappointment — his followers fragmented rather than simply disappearing. The most important thing Miller contributed to JW theology is not any specific doctrine but the entire prophetic apparatus: Daniel, the day-year principle, chronological calculation, and the willingness to set dates from scripture. Russell didn\'t build that machine. He inherited it and set a new date.',
+    pills: [
+      { text: 'Prophetic chronology from Daniel', cls: 'gm-pill-red' },
+      { text: 'Day-year interpretive principle', cls: 'gm-pill-red' },
+      { text: 'Date-setting methodology', cls: 'gm-pill-red' },
+      { text: 'End-of-age urgency', cls: 'gm-pill-gold' },
+    ]
+  },
+  storrs: {
+    name: 'George Storrs',
+    dates: '1796 – 1879',
+    role: 'Methodist minister · Millerite · 19th-century conditionalist',
+    desc: 'Storrs is the most overlooked figure in JW intellectual history. A Methodist minister who became a Millerite, he published his landmark Six Sermons (1842) — a systematic attack on the immortal soul and hell as eternal torment. He argued from Scripture that the soul is not inherently immortal, that the dead are entirely unconscious (soul sleep), and that the wicked are annihilated rather than eternally punished. These ideas flowed directly into the Adventist stream after 1844, into Barbour, and from Barbour into Russell. The JW proof text for soul sleep (Eccl 9:5, "the dead know nothing") and annihilationism both come through this chain.',
+    pills: [
+      { text: 'Soul sleep', cls: 'gm-pill-red' },
+      { text: 'Annihilation of the wicked', cls: 'gm-pill-red' },
+      { text: 'Denial of eternal hell', cls: 'gm-pill-red' },
+      { text: 'Soul not immortal', cls: 'gm-pill-red' },
+    ]
+  },
+  post: {
+    name: 'Post-Disappointment Adventist Splinters',
+    dates: '1844 onward',
+    role: 'Multiple factions · Reformation of Miller\'s failed chronology',
+    desc: 'After the Great Disappointment, Miller\'s followers fractured into several streams. One became the Seventh-day Adventists (holding the Trinity). Others kept recalculating — pushing dates forward, reinterpreting what "fulfillment" meant, and absorbing Storrs\'s conditionalist ideas. The common ideas circulating in this environment — the intellectual air Russell breathed — included: rejection of hell as eternal torment, rejection of the Trinity, "restoration of true Christianity" rhetoric, prophetic chart culture, and deep suspicion of mainstream Christianity as apostate. Russell did not invent any of these postures. He entered a subculture that had already fully developed them.',
+    pills: [
+      { text: 'Post-failure prophecy revision', cls: 'gm-pill-red' },
+      { text: 'Anti-denominational "restoration" mindset', cls: 'gm-pill-gold' },
+      { text: 'Prophetic chart culture', cls: 'gm-pill-gold' },
+    ]
+  },
+  brown: {
+    name: 'John Aquila Brown',
+    dates: '1823 publication',
+    role: 'Bible chronologist · Originator of the 1914 calculation',
+    desc: 'Brown published the calculation that eventually became the Watchtower\'s cornerstone prophetic claim decades before Russell was born. The formula: 607 BC (Jerusalem\'s fall) + 2,520 years (seven "times" × 360 days from Daniel 4) = 1914. Brown worked this out in 1823. Barbour refined and adopted it; Russell received it from Barbour. The Watchtower today stakes its entire claim to prophetic appointment on this date — and on a starting year (607 BC) that mainstream archaeology and historiography do not support, placing Jerusalem\'s fall at 586/587 BC instead.',
+    pills: [
+      { text: '607 BC + 2,520 yrs = 1914', cls: 'gm-pill-red' },
+      { text: 'Daniel 4 "seven times" calculation', cls: 'gm-pill-gold' },
+      { text: 'Pre-dates Russell by decades', cls: 'gm-pill-gray' },
+    ]
+  },
+  wendell: {
+    name: 'Jonas Wendell',
+    dates: '1815 – 1873',
+    role: 'Second Adventist preacher · Russell\'s personal awakening',
+    desc: 'Russell himself recorded that a sermon by Wendell, heard around 1869 when Russell was approximately 17, rescued him from religious skepticism and set him on his life\'s path. Wendell had reworked Miller\'s chronology to predict Christ\'s return in 1874. Russell attended the meeting doubtful and left energized. Wendell gave Russell the emotional catalyst and introduced him to the date 1874 — but not the developed theological system. That came from Barbour. The sequence matters: Russell did not arrive at 1874 independently through Scripture study. He first heard it preached.',
+    pills: [
+      { text: 'Russell\'s personal catalyst', cls: 'gm-pill-red' },
+      { text: '1874 as year of Christ\'s return', cls: 'gm-pill-gold' },
+    ]
+  },
+  barbour: {
+    name: 'Nelson H. Barbour',
+    dates: '1824 – 1905',
+    role: 'Primary source · Russell\'s direct theological partner',
+    desc: 'Barbour is the single most important figure in the intellectual genealogy of JW theology. A former Millerite who kept recalculating after 1844, he developed the doctrine of an invisible, spiritual presence of Christ — arguing the Greek parousia meant "presence" not "coming," so the return had already happened invisibly in 1874. This is the direct ancestor of the JW teaching that Christ invisibly returned in 1914. Russell and Barbour co-authored Three Worlds and the Harvest of This World (1877), which laid out the entire prophetic framework Russell later built the Watch Tower on. Their split (c. 1878–79) was over the atonement — Barbour denied ransom substitution; Russell held it. Russell kept everything else.',
+    pills: [
+      { text: 'Invisible parousia (presence)', cls: 'gm-pill-red' },
+      { text: '1914 chronological framework', cls: 'gm-pill-red' },
+      { text: '6,000-year human history timeline', cls: 'gm-pill-red' },
+      { text: 'Conditionalism / soul sleep', cls: 'gm-pill-red' },
+      { text: 'Herald of the Morning journal', cls: 'gm-pill-gold' },
+    ]
+  },
+  russell: {
+    name: 'Charles Taze Russell',
+    dates: '1852 – 1916',
+    role: 'Synthesizer · Organizer · Publisher — Watch Tower 1879',
+    desc: 'Russell\'s genuine contribution was organizational and communicative, not doctrinal. He was a skilled publisher, prolific writer, and effective popularizer who took assembled theological ingredients from the streams above and packaged them into a coherent, accessible system. His Studies in the Scriptures (6 vols.) reached hundreds of thousands. What he added independently: ransom substitution theology (splitting from Barbour on this), the two-class heavenly/earthly distinction in developed form, and the Watch Tower institutional structure. His successor Joseph Rutherford formalized the name "Jehovah\'s Witnesses" in 1931, introduced the blood transfusion prohibition, and intensified the shunning system — all after Russell\'s death.',
+    pills: [
+      { text: 'Organizational structure', cls: 'gm-pill-red' },
+      { text: 'Two-class doctrine (144,000 vs great crowd)', cls: 'gm-pill-red' },
+      { text: 'Ransom substitution (his own — broke from Barbour)', cls: 'gm-pill-gold' },
+      { text: 'All core chronology inherited from Barbour', cls: 'gm-pill-gray' },
+    ]
+  },
+  jw: {
+    name: 'Jehovah\'s Witnesses',
+    dates: 'Name adopted 1931 under J.F. Rutherford',
+    role: 'The institutional organization built on Russell\'s framework',
+    desc: 'The name "Jehovah\'s Witnesses" was adopted in 1931 under Russell\'s successor Joseph Franklin Rutherford, who transformed Russell\'s loosely organized Bible Student movement into a centralized, authoritarian organization. Rutherford formalized the Governing Body structure, introduced the blood transfusion prohibition, mandated disfellowshipping and shunning, refined the two-tier doctrine, and intensified the claim to be Jehovah\'s sole visible organization. Many doctrinal positions associated with JWs today — including elements of the blood policy and the rigid organizational hierarchy — were Rutherford\'s additions, sometimes reversing positions Russell himself had held.',
+    pills: [
+      { text: 'Governing Body authority claim', cls: 'gm-pill-red' },
+      { text: 'Blood transfusion prohibition (Rutherford)', cls: 'gm-pill-red' },
+      { text: 'Disfellowshipping / shunning formalized', cls: 'gm-pill-red' },
+      { text: 'Built on Russell\'s framework', cls: 'gm-pill-gray' },
+    ]
+  }
+};
+
+// ── STATE ──
+let gmScale  = 1;
+let gmTx     = 0;
+let gmTy     = 0;
+let gmDragging = false;
+let gmDragStart = { x: 0, y: 0 };
+let gmSelected = null;
+
+const svg    = document.getElementById('gm-svg');
+const root   = document.getElementById('gm-root');
+const panel  = document.getElementById('gm-panel');
+
+// ── PAN ──
+svg.addEventListener('mousedown', e => {
+  if (e.target.closest('.gm-node')) return;
+  gmDragging = true;
+  gmDragStart = { x: e.clientX - gmTx, y: e.clientY - gmTy };
+  svg.style.cursor = 'grabbing';
+});
+
+window.addEventListener('mousemove', e => {
+  if (!gmDragging) return;
+  gmTx = e.clientX - gmDragStart.x;
+  gmTy = e.clientY - gmDragStart.y;
+  gmApplyTransform();
+});
+
+window.addEventListener('mouseup', () => {
+  gmDragging = false;
+  svg.style.cursor = 'grab';
+});
+
+// Touch pan
+svg.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  gmDragStart = { x: t.clientX - gmTx, y: t.clientY - gmTy };
+}, { passive: true });
+
+svg.addEventListener('touchmove', e => {
+  const t = e.touches[0];
+  gmTx = t.clientX - gmDragStart.x;
+  gmTy = t.clientY - gmDragStart.y;
+  gmApplyTransform();
+}, { passive: true });
+
+// ── ZOOM (wheel) ──
+svg.addEventListener('wheel', e => {
+  e.preventDefault();
+  gmZoom(e.deltaY < 0 ? 1.1 : 0.91);
+}, { passive: false });
+
+function gmZoom(factor) {
+  gmScale = Math.min(Math.max(gmScale * factor, 0.4), 3);
+  gmApplyTransform();
+}
+
+function gmApplyTransform() {
+  root.setAttribute('transform',
+    `translate(${gmTx},${gmTy}) scale(${gmScale})`);
+}
+
+function gmReset() {
+  gmScale = 1; gmTx = 0; gmTy = 0;
+  gmApplyTransform();
+}
+
+// ── NODE SELECT ──
+function gmSelect(id) {
+  // Deselect old
+  if (gmSelected) {
+    const old = document.getElementById('n-' + gmSelected);
+    if (old) old.classList.remove('selected');
+  }
+
+  if (gmSelected === id) {
+    gmClose();
+    return;
+  }
+
+  gmSelected = id;
+  const node = document.getElementById('n-' + id);
+  if (node) node.classList.add('selected');
+
+  const d = GM_DATA[id];
+  if (!d) return;
+
+  document.getElementById('gm-panel-name').textContent    = d.name;
+  document.getElementById('gm-panel-dates').textContent   = d.dates;
+  document.getElementById('gm-panel-role').textContent    = d.role;
+  document.getElementById('gm-panel-desc').textContent    = d.desc;
+
+  const pillContainer = document.getElementById('gm-panel-doctrines');
+  pillContainer.innerHTML = d.pills.map(p =>
+    `<span class="gm-pill ${p.cls}">${p.text}</span>`
+  ).join('');
+
+  panel.classList.add('visible');
+}
+
+function gmClose() {
+  panel.classList.remove('visible');
+  if (gmSelected) {
+    const old = document.getElementById('n-' + gmSelected);
+    if (old) old.classList.remove('selected');
+  }
+  gmSelected = null;
+}
+</script>
+
 <!-- ══════════════════════════════════════ -->
 <!-- 30,000-FOOT VIEW / THEOLOGY MAP -->
 <!-- ══════════════════════════════════════ -->
