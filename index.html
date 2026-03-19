@@ -1775,6 +1775,714 @@ footer {
     <div class="collision-text">The claim that any human organization is God's sole channel of truth is a significant one — and Scripture provides a clear way to test it. The Bereans in Acts 17:11 tested Paul's teaching against Scripture and were praised for it. That same approach — examining any teaching, including the Watchtower's, against the text of Scripture — is what this entire site invites. It is worth knowing that the organization has made specific, dateable prophetic predictions that did not come to pass (including 1914, 1925, and 1975 as predicted turning points for Armageddon or the beginning of paradise). Deuteronomy 18:20–22 provides a standard for evaluating prophetic claims, and those passages are worth reading alongside that history. None of this is said to condemn the many sincere people who have devoted their lives within the Watchtower community — but the question of whether an organization's claims to exclusive divine authority can withstand scriptural scrutiny is precisely the question this site was built to explore, openly and honestly, for anyone who wants to look.</div>
   </div>
 </div>
+  <!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!--                                                                          -->
+<!--   TWO THEOLOGIES, ONE CANON — PLUG-IN SECTION                           -->
+<!--   "Before Russell: The Intellectual Genealogy of JW Theology"           -->
+<!--                                                                          -->
+<!--   HOW TO USE:                                                            -->
+<!--   1. Add "Before Russell" to your <nav> (see nav snippet at bottom)     -->
+<!--   2. Paste the entire <div class="category" id="cat0"> block into       -->
+<!--      your .container div — recommended position: just before #cat1      -->
+<!--   3. Add "cat0" to the summary table (see table row snippet at bottom)  -->
+<!--   4. No new CSS needed — all styles use your existing variables          -->
+<!--                                                                          -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- STEP 1: Add this <style> block once,        -->
+<!-- inside your existing <style> tag            -->
+<!-- (or anywhere before the section)            -->
+<!-- ─────────────────────────────────────────── -->
+<style>
+/* ── GENEALOGY TIMELINE (cat0 only) ── */
+.genealogy-timeline {
+  position: relative;
+  margin: 0 0 8px;
+}
+
+.genealogy-timeline::before {
+  content: '';
+  position: absolute;
+  left: 108px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border) 60px, var(--border) calc(100% - 60px), transparent);
+}
+
+.genealogy-entry {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 0 28px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.genealogy-entry + .genealogy-entry {
+  margin-top: 0;
+}
+
+.genealogy-era {
+  padding: 28px 0 8px;
+  text-align: right;
+  position: relative;
+}
+
+.genealogy-era-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.genealogy-era-label strong {
+  display: block;
+  font-size: 12px;
+  color: var(--gold-dim);
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+
+/* The dot on the timeline */
+.genealogy-era::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 38px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--border-light);
+  border: 1px solid var(--border);
+}
+
+.genealogy-entry.primary .genealogy-era::after {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  width: 11px;
+  height: 11px;
+  right: -6px;
+  top: 37px;
+}
+
+.genealogy-entry.terminal .genealogy-era::after {
+  background: #4a2d8a;
+  border-color: #7c5cbf;
+  width: 13px;
+  height: 13px;
+  right: -7px;
+  top: 36px;
+}
+
+.genealogy-body {
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.genealogy-entry:last-child .genealogy-body {
+  border-bottom: none;
+}
+
+.genealogy-person {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.genealogy-entry.primary .genealogy-person {
+  color: var(--gold);
+}
+
+.genealogy-dates {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.genealogy-role {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  font-style: normal;
+}
+
+.genealogy-entry.primary .genealogy-role {
+  color: var(--gold-dim);
+}
+
+.genealogy-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.genealogy-desc strong {
+  color: var(--text);
+}
+
+.doctrine-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.doctrine-pill {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border: 1px solid var(--border-light);
+  color: var(--text-dim);
+  background: var(--surface2);
+}
+
+.doctrine-pill.inherited {
+  border-color: var(--gold-dim);
+  color: var(--gold-dim);
+}
+
+.doctrine-pill.direct {
+  border-color: #c0392b44;
+  color: #e89080;
+  background: rgba(192,57,43,0.07);
+}
+
+/* Connector arrow between entries */
+.genealogy-connector {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.genealogy-connector::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* Doctrine flow table */
+.doctrine-flow {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.doctrine-flow th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+
+.doctrine-flow td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.doctrine-flow tr:last-child td {
+  border-bottom: none;
+}
+
+.doctrine-flow tr:hover td {
+  background: var(--surface);
+}
+
+.doctrine-flow td:first-child {
+  font-family: 'Playfair Display', serif;
+  color: var(--text);
+  width: 24%;
+  font-size: 14px;
+}
+
+.doctrine-flow td:nth-child(2) {
+  color: var(--text-muted);
+  width: 22%;
+  font-size: 12px;
+}
+
+.doctrine-flow td:nth-child(3) {
+  color: #e09090;
+  width: 30%;
+  font-size: 13px;
+}
+
+.doctrine-flow td:last-child {
+  color: #90c8a0;
+  width: 24%;
+  font-size: 13px;
+}
+
+.source-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-dim);
+  margin-bottom: 3px;
+}
+
+/* Bottom line box */
+.bottom-line {
+  background: rgba(200,168,75,0.06);
+  border: 1px solid var(--gold-dim);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin-bottom: 8px;
+}
+
+.bottom-line-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.bottom-line p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.bottom-line p:last-child {
+  margin-bottom: 0;
+}
+
+.bottom-line strong {
+  color: var(--text);
+}
+
+/* Failed prophecy list */
+.failed-prophecy-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.failed-prophecy-list li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.6;
+  align-items: baseline;
+}
+
+.failed-prophecy-list li:last-child {
+  border-bottom: none;
+}
+
+.fp-year {
+  font-family: 'Playfair Display', serif;
+  color: #e89080;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fp-desc {
+  color: var(--text-muted);
+}
+
+.fp-desc strong {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .genealogy-timeline::before { left: 80px; }
+  .genealogy-entry { grid-template-columns: 80px 1fr; gap: 0 16px; }
+  .genealogy-era-label strong { font-size: 11px; }
+  .doctrine-flow { font-size: 12px; }
+  .doctrine-flow td:first-child { width: 30%; }
+  .doctrine-flow td:nth-child(2) { display: none; }
+}
+</style>
+
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- STEP 2: Paste this entire block into .container    -->
+<!-- Recommended position: immediately before #cat1    -->
+<!-- ─────────────────────────────────────────────────── -->
+
+<div class="category" id="cat0">
+  <div class="category-header">
+    <span class="cat-num">00</span>
+    <h2 class="cat-title">Before Russell — The Intellectual Genealogy of JW Theology</h2>
+  </div>
+
+  <div class="tag-row" style="margin-bottom:20px">
+    <span class="tag tag-bibliological">Historical</span>
+    <span class="tag tag-eschatological">Eschatological Origins</span>
+    <span class="tag tag-fundamental">Foundational</span>
+  </div>
+
+  <!-- Intro note -->
+  <div style="background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--gold); padding:16px 22px; font-size:14px; color:var(--text-muted); line-height:1.75; margin-bottom:28px;">
+    <strong style="color:var(--text);">Why the origins of a theology matter:</strong> The Watchtower presents itself as a recovery of original, primitive Christianity — the first organization in 1,800 years to teach the truth about God. But a careful look at history reveals something different: most of its distinctive doctrines trace directly to identifiable 19th-century American sources that were themselves the product of failed prophecy, doctrinal revision, and speculative date-setting. Charles Taze Russell did not receive new light from Scripture. He inherited a framework — and organized it. What follows maps exactly where each piece came from.
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <div class="genealogy-timeline">
+
+    <!-- ERA: ANCIENT ROOTS -->
+    <div class="genealogy-entry">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>4th – 17th c.</strong>
+          Ancient roots
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">The Arian &amp; Socinian Traditions</div>
+        <div class="genealogy-dates">AD 256 – 336 (Arius) · 16th–17th c. (Socinianism)</div>
+        <div class="genealogy-role">Anti-Trinitarian theological streams condemned by the early church</div>
+        <div class="genealogy-desc">
+          The denial of Christ's full deity did not originate with Russell — or even with the 19th century. <strong>Arius of Alexandria</strong> (c. 256–336 AD) taught that the Son was a created being, subordinate to the Father, who "had a beginning" — a position the Council of Nicaea explicitly condemned in 325 AD as contrary to apostolic teaching. Arianism closely parallels the JW view of Christ, and this is significant: Nicaea did not <em>invent</em> Trinitarian doctrine to oppose it; the council was settling a controversy against a view that the church had been opposing for decades.<br><br>
+          In the 16th–17th centuries, the <strong>Socinians</strong> (the Polish Brethren) revived this framework in a more systematic form. They denied the Trinity, taught that Jesus was a supremely exalted but ultimately created being, rejected the immortality of the soul, and embraced a rationalistic approach to Scripture that filtered out what they considered philosophical excess. The Socinian influence flowed into Protestant liberalism and resurfaced — in diluted form — in the 19th-century American environment where Russell would emerge.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill inherited">Christ is a created being</span>
+          <span class="doctrine-pill inherited">Denial of the Trinity</span>
+          <span class="doctrine-pill inherited">Soul not naturally immortal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR -->
+    <div class="genealogy-entry" style="margin-top:-1px;">
+      <div style="grid-column:2; padding:6px 0; font-size:11px; color:var(--text-dim); letter-spacing:0.1em; text-transform:uppercase; padding-left:0;">
+        &nbsp;
+      </div>
+    </div>
+
+    <!-- ERA: EARLY 1800S — GEORGE STORRS -->
+    <div class="genealogy-entry">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>1820s–1860s</strong>
+          Conditionalism
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">George Storrs</div>
+        <div class="genealogy-dates">1796 – 1879</div>
+        <div class="genealogy-role">Methodist minister · Millerite · Father of 19th-century conditionalism</div>
+        <div class="genealogy-desc">
+          Storrs is the figure most often omitted from popular summaries of JW origins, but he is critical. A Methodist minister who became a Millerite, Storrs published his landmark <em>Six Sermons</em> (1842) — a systematic attack on the doctrine of the immortal soul and hell as eternal conscious torment. He argued from Scripture that the soul is not inherently immortal, that the dead are entirely unconscious ("soul sleep"), and that the wicked are ultimately annihilated rather than eternally punished.<br><br>
+          These ideas flowed directly into the Adventist stream after the Great Disappointment of 1844, and from there into Nelson Barbour, and from Barbour into Russell. The JW doctrine that <strong>"the dead are not conscious of anything"</strong> (their primary use of Ecclesiastes 9:5) traces through this precise chain of transmission. Storrs also rejected the Trinity independently, making him a double source for JW anti-Trinitarianism — once through the Socinian stream and once through his own Adventist revisions.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill direct">Soul sleep — no consciousness after death</span>
+          <span class="doctrine-pill direct">Annihilation of the wicked (no eternal hell)</span>
+          <span class="doctrine-pill direct">Soul not immortal</span>
+          <span class="doctrine-pill inherited">Anti-Trinitarian tendency</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA: WILLIAM MILLER -->
+    <div class="genealogy-entry">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>1830s–1844</strong>
+          Millerism
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">William Miller</div>
+        <div class="genealogy-dates">1782 – 1849</div>
+        <div class="genealogy-role">Baptist preacher · Founder of the Millerite movement</div>
+        <div class="genealogy-desc">
+          Miller was a Baptist lay preacher who became convinced that Christ would return in 1843–1844, based on his calculation of Daniel 8:14: "Unto 2,300 days; then shall the sanctuary be cleansed." Applying the day-year principle (one prophetic day = one calendar year) and tracing from 457 BC, he arrived at 1844. His movement attracted tens of thousands of followers across denominational lines.<br><br>
+          When 1844 came and went without incident — the <strong>Great Disappointment</strong> — most of Miller's followers did not simply abandon their faith. They reworked it. They revised the date, reinterpreted what "fulfillment" could mean, and continued publishing. This is the most important thing Miller contributed to JW theology: not any specific doctrine, but the <strong>entire method</strong>. The prophetic timeline apparatus — Daniel, the day-year principle, chronological calculation, date-setting — was a fully assembled machine. Russell didn't build that machine. He inherited it and set a new date.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill direct">Prophetic chronology from Daniel</span>
+          <span class="doctrine-pill direct">Day-year interpretive principle</span>
+          <span class="doctrine-pill direct">Date-setting mentality</span>
+          <span class="doctrine-pill direct">Obsession with "the end of this age"</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA: POST-DISAPPOINTMENT ADVENTISTS -->
+    <div class="genealogy-entry">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>1844–1870</strong>
+          Post-Disappointment
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">The Adventist Splinter Movements</div>
+        <div class="genealogy-dates">1844 onward</div>
+        <div class="genealogy-role">Multiple factions · Reformation of Miller's failed chronology</div>
+        <div class="genealogy-desc">
+          After the Great Disappointment, Miller's followers fractured into several streams. One group became the <strong>Seventh-day Adventists</strong> (still existing today, holding the Trinity). Other groups took the Millerite prophetic method and kept recalculating — pushing dates forward, reinterpreting what "fulfillment" meant, and absorbing Storrs's conditionalist ideas along the way.<br><br>
+          The common ideas circulating in this environment — the intellectual water Russell grew up drinking — included: rejection of hell as eternal torment, rejection of the Trinity, "restoration of true Christianity" rhetoric, heavy use of prophetic charts and chronological numerology, and a deep suspicion of mainstream denominational Christianity as apostate. Russell didn't invent any of these postures. He arrived into a subculture that had already developed them.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill inherited">Anti-denominational "restoration" mindset</span>
+          <span class="doctrine-pill inherited">Recalculation after failed prophecy</span>
+          <span class="doctrine-pill inherited">Prophetic chart culture</span>
+          <span class="doctrine-pill inherited">Rejection of mainstream Christianity as "apostate"</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA: JONAS WENDELL -->
+    <div class="genealogy-entry">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>c. 1869</strong>
+          Russell's spark
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">Jonas Wendell</div>
+        <div class="genealogy-dates">1815 – 1873</div>
+        <div class="genealogy-role">Second Adventist preacher · Russell's personal awakening</div>
+        <div class="genealogy-desc">
+          Russell himself recorded that a sermon by Wendell — heard around 1869, when Russell was approximately 17 years old — rescued him from a season of religious doubt and skepticism. Wendell had reworked Miller's chronology to predict Christ's return in <strong>1874</strong>. Russell attended skeptical and left energized, later writing that this encounter set him on the path that would define his life's work.<br><br>
+          Wendell gave Russell the emotional and spiritual catalyst. He did not give him the developed theological system — that came later from Barbour. But the sequence matters: Russell did not arrive at 1874 independently through Scripture study. He first heard it from a man who had already calculated it from the Millerite framework.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill direct">1874 as year of Christ's return</span>
+          <span class="doctrine-pill direct">Personal catalyst for Russell's prophetic interest</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA: NELSON BARBOUR — PRIMARY -->
+    <div class="genealogy-entry primary">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>1875–1879</strong>
+          Primary source
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">Nelson H. Barbour</div>
+        <div class="genealogy-dates">1824 – 1905</div>
+        <div class="genealogy-role">Former Millerite · Russell's direct theological partner · Most critical influence</div>
+        <div class="genealogy-desc">
+          Barbour is the single most important figure in understanding the origin of JW theology — and the most frequently overlooked. He was a former Millerite who kept recalculating after 1844, eventually arriving at 1874 as the date of Christ's return. When no visible return occurred, he developed the doctrine of an <strong>invisible, spiritual presence</strong> of Christ — the Greek word <em>parousia</em>, he argued, meant "presence" not "coming," so the return had already happened but was invisible. This single interpretive move is the direct ancestor of the JW teaching that Christ invisibly returned in 1914.<br><br>
+          Around 1875–1876, Barbour and Russell made contact, and Russell became a financial backer of Barbour's journal <em>Herald of the Morning</em>. In 1877 they co-authored <strong><em>Three Worlds and the Harvest of This World</em></strong> — a book that laid out the full prophetic framework: the 6,000 years of human history ending in 1873/1874, the invisible return of Christ, the "harvest" period, and the end of "Gentile Times" in 1914. <em>Russell did not add this framework later. He built the Watch Tower on it.</em><br><br>
+          Their split around 1878–1879 was over the atonement — Barbour moved toward denying that Christ's death was a ransom price; Russell held to ransom substitution and broke fellowship. But by then, Russell had already absorbed the entire prophetic architecture. He kept the building and changed one room.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill direct">Invisible return of Christ (parousia = presence)</span>
+          <span class="doctrine-pill direct">Chronological end-times calculations</span>
+          <span class="doctrine-pill direct">1874 as the date of Christ's invisible return</span>
+          <span class="doctrine-pill direct">End of "Gentile Times" = 1914</span>
+          <span class="doctrine-pill direct">6,000-year human history timeline</span>
+          <span class="doctrine-pill direct">Denial of eternal conscious torment</span>
+          <span class="doctrine-pill inherited">Herald of the Morning prophetic framework</span>
+        </div>
+
+        <!-- The 1914 calculation note -->
+        <div style="background:rgba(192,57,43,0.07); border:1px solid var(--red-dim); border-left:3px solid var(--red); padding:14px 18px; margin-top:16px; font-size:13px; color:#e89080; line-height:1.7;">
+          <div class="nwt-label" style="margin-bottom:6px;">The 1914 Calculation — Where It Actually Came From</div>
+          The 1914 date — the cornerstone of all JW prophetic claims and the basis for the Watchtower's claim to divine appointment — is derived from a specific calculation: 607 BC (their date for Jerusalem's fall) + 2,520 years (seven "times" × 360 days, from Daniel 4) = 1914. This exact calculation was first published by <strong>John Aquila Brown</strong> in 1823, refined by Barbour, and adopted by Russell. The Watchtower organization today stakes its entire claim to prophetic authority on a date that Russell borrowed from a man he eventually broke fellowship with — and that man had borrowed it from someone else. <em>Note: mainstream scholarship dates Jerusalem's fall to 586/587 BC, not 607 BC; the Watchtower's unique 607 BC date is required to make the calculation reach 1914 and is not supported by the historical or archaeological record.</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERA: RUSSELL HIMSELF -->
+    <div class="genealogy-entry terminal">
+      <div class="genealogy-era">
+        <div class="genealogy-era-label">
+          <strong>1879 – 1916</strong>
+          The synthesizer
+        </div>
+      </div>
+      <div class="genealogy-body">
+        <div class="genealogy-person">Charles Taze Russell</div>
+        <div class="genealogy-dates">1852 – 1916</div>
+        <div class="genealogy-role">Founder of the Bible Student movement · Watch Tower Bible and Tract Society</div>
+        <div class="genealogy-desc">
+          Russell's genuine contribution was organizational and communicative, not doctrinal. He was a skilled publisher, a tireless correspondent, and an effective popularizer. He took the assembled theological ingredients from the streams above and packaged them into a coherent, accessible, and aggressively distributed system. His <em>Zion's Watch Tower</em> (founded 1879) and his six-volume <em>Studies in the Scriptures</em> reached hundreds of thousands of readers.<br><br>
+          What Russell <em>did</em> add or modify from his sources: he held to ransom substitution (splitting from Barbour on this), he developed the two-class heavenly/earthly distinction more fully, and he gave the organizational apparatus a formal institutional structure. His successor, <strong>Joseph Franklin Rutherford</strong> ("Judge Rutherford"), transformed Russell's Bible Student movement into the distinctly authoritarian organization called Jehovah's Witnesses in 1931 — centralizing the Governing Body, introducing the blood transfusion prohibition, and intensifying the shunning of disfellowshipped members. Most of what people associate with JW culture today was Rutherford's addition, not Russell's.
+        </div>
+        <div class="doctrine-pills">
+          <span class="doctrine-pill inherited">All core prophetic chronology (from Barbour)</span>
+          <span class="doctrine-pill inherited">Soul sleep / annihilationism (from Storrs via Barbour)</span>
+          <span class="doctrine-pill inherited">Anti-Trinitarianism (from Arian/Socinian stream)</span>
+          <span class="doctrine-pill direct">Two-class system (144,000 vs. great crowd)</span>
+          <span class="doctrine-pill direct">Ransom substitution theology (his own; broke from Barbour here)</span>
+          <span class="doctrine-pill direct">Watch Tower organizational structure</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.genealogy-timeline -->
+
+
+  <!-- ── DOCTRINE ORIGIN TABLE ── -->
+  <div style="margin-top:32px; margin-bottom:8px;">
+    <div style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; font-weight:600;">Doctrine-by-Doctrine Origin Map — Where Each Key JW Teaching Actually Came From</div>
+    <div style="overflow-x:auto;">
+      <table class="doctrine-flow">
+        <thead>
+          <tr>
+            <th>JW Doctrine</th>
+            <th>Original Source</th>
+            <th>What Was Inherited / How</th>
+            <th>What Scripture Actually Says</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Christ is a created being (Michael the Archangel)</td>
+            <td><span class="source-tag">Arian tradition</span> 4th century; revived by Socinians 16th c.</td>
+            <td>The Arian view of a subordinate, created Christ flowed through Socinian theology into the rationalist Protestant stream Russell inhabited. It was not derived fresh from Scripture — it was a pre-existing framework.</td>
+            <td>John 1:1–3 — "All things were made through him; without him nothing was made." If Christ made all created things, he cannot himself be a created thing. Col 1:16–17; Heb 1:6, 8.</td>
+          </tr>
+          <tr>
+            <td>Denial of the Trinity</td>
+            <td><span class="source-tag">Arian / Socinian</span> + <span class="source-tag">Storrs</span></td>
+            <td>Both the ancient Arian stream and George Storrs's 19th-century Adventist revisions independently denied the Trinity. Russell entered a theological environment already saturated with anti-Trinitarianism.</td>
+            <td>Matt 28:19; 2 Cor 13:14; John 16:13–14; Acts 5:3–4. Three Persons acting personally and distinctly throughout the whole canon. See Category 2 of this site for full treatment.</td>
+          </tr>
+          <tr>
+            <td>Soul sleep — no consciousness after death</td>
+            <td><span class="source-tag">George Storrs</span> (1796–1879)</td>
+            <td>Storrs's <em>Six Sermons</em> (1842) popularized conditionalism and soul sleep across the Millerite movement. Barbour absorbed it; Russell received it through Barbour.</td>
+            <td>Luke 23:43; 2 Cor 5:8; Phil 1:23; Rev 6:9–10. The intermediate state is described as conscious throughout the NT. See Category 7.</td>
+          </tr>
+          <tr>
+            <td>Annihilation — no eternal conscious punishment</td>
+            <td><span class="source-tag">George Storrs</span> + <span class="source-tag">Adventist stream</span></td>
+            <td>Storrs argued directly against eternal hell in his <em>Six Sermons</em>. The Adventist movement after 1844 broadly adopted annihilationism. Russell inherited this as received doctrine, not original exegesis.</td>
+            <td>Matt 25:46; Rev 14:11; Rev 20:10; Mark 9:48. The identical word <em>aiōnios</em> describes both eternal life and eternal punishment in the same sentence. See Category 9.</td>
+          </tr>
+          <tr>
+            <td>Invisible return of Christ (parousia = presence)</td>
+            <td><span class="source-tag">Nelson Barbour</span> (1870s)</td>
+            <td>Barbour developed this interpretation after 1874 passed without incident, to salvage his prophetic calculation. Russell adopted it directly and applied it to 1914 when 1874 required revision.</td>
+            <td>Acts 1:11 — "This same Jesus… will come in the same way as you saw him go." Rev 1:7 — "every eye will see him." The NT consistently describes the return as visible, bodily, and unmistakable.</td>
+          </tr>
+          <tr>
+            <td>1914 as the key prophetic date</td>
+            <td><span class="source-tag">John Aquila Brown</span> (1823) → <span class="source-tag">Barbour</span> → Russell</td>
+            <td>The 607 BC + 2,520 years = 1914 calculation predates Russell by decades. He adopted it from Barbour's chronological system, which had already predicted 1874. When 1914 also passed without Armageddon, Rutherford reinterpreted it as Christ's invisible enthronement rather than abandoning the date.</td>
+            <td>The 607 BC anchor date is unsupported by archaeology or the historical record — mainstream scholarship dates Jerusalem's fall to 586/587 BC. The entire calculation depends on this date being correct.</td>
+          </tr>
+          <tr>
+            <td>Prophetic date-setting from Daniel</td>
+            <td><span class="source-tag">William Miller</span> (1782–1849)</td>
+            <td>Miller built and popularized the day-year interpretive method applied to Daniel's chronological texts. Every JW prophetic calculation since follows Miller's method — just with different starting points and different conclusions about what "fulfillment" means.</td>
+            <td>Deut 18:20–22 — The test of a prophet: if the thing predicted does not come to pass, the LORD did not speak it. The Watchtower's failed prophecies of 1914, 1925, and 1975 must be weighed against this standard.</td>
+          </tr>
+          <tr>
+            <td>"Jehovah's visible organization" claim</td>
+            <td><span class="source-tag">Rutherford</span> (1931 onward) — not Russell</td>
+            <td>The organizational authority structure, the name "Jehovah's Witnesses," the blood transfusion prohibition, the disfellowshipping/shunning system, and the two-tier access to Christ (anointed vs. great crowd) were all formalized or introduced by Rutherford after Russell's death — often contradicting positions Russell had held.</td>
+            <td>Acts 17:11 — The Bereans were commended for testing all teaching against Scripture. Gal 1:8–9 — Even an angel from heaven is subject to the apostolic gospel. No human organization holds mediatorial authority between believers and Christ.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ── FAILED PROPHECIES ── -->
+  <div class="collision" style="margin-top:8px;">
+    <div class="collision-label">⚡ The Prophetic Record — Testing the Claims Against the Standard of Scripture</div>
+    <div class="collision-text">
+      <p>Deuteronomy 18:20–22 provides the biblical standard for evaluating any prophetic claim: "If a prophet speaks in the name of the LORD and the thing does not happen or come true, that is a thing which the LORD has not spoken." The Watchtower has made specific, public, dateable prophetic predictions in Jehovah's name. The historical record of those predictions is verifiable from the organization's own published literature:</p>
+
+      <ul class="failed-prophecy-list">
+        <li>
+          <span class="fp-year">1874</span>
+          <span class="fp-desc"><strong>Christ's invisible return</strong> — predicted by Barbour, adopted by Russell. When it produced no visible result, the interpretation shifted: Christ had returned, just invisibly. This reinterpretation of non-fulfillment as fulfillment became a permanent feature of the organization's prophetic methodology.</span>
+        </li>
+        <li>
+          <span class="fp-year">1914</span>
+          <span class="fp-desc"><strong>End of Gentile Times / Armageddon</strong> — Russell's Watch Tower publications prior to 1914 consistently implied or stated that Armageddon would occur and the establishment of God's kingdom would be complete by or around 1914. When this did not occur, the date was retained but reinterpreted as the year Christ was invisibly enthroned in heaven.</span>
+        </li>
+        <li>
+          <span class="fp-year">1918</span>
+          <span class="fp-desc"><strong>Resurrection of the ancient worthies</strong> — Russell predicted that Abraham, Isaac, Jacob, and other Old Testament figures would be resurrected by 1914, with 1918 as a secondary date. Rutherford published that a house named "Beth-Sarim" in San Diego was built to receive them. It was sold in 1948.</span>
+        </li>
+        <li>
+          <span class="fp-year">1925</span>
+          <span class="fp-desc"><strong>Beginning of the new world / earthly resurrection</strong> — Rutherford's 1920 publication <em>Millions Now Living Will Never Die</em> explicitly predicted that the world as known would end by 1925. Rutherford later called 1925 "the greatest disappointment" of his life.</span>
+        </li>
+        <li>
+          <span class="fp-year">1975</span>
+          <span class="fp-desc"><strong>Armageddon / end of 6,000 years of human existence</strong> — Watchtower publications and talks throughout the late 1960s and early 1970s strongly implied that 1975 would mark the end of human history and the beginning of Christ's millennial reign. Many Witnesses sold homes and property in preparation. When 1975 passed, the organization eventually conceded it had "raised hopes" that were not fulfilled — without acknowledging the publications by name.</span>
+        </li>
+      </ul>
+
+      <p style="margin-top:14px;">The pattern across these predictions is consistent: a date is set with confidence, it passes without fulfillment, and the response is reinterpretation rather than repudiation of the method. The Deuteronomy 18 standard does not distinguish between sincere and insincere prophecy — it asks only whether the prediction came to pass. These are not peripheral historical curiosities. They are directly relevant to the Watchtower's claim to be Jehovah's sole channel of truth, and every person who rests their eternal security on that claim deserves to examine the record carefully.</p>
+    </div>
+  </div>
+
+
+  <!-- ── BOTTOM LINE ── -->
+  <div class="bottom-line">
+    <div class="bottom-line-label">The Bottom Line — What This History Means for Evaluating JW Doctrine</div>
+    <p>Jehovah's Witness theology did not emerge from a fresh reading of Scripture by a man who recovered lost truth. It emerged from the specific wreckage of failed 19th-century American prophetic speculation — primarily through the influence of <strong>Nelson Barbour</strong>, who passed along the prophetic chronology and the concept of Christ's invisible return, and <strong>George Storrs</strong>, who contributed soul sleep and annihilationism, and ultimately from the <strong>Arian tradition</strong>, which had been providing the subordinationist Christology for fifteen centuries before Russell was born.</p>
+    <p>This matters because the Watchtower's authority claim rests on being uniquely appointed by God to dispense truth. But if its most distinctive doctrines are traceable to identifiable human sources — sources that themselves revised their views after failed predictions, and that the church had already evaluated and rejected — the claim deserves scrutiny rather than deference. The same standard the Watchtower applies to all other Christian traditions ("test everything against Scripture") applies equally to itself. The Bereans in Acts 17:11 were not commended for trusting their source. They were commended for examining the Scriptures daily to see whether what they were being told was true.</p>
+    <p><strong>That is precisely the invitation this site extends to every reader, whatever their background.</strong></p>
+  </div>
+
+</div>
+<!-- /.category #cat0 -->
+
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- STEP 3: Add this nav item to your <nav> element        -->
+<!-- Recommended position: first item, before "Nature of   -->
+<!-- God" — or wherever fits your nav flow                  -->
+<!-- ─────────────────────────────────────────────────────── -->
+<!--
+  <div class="nav-item" onclick="scrollTo('cat0')">Origins</div>
+-->
+
+
+<!-- ─────────────────────────────────────────────────────── -->
+<!-- STEP 4: Add this row to your summary table <tbody>     -->
+<!-- Recommended position: first row (before Nature of God) -->
+<!-- ─────────────────────────────────────────────────────── -->
+<!--
+  <tr>
+    <td>Origins of JW Theology</td>
+    <td>Russell recovered primitive Christianity; doctrines are uniquely biblical</td>
+    <td>Traceable to Arian/Socinian tradition, George Storrs, William Miller, and Nelson Barbour; built on failed 19th-c. prophetic speculation</td>
+  </tr>
+-->
 
 <!-- ══════════════════════════════════════ -->
 <!-- 30,000-FOOT VIEW / THEOLOGY MAP -->
