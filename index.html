@@ -2676,8 +2676,14 @@ function scrollToSection(id) {
   const nav  = document.getElementById('mainnav');
   const navH = nav ? nav.getBoundingClientRect().height : 54;
   const top  = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+
   window.scrollTo({ top, behavior: 'smooth' });
   setActiveNav(id);
+
+  // Ensure the target section is visible on iOS/mobile when navigating via nav.
+  // IntersectionObserver may fire late after programmatic smooth scroll.
+  el.classList.add('visible');
+  requestAnimationFrame(() => el.classList.add('visible'));
 }
 
 /* ── Active state ── */
