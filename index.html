@@ -790,6 +790,33 @@ footer {
   .doctrine-flow td { word-break: break-word; }
 }
 
+/* CSS for donate and forum buttons */
+  .project-actions-note {
+  background: rgba(200,168,75,0.05);
+  border: 1px solid var(--gold-dim);
+  border-left: 3px solid var(--gold);
+  padding: 18px 22px;
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 18px auto 0;
+  text-align: left;
+  line-height: 1.75;
+}
+
+.project-actions-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.project-actions-note p {
+  margin-bottom: 14px;
+}
+
 /* ── ANIMATIONS ── */
 .category {
   opacity: 0;
@@ -817,6 +844,24 @@ footer {
     <strong>Hermeneutical Commitment:</strong> The Christian positions throughout this site are presented from a <em>literal, grammatical-historical</em> interpretive framework — the same method used in classical dispensationalism. Prophecy is interpreted literally unless the grammar or context demands otherwise. Israel and the Church are treated as distinct programs in God's redemptive plan. The normal, plain meaning of the text is the governing principle.
   </div>
 </header>
+<!-- ══════════════════════════════════════ -->
+<!-- Donate Buttons -->
+<!-- ══════════════════════════════════════ -->
+  
+  <div class="project-actions-note">
+  <div class="project-actions-label">Get Involved</div>
+  <p>
+    If this project has been useful to you, you can support its continued development or join the discussion on GitHub.
+  </p>
+  <div class="action-bar">
+    <a class="action-btn action-btn-donate" href="https://YOUR-DONATION-LINK-HERE" target="_blank" rel="noopener noreferrer">
+      Support This Project
+    </a>
+    <a class="action-btn action-btn-discuss" href="https://github.com/asmith-oss/JW-vs-Dispensational-Christian/discussions" target="_blank" rel="noopener noreferrer">
+      Discuss on GitHub
+    </a>
+  </div>
+</div>
 
 <nav id="mainnav">
   <div class="nav-item active" onclick="scrollToSection('cat1')">Nature of God</div>
