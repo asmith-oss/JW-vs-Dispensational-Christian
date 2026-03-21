@@ -2858,6 +2858,31 @@ window.addEventListener('scroll', () => {
 
   setActiveNav(activeId, { animate: false });
 }, { passive: true });
+
+const seenSections = new Set();
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+
+      if (!seenSections.has(id)) {
+        seenSections.add(id);
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'section_view', {
+            event_label: id
+          });
+        }
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.category').forEach(el => {
+  sectionObserver.observe(el);
+});
+  
 </script>
 
 </body>
