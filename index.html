@@ -2760,8 +2760,10 @@ footer {
 <script>
 /* ── Fade-in on scroll ── */
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
   });
 }, { threshold: 0.05 });
 
@@ -2775,7 +2777,7 @@ function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  const nav  = document.getElementById('mainnav');
+  const nav = document.getElementById('mainnav');
   const navH = nav ? nav.getBoundingClientRect().height : 54;
   const scrollY = window.scrollY !== undefined ? window.scrollY : window.pageYOffset;
   const top = el.getBoundingClientRect().top + scrollY - navH - 8;
@@ -2804,11 +2806,15 @@ function setActiveNav(activeId, options = { animate: true }) {
   currentActiveSection = activeId;
 
   let activeItem = null;
+
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
-    const fn    = item.getAttribute('onclick') || '';
-    const match = fn.match(/'([^']+)'/);
-    if (match && match[1] === activeId) {
+
+    const fn = item.getAttribute('onclick') || '';
+    const matches = [...fn.matchAll(/'([^']+)'/g)];
+    const lastMatch = matches.length ? matches[matches.length - 1][1] : null;
+
+    if (lastMatch === activeId) {
       item.classList.add('active');
       activeItem = item;
     }
@@ -2817,8 +2823,8 @@ function setActiveNav(activeId, options = { animate: true }) {
   if (activeItem) {
     activeItem.scrollIntoView({
       behavior: options.animate ? 'smooth' : 'auto',
-      inline:   'center',
-      block:    'nearest'
+      inline: 'center',
+      block: 'nearest'
     });
   }
 }
@@ -2834,8 +2840,8 @@ const allSections = [
 window.addEventListener('scroll', () => {
   if (isProgrammaticScroll) return;
 
-  const nav       = document.getElementById('mainnav');
-  const navH      = nav ? nav.getBoundingClientRect().height : 54;
+  const nav = document.getElementById('mainnav');
+  const navH = nav ? nav.getBoundingClientRect().height : 54;
   const threshold = navH + 20;
 
   let activeId = allSections[0];
@@ -2843,13 +2849,11 @@ window.addEventListener('scroll', () => {
   for (const id of allSections) {
     const el = document.getElementById(id);
     if (!el) continue;
+
     const rect = el.getBoundingClientRect();
     if (rect.top <= threshold) {
       activeId = id;
     }
-    /* Removed the early break — iterate all sections every time.
-       The break was the mobile bug: on portrait the last sections
-       never registered because the loop exited before reaching them. */
   }
 
   setActiveNav(activeId, { animate: false });
