@@ -791,30 +791,49 @@ footer {
 }
 
 /* CSS for donate and forum buttons */
-  .project-actions-note {
-  background: rgba(200,168,75,0.05);
-  border: 1px solid var(--gold-dim);
-  border-left: 3px solid var(--gold);
-  padding: 18px 22px;
-  font-size: 14px;
-  color: var(--text-muted);
-  max-width: 680px;
-  margin: 18px auto 0;
-  text-align: left;
-  line-height: 1.75;
+  .cta-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
 }
 
-.project-actions-label {
-  font-size: 10px;
-  letter-spacing: 0.22em;
+/* Base button */
+.cta-btn {
+  padding: 12px 18px;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
   font-weight: 600;
+  border: 1px solid var(--border-light);
+  background: var(--surface2);
+  color: var(--text);
+  transition: all 0.2s ease;
 }
 
-.project-actions-note p {
-  margin-bottom: 14px;
+/* Donate (gold accent) */
+.cta-donate {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+  background: rgba(200,168,75,0.08);
+}
+
+.cta-donate:hover {
+  background: rgba(200,168,75,0.14);
+  border-color: var(--gold);
+}
+
+/* Discussion (cool blue accent) */
+.cta-discuss {
+  border-color: rgba(91,141,217,0.35);
+  color: #c8dbf5;
+  background: rgba(91,141,217,0.08);
+}
+
+.cta-discuss:hover {
+  background: rgba(91,141,217,0.14);
+  border-color: var(--dispensational);
 }
 
 /* ── ANIMATIONS ── */
@@ -848,19 +867,20 @@ footer {
 <!-- Donate Buttons -->
 <!-- ══════════════════════════════════════ -->
   
-  <div class="project-actions-note">
-  <div class="project-actions-label">Get Involved</div>
-  <p>
-    If this project has been useful to you, you can support its continued development or join the discussion on GitHub.
-  </p>
-  <div class="action-bar">
-    <a class="action-btn action-btn-donate" href="https://YOUR-DONATION-LINK-HERE" target="_blank" rel="noopener noreferrer">
-      Support This Project
-    </a>
-    <a class="action-btn action-btn-discuss" href="https://github.com/asmith-oss/JW-vs-Dispensational-Christian/discussions" target="_blank" rel="noopener noreferrer">
-      Discuss on GitHub
-    </a>
-  </div>
+  <div class="cta-bar">
+  <a href="https://YOUR-DONATION-LINK-HERE"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="cta-btn cta-donate">
+    Support This Project
+  </a>
+
+  <a href="https://github.com/asmith-oss/JW-vs-Dispensational-Christian/discussions"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="cta-btn cta-discuss">
+    Join the Discussion
+  </a>
 </div>
 
 <nav id="mainnav">
