@@ -854,6 +854,319 @@ footer {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .category.visible { opacity: 1; transform: translateY(0); }
+
+/* ── GUIDED OPENING CASCADE ── */
+#opening {
+  scroll-margin-top: 76px;
+  margin-top: 56px;
+}
+.opening-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background:
+    radial-gradient(900px 420px at 50% -120px, rgba(200,168,75,0.16), transparent 64%),
+    linear-gradient(180deg, rgba(28,28,34,0.96), rgba(20,20,24,0.98));
+  box-shadow: 0 28px 80px rgba(0,0,0,0.28);
+}
+.opening-shell::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -185px;
+  top: -185px;
+  border: 1px solid rgba(200,168,75,0.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 34px rgba(200,168,75,0.025),
+    0 0 0 70px rgba(200,168,75,0.018);
+  pointer-events: none;
+}
+.opening-intro {
+  position: relative;
+  padding: 54px 56px 44px;
+  border-bottom: 1px solid var(--border);
+}
+.opening-eyebrow {
+  margin-bottom: 16px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.opening-title {
+  max-width: 760px;
+  margin: 0 0 22px;
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(31px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.08;
+}
+.opening-title em {
+  color: var(--gold);
+  font-weight: 400;
+}
+.opening-question {
+  max-width: 790px;
+  margin: 0;
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(19px, 2.5vw, 25px);
+  line-height: 1.55;
+}
+.opening-question strong {
+  color: #f0d98d;
+  font-weight: 400;
+}
+.opening-intro-copy {
+  max-width: 740px;
+  margin: 24px 0 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.opening-begin {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 13px 18px;
+  border: 1px solid var(--gold-dim);
+  background: rgba(200,168,75,0.08);
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.opening-begin:hover {
+  border-color: var(--gold);
+  background: rgba(200,168,75,0.14);
+  transform: translateY(-1px);
+}
+.opening-begin:focus-visible,
+.opening-step summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+.opening-begin-arrow {
+  font-size: 17px;
+  line-height: 1;
+}
+.opening-cascade {
+  position: relative;
+  padding: 28px 30px 34px;
+}
+.opening-cascade::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  bottom: 56px;
+  left: 57px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold-dim), var(--border), var(--border));
+  opacity: 0.8;
+}
+.opening-step {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  background: rgba(13,13,15,0.72);
+  transition: border-color 0.22s ease, background 0.22s ease;
+}
+.opening-step:last-child { margin-bottom: 0; }
+.opening-step[open] {
+  border-color: rgba(200,168,75,0.42);
+  background: rgba(20,20,24,0.97);
+}
+.opening-step summary {
+  display: grid;
+  grid-template-columns: 54px minmax(0,1fr) 38px;
+  gap: 16px;
+  align-items: center;
+  min-height: 92px;
+  padding: 16px 20px 16px 12px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.opening-step summary::-webkit-details-marker { display: none; }
+.opening-step-number {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.opening-step[open] .opening-step-number {
+  border-color: var(--gold-dim);
+  background: rgba(200,168,75,0.09);
+  color: var(--gold);
+}
+.opening-step-kicker {
+  margin-bottom: 3px;
+  color: var(--text-dim);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.opening-step-title {
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.2vw, 23px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.opening-step-teaser {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.opening-step-toggle {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+}
+.opening-step-toggle::before,
+.opening-step-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 1px;
+  background: var(--gold);
+  transform: translate(-50%,-50%);
+  transition: transform 0.2s ease;
+}
+.opening-step-toggle::after { transform: translate(-50%,-50%) rotate(90deg); }
+.opening-step[open] .opening-step-toggle::after { transform: translate(-50%,-50%) rotate(0deg); }
+.opening-step-body {
+  margin-left: 82px;
+  padding: 2px 42px 36px 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.82;
+}
+.opening-step-body::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 0 0 26px;
+  background: linear-gradient(to right, var(--border-light), transparent 85%);
+}
+.opening-step-body p {
+  max-width: 760px;
+  margin: 0 0 17px;
+}
+.opening-step-body p:last-child { margin-bottom: 0; }
+.opening-step-body strong { color: var(--text); }
+.opening-scripture {
+  max-width: 730px;
+  margin: 24px 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--gold);
+  background: rgba(200,168,75,0.055);
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.65;
+}
+.opening-scripture cite {
+  display: block;
+  margin-top: 8px;
+  color: var(--gold);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.opening-pull {
+  max-width: 730px;
+  margin: 22px 0;
+  padding: 17px 20px;
+  border: 1px solid rgba(91,141,217,0.24);
+  background: rgba(91,141,217,0.07);
+  color: #c8dbf5;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.opening-punch {
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+}
+.opening-warning {
+  max-width: 730px;
+  margin: 22px 0;
+  padding: 17px 20px;
+  border-left: 3px solid var(--amber);
+  background: rgba(212,137,26,0.07);
+  color: #e4c48f;
+}
+.opening-final-question {
+  max-width: 760px;
+  margin-top: 24px;
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(21px, 3vw, 30px);
+  font-style: italic;
+  line-height: 1.45;
+}
+.opening-step[open] .opening-step-body { animation: openingReveal 0.28s ease both; }
+@keyframes openingReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 680px) {
+  #opening { margin-top: 34px; }
+  .opening-intro { padding: 38px 24px 32px; }
+  .opening-question { font-size: 19px; }
+  .opening-cascade { padding: 18px 12px 20px; }
+  .opening-cascade::before { left: 38px; top: 44px; bottom: 44px; }
+  .opening-step summary {
+    grid-template-columns: 42px minmax(0,1fr) 30px;
+    gap: 10px;
+    min-height: 82px;
+    padding: 13px 12px 13px 8px;
+  }
+  .opening-step-number { width: 34px; height: 34px; font-size: 11px; }
+  .opening-step-teaser { display: none; }
+  .opening-step-toggle { width: 26px; height: 26px; }
+  .opening-step-body {
+    margin-left: 50px;
+    padding: 0 18px 28px 0;
+    font-size: 14px;
+  }
+  .opening-scripture { padding: 15px 17px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening-begin,
+  .opening-step,
+  .opening-step-number,
+  .opening-step-toggle::after { transition: none; }
+  .opening-step[open] .opening-step-body { animation: none; }
+}
+
 </style>
 </head>
 <body>
@@ -896,7 +1209,8 @@ footer {
 
 
 <nav id="mainnav">
-  <div class="nav-item active" onclick="gtag('event','nav_click',{event_label:'Nature of God'}); scrollToSection('cat1')">Nature of God</div>
+  <div class="nav-item active" onclick="gtag('event','nav_click',{event_label:'Start Here'}); scrollToSection('opening')">Start Here</div>
+  <div class="nav-item" onclick="gtag('event','nav_click',{event_label:'Nature of God'}); scrollToSection('cat1')">Nature of God</div>
   <div class="nav-item" onclick="gtag('event','nav_click',{event_label:'Trinity'}); scrollToSection('cat2')">Trinity</div>
   <div class="nav-item" onclick="gtag('event','nav_click',{event_label:'Person of Christ'}); scrollToSection('cat3')">Person of Christ</div>
   <div class="nav-item" onclick="gtag('event','nav_click',{event_label:'Holy Spirit'}); scrollToSection('cat4')">Holy Spirit</div>
@@ -920,6 +1234,234 @@ footer {
 </nav>
 
 <div class="container">
+
+<!-- ══════════════════════════════════════ -->
+<!-- START HERE: GUIDED OPENING CASCADE -->
+<!-- ══════════════════════════════════════ -->
+<section class="opening-section category" id="opening" aria-labelledby="opening-title">
+  <div class="opening-shell">
+    <div class="opening-intro">
+      <div class="opening-eyebrow">Start here · Listen before answering</div>
+      <h2 class="opening-title" id="opening-title">Before We Shut the <em>Argument</em> Down</h2>
+      <p class="opening-question">
+        What does a Jehovah’s Witness think when they see a Christian pray to Christ Jesus?
+        Do we ask why they feel it is appropriate to pray to Jesus and not just Jehovah directly?
+        <strong>What if we gave that person the opportunity to clearly explain why?</strong>
+      </p>
+      <p class="opening-intro-copy">
+        Shouldn’t our theology be able to withstand these arguments? And if so, why are we so quick to shut them down?
+        Maybe the Christian is not attempting to replace Jehovah with Jesus. Maybe they believe approaching Jesus is not
+        going over Jehovah’s head at all. Maybe they believe it is exactly how God instructed them to approach Him.
+        Whether we agree or disagree, shouldn’t we at least understand the argument before deciding it is wrong?
+      </p>
+      <button class="opening-begin" type="button" onclick="beginOpeningJourney()">
+        Begin with the first question <span class="opening-begin-arrow" aria-hidden="true">↓</span>
+      </button>
+    </div>
+
+    <div class="opening-cascade">
+      <details class="opening-step" id="opening-step-1">
+        <summary>
+          <span class="opening-step-number">01</span>
+          <span>
+            <span class="opening-step-kicker">The first question</span>
+            <span class="opening-step-title">Why Christ specifically?</span>
+            <span class="opening-step-teaser">Maybe prayer to Jesus is not going over Jehovah’s head.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p>Ask the Christian why they pray to Jesus, depend upon Jesus, or say things like, “I can do all things through Christ.”</p>
+          <p>They may answer: <strong>Because I understand that I am accountable to Him.</strong></p>
+          <p>Because God is perfect and sovereign, and everything is subject to His mercy. Sinful human beings cannot simply walk into the unveiled presence of a perfect God on the basis of their own righteousness. Even Moses could not look directly upon His face.</p>
+          <p>The only thing that washes me clean and justifies me before God is Jesus. Through His grace, He has paid my debt in full.</p>
+          <p class="opening-punch"><strong>You can’t side-step Him. He’s paying your way!</strong></p>
+          <blockquote class="opening-scripture">
+            “I am the way, the truth, and the life: no man cometh unto the Father, but by me.”
+            <cite>John 14:6 · KJV</cite>
+          </blockquote>
+          <p>I think it is safe to interpret that quite literally.</p>
+          <p>If you worked an important job and your boss said, “Nobody comes to the owner of this company but through me”—and you knew those words were spoken with direct authority from God Himself—would you dare to go over his head?</p>
+          <p><strong>Especially if this boss was the only reason you had the job in the first place!</strong></p>
+          <p>The Christian’s argument is not merely that Jesus provided a ransom at some point in the past. It is that Jesus remains the living way through whom we approach the Father.</p>
+          <p class="opening-punch"><strong>That little shift in the framework is actually massive.</strong></p>
+          <div class="opening-pull">
+            It is not: “Jesus was provided as a ransom for us to benefit from, handed the payment to the Father, and then stepped out of the way. Now we receive the benefit, become more obedient, and attempt to qualify ourselves before God.”
+          </div>
+          <p>Jesus does not simply say, “My sacrifice makes it possible for you to approach God on your own.” He says, “No man cometh unto the Father, but by me.”</p>
+          <p><strong>Jesus didn’t just create the way and leave it behind for us. Jesus is—and remains—the way.</strong></p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-2">
+        <summary>
+          <span class="opening-step-number">02</span>
+          <span>
+            <span class="opening-step-kicker">Faith under pressure</span>
+            <span class="opening-step-title">What happens when everything falls apart?</span>
+            <span class="opening-step-teaser">Job was given perspective—not the explanation he wanted.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p><strong>Tragic things happen.</strong></p>
+          <p>In Job, the reader knows why Satan was permitted to test him, but Job himself was never given that behind-the-scenes explanation. His three friends spent most of the book trying to convince him that he must have deserved what was happening.</p>
+          <p>But we are told that Job was blameless and upright.</p>
+          <p>When God finally speaks from the whirlwind, He does not give Job a simple explanation. He gives him perspective: <strong>I am in control of every aspect of everything.</strong></p>
+          <p>God’s sovereignty is not limited by our understanding or subject to the same limitations we are. He is outside creation, not subject to it. He breathed all things into existence, continuously holds the universe together, and sees the end from the beginning.</p>
+          <p>That is not entirely possible for us to understand—and it is not our job to.</p>
+          <div class="opening-pull">We share the same limitations as Job. God didn’t give Job the answer Job wanted; He gave him perspective.</div>
+          <p>Job shows that faith may require trusting that suffering is not proof God is punishing you—even when everything around you is crumbling.</p>
+          <p>It is incredibly difficult to accept that God exercises complete sovereignty over everything, down to the grain of sand on the beach, while terrible things are still permitted to happen. That is simply outside our realm of understanding.</p>
+          <p>But the Christian who calls upon Christ in that moment is saying: <strong>Even though I cannot see how this ends, I still trust You.</strong></p>
+          <p>That is what “I can do all things through Christ” means in its context. It is not a promise that every tragedy will be reversed in this life. It is confidence that Christ will sustain the believer through abundance, suffering, weakness, and need.</p>
+          <p>Every second we spend on this planet is an act of mercy from a perfect God.</p>
+          <p><strong>Mercy is God withholding the judgment we deserve.</strong></p>
+          <p><strong>Grace is God giving us what we have not—and could not—earn.</strong></p>
+          <p class="opening-punch"><strong>WE CAN’T “EARN” GRACE.</strong></p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-3">
+        <summary>
+          <span class="opening-step-number">03</span>
+          <span>
+            <span class="opening-step-kicker">The supporting question</span>
+            <span class="opening-step-title">Taking that a big step deeper</span>
+            <span class="opening-step-teaser">Where does our confidence before God actually rest?</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p>Jewish beliefs about repentance, mercy, covenant faithfulness, and the world to come are not simply “wrong” or unfounded.</p>
+          <p>But the Law was not given as proof that human beings could earn righteousness by becoming obedient enough.</p>
+          <p class="opening-punch"><strong>It is the exact opposite.</strong></p>
+          <p>The Law reveals God’s holiness, exposes our sin, and makes it abundantly clear that no one can justify himself before Him. Paul says that “all have sinned” and that the whole world stands guilty before God.</p>
+          <div class="opening-warning"><strong>Jehovah’s Witnesses do believe</strong> that salvation depends upon Christ’s ransom as the perfect sacrifice and upon God’s undeserved kindness. The argument is not that they deny Christ.</div>
+          <p>The concern is that the system carries a real risk that mirrors the same stumbling block Paul identified among the Jews: allowing obedience, performance, or organizational loyalty to function as grounds for confidence in our justification before God.</p>
+          <p>That kind of confidence is impossible for any of us to sustain.</p>
+          <p>If Satan were allowed to test any of us as severely as he tested Job, we would all be in <strong>deep, DEEP trouble.</strong></p>
+          <p>And what happens when we stumble?</p>
+          <div class="opening-pull">“Yesterday I was doing great, and I felt pretty confident that I was on God’s good side. Today I gave a guy the finger because he cut me off in traffic, and now I’m not so sure.”</div>
+          <p>If my confidence before God rises and falls according to how well I performed today, then my confidence is ultimately resting in me—not in Christ or God.</p>
+          <p>Paul’s argument is that Jew and Gentile are both under sin. No one is justified by works of the Law. Circumcision won’t cut it—pun intended—and righteousness must be received through faith in Jesus Christ.</p>
+          <p>That makes the central issue of justification through faith <strong>very, very difficult to dismiss.</strong></p>
+          <p>Good works are great. We should try hard to do what is right. <strong>BUT</strong> the fruit that follows justification through faith is the product of sanctification—not the other way around.</p>
+          <p><strong>You do not earn God’s acceptance through obedience.</strong></p>
+          <p>Genuine obedience is made possible through faith and through the work of God’s Spirit within you. God does not merely give us commands and then leave us to transform ourselves. He works within believers, changing their desires and enabling them to obey.</p>
+          <div class="opening-pull">We are not saved because we obey. We begin to obey because God has intervened and saved.</div>
+          <p>Our works are evidence of living faith, but Christ alone is the foundation of our confidence and justification before God.</p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-4">
+        <summary>
+          <span class="opening-step-number">04</span>
+          <span>
+            <span class="opening-step-kicker">The opened way</span>
+            <span class="opening-step-title">What about the temple veil?</span>
+            <span class="opening-step-teaser">Christ did not pay the ransom and then step aside.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p>When Christ died, the temple veil was torn from top to bottom.</p>
+          <p>The barrier separating sinful people from the Most Holy Place was opened—not because humanity had finally become obedient enough, but because Christ’s sacrifice and His obedience had made the way.</p>
+          <p>Access to God was no longer restricted to an earthly high priest entering the Most Holy Place once a year.</p>
+          <p><strong>Jesus is now our eternal High Priest, and through Him we may draw near to God with confidence.</strong></p>
+          <p>The ransom was not merely a payment that reopened the door so we could try to qualify ourselves. Christ paid our debt, reconciles us to the Father, clothes us in His righteousness, continually intercedes for us, and remains our eternal High Priest.</p>
+          <blockquote class="opening-scripture">
+            “He is able also to save them to the uttermost that come unto God by him, seeing he ever liveth to make intercession for them.”
+            <cite>Hebrews 7:25 · KJV</cite>
+          </blockquote>
+          <p class="opening-punch"><strong>And access to God is not limited to the Governing Body’s ability to interpret Scripture for us either!</strong></p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-5">
+        <summary>
+          <span class="opening-step-number">05</span>
+          <span>
+            <span class="opening-step-kicker">The right to examine</span>
+            <span class="opening-step-title">What if investigating this feels dangerous?</span>
+            <span class="opening-step-teaser">The Bereans tested an apostle—and were called noble.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p>The other issue is the fear that investigating these things for ourselves is somehow dangerous—that we could not possibly understand Scripture without the organization, or that independently testing its theology would amount to apostasy.</p>
+          <p class="opening-punch"><strong>This is blatantly wrong.</strong></p>
+          <p>God says that the work of His Law is written in the hearts of the Gentiles. That does not mean our instincts are infallible, but it does mean truth is not the private property of any human institution.</p>
+          <p>When truth is exposed, it can resonate as undeniable truth.</p>
+          <p><strong>Sometimes the biggest barrier to recognizing it is assuming we already have it.</strong></p>
+          <blockquote class="opening-scripture">
+            “These were more noble than those in Thessalonica, in that they received the word with all readiness of mind, and searched the scriptures daily, whether those things were so.”
+            <cite>Acts 17:11 · KJV</cite>
+          </blockquote>
+          <p>The Bereans received Paul’s teaching eagerly while still examining the Scriptures every day to determine whether what he said was true.</p>
+          <p><strong>Even though Paul was an apostle.</strong></p>
+          <p>Scripture was absolutely meant to be heard, studied, and understood within the community of believers—within what the New Testament calls the church, the bride of Christ, instructed to remain attentive and eagerly await her Bridegroom.</p>
+          <p>But that does not make personal examination dangerous or apostate.</p>
+          <p class="opening-punch"><strong>It is instructed.</strong></p>
+          <p>If the Bereans were commended for testing an apostle’s teaching against God’s Word, then carefully testing the theology of any church, organization, elder, pastor, or governing body cannot itself be rebellion against God.</p>
+          <p>And it also means you do not have to land on the same interpretation they do. Otherwise, what is the point of doing your own research?</p>
+          <p>Test your understanding against what is being taught, but most importantly, test what is being taught against what the Bible actually says.</p>
+          <p><strong>You are doing exactly what God instructed you to do.</strong></p>
+          <p>Apostasy is abandoning God and the truth for idolatry or unbelief. Refusing to place unquestioning confidence in human interpreters is not apostasy.</p>
+          <p>It is common sense—and it is biblically appropriate.</p>
+          <blockquote class="opening-scripture">
+            “Prove all things; hold fast that which is good.”
+            <cite>1 Thessalonians 5:21 · KJV</cite>
+          </blockquote>
+          <p>Putting theology to the fire for yourself—with humility, prayer, and Scripture—is not faithlessness. It is part of taking God’s truth seriously.</p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-6">
+        <summary>
+          <span class="opening-step-number">06</span>
+          <span>
+            <span class="opening-step-kicker">A necessary distinction</span>
+            <span class="opening-step-title">Does that mean every church is right?</span>
+            <span class="opening-step-teaser">Leaving one exclusive claim does not require trusting everyone else.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p class="opening-punch"><strong>Absolutely not.</strong></p>
+          <p>Not all churches are the same.</p>
+          <p>In Revelation 2–3, Jesus writes to seven actual churches. Two receive no rebuke. Laodicea receives no praise. Sardis is nearly dead, though a few have remained undefiled. The others receive different combinations of praise, warning, correction, and condemnation.</p>
+          <p><strong>Jesus is literally giving us a roadmap for evaluating an individual church.</strong></p>
+          <p>The alternative to the Watchtower organization is not blindly walking into any building with the word “church” on it and believing whatever comes from the stage.</p>
+          <p>The Joel Osteen-style churches of the world, in my opinion, often become little more than bumper-sticker Christianity—telling people that God wants them rich, healthy, comfortable, and successful while avoiding the parts of Scripture that call for repentance, endurance, sacrifice, and truth.</p>
+          <p>Jesus warns about lukewarm churches too.</p>
+          <div class="opening-pull">Every church must be evaluated. Every teacher must be tested. Every theological system must be put to the fire of Scripture.</div>
+          <p>That includes Jehovah’s Witness theology.</p>
+          <p>It includes dispensational theology.</p>
+          <p><strong>It includes the theology presented on this website.</strong></p>
+        </div>
+      </details>
+
+      <details class="opening-step" id="opening-step-7">
+        <summary>
+          <span class="opening-step-number">07</span>
+          <span>
+            <span class="opening-step-kicker">Before the fuller case</span>
+            <span class="opening-step-title">The question we have to leave open</span>
+            <span class="opening-step-teaser">This is the opening scene—not the closing argument.</span>
+          </span>
+          <span class="opening-step-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="opening-step-body">
+          <p>None of this settles every question. It is not supposed to—not yet.</p>
+          <p>This is only the opening scene: enough to show that the Christian praying to Jesus may not be doing what a Jehovah’s Witness initially assumes, and enough to make the next question unavoidable:</p>
+          <div class="opening-final-question">What if their framework can account for more of Scripture than we have been willing to let them explain?</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
 
 <!-- ══════════════════════════════════════ -->
 <!-- CAT 1: NATURE OF GOD -->
@@ -2938,6 +3480,39 @@ function scrollToSection(id) {
   }, 1200);
 }
 
+
+/* ── Guided opening ── */
+function beginOpeningJourney() {
+  const firstStep = document.getElementById('opening-step-1');
+  if (!firstStep) return;
+
+  firstStep.open = true;
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'opening_begin', {
+      event_label: 'Why Christ specifically'
+    });
+  }
+
+  window.setTimeout(() => {
+    const nav = document.getElementById('mainnav');
+    const navH = nav ? nav.getBoundingClientRect().height : 54;
+    const scrollY = window.scrollY !== undefined ? window.scrollY : window.pageYOffset;
+    const top = firstStep.getBoundingClientRect().top + scrollY - navH - 14;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 60);
+}
+
+document.querySelectorAll('.opening-step').forEach(step => {
+  step.addEventListener('toggle', () => {
+    if (step.open && typeof gtag === 'function') {
+      gtag('event', 'opening_step_expand', {
+        event_label: step.id
+      });
+    }
+  });
+});
+
 /* ── Active nav highlight ── */
 let currentActiveSection = null;
 
@@ -2971,7 +3546,7 @@ function setActiveNav(activeId, options = { animate: true }) {
 
 /* ── Section list in DOM order ── */
 const allSections = [
-  'cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9',
+  'opening','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9',
   'cat10','cat11','cat12','cat13','cat14','cat15','cat16','cat17',
   'cat18','cat19','overview','summary'
 ];
